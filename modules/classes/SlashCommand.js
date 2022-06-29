@@ -105,7 +105,7 @@ class SlashCommand extends Modals {
 
             banned.length = 25
             let fill = banned.filter(data => data?.user.tag.includes(value) || data?.user.id.includes(value)) || []
-            mapped = fill.map(data => ({ name: `${data.user.tag} - ${data.user.id} | ${data.reason || 'Sem razão definida'}`, value: data.user.id }))
+            mapped = fill.map(data => ({ name: `${data.user.tag} - ${data.user.id} | ${data.reason?.slice(0, 150) || 'Sem razão definida'}`, value: data.user.id }))
         }
 
         if (['color', 'cor'].includes(name)) {
