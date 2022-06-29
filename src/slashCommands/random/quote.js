@@ -1,22 +1,5 @@
 const { Canvas } = require('canvacord')
 const { MessageAttachment } = require('discord.js')
-const util = require('../../structures/util')
-
-const ColorsData = {
-    name: 'color',
-    description: 'Cor da quote',
-    type: 3,
-    required: true,
-    choices: []
-}
-
-let colors = Object.keys(util.EmbedColors)
-
-for (let data of colors)
-    ColorsData.choices.push({
-        name: util.ColorsTranslate[data],
-        value: data
-    })
 
 module.exports = {
     name: 'quote',
@@ -36,7 +19,13 @@ module.exports = {
             type: 3,
             required: true
         },
-        ColorsData
+        {
+            name: 'color',
+            description: 'Cor da quote',
+            type: 3,
+            required: true,
+            autocomplete: true
+        }
     ],
     async execute({ interaction: interaction, emojis: e }) {
 

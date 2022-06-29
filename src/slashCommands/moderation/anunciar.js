@@ -1,20 +1,5 @@
 const util = require('../../structures/util')
 
-const colorOption = {
-    name: 'color',
-    description: 'Selecione a cor da embed',
-    type: 3,
-    choices: []
-}
-
-const Colors = Object.keys(util.EmbedColors || {})
-
-for (const color of Colors)
-    colorOption.choices.push({
-        name: util.ColorsTranslate[color],
-        value: util.EmbedColors[color]
-    })
-
 module.exports = {
     name: 'anunciar',
     description: '[moderation] Anúncie em canais atráves de mim',
@@ -44,7 +29,12 @@ module.exports = {
                     description: 'Qual o título do anúncio?',
                     type: 3
                 },
-                colorOption,
+                {
+                    name: 'color',
+                    description: 'Selecione a cor da embed',
+                    type: 3,
+                    autocomplete: true
+                },
             ]
         },
         {
@@ -100,7 +90,7 @@ module.exports = {
             return channel.send({
                 embeds: [
                     {
-                        color: color || util.EmbedColors.DEFAULT,
+                        color: color || util.HexColors.DEFAULT,
                         title: title,
                         description: message,
                         footer: { text: `${client.user.username}'s Announcement Command` }

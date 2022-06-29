@@ -1,154 +1,5 @@
 const util = require('../../structures/util')
 
-const editObject = {
-    name: 'edit',
-    description: '[moderation] Edite as informações do cargo',
-    type: 1,
-    options: [
-        {
-            name: 'cargo',
-            description: 'Escolha um cargo para editar',
-            type: 8,
-            required: true
-        },
-        {
-            name: 'nome',
-            description: 'Novo nome para o cargo',
-            type: 3
-        },
-        {
-            name: 'cor',
-            description: 'Nova cor para o cargo',
-            type: 3,
-            choices: []
-        },
-        {
-            name: 'visivel',
-            description: 'Deixar o cargo visível para todos',
-            type: 4,
-            choices: [
-                {
-                    name: 'Mostrar este cargo para todos',
-                    value: 1
-                },
-                {
-                    name: 'Deixa esse cargo escondido',
-                    value: 2
-                }
-            ]
-        },
-        {
-            name: 'delete_permissions',
-            description: 'Desative todas as permissões',
-            type: 4,
-            choices: [
-                {
-                    name: 'Sim, deletar todas as permissões',
-                    value: 1
-                },
-                {
-                    name: 'Melhor não, deixa pra lá',
-                    value: 2
-                }
-            ]
-        },
-        {
-            name: 'mencionavel',
-            description: 'Deixar ou não qualquer um marcar este cargo?',
-            type: 4,
-            choices: [
-                {
-                    name: 'YEP! Todos podem marcar este cargo',
-                    value: 1
-                },
-                {
-                    name: 'Nop, nop! Não é para ninguém marcar este cargo.',
-                    value: 2
-                }
-            ]
-        },
-    ]
-}
-
-const createRole = {
-    name: 'create',
-    description: '[moderation] Crie as novas informações do cargo',
-    type: 1,
-    options: [
-        {
-            name: 'nome',
-            description: 'Novo nome para o cargo',
-            required: true,
-            type: 3
-        },
-        {
-            name: 'cor',
-            description: 'Escolha um cor irada para o novo cargo',
-            type: 3,
-            choices: []
-        },
-        {
-            name: 'visivel',
-            description: 'Deixar o cargo visível para todos',
-            type: 4,
-            choices: [
-                {
-                    name: 'Mostrar este cargo para todos',
-                    value: 1
-                },
-                {
-                    name: 'Deixa esse cargo escondido',
-                    value: 2
-                }
-            ]
-        },
-        {
-            name: 'delete_permissions',
-            description: 'Desative todas as permissões',
-            type: 4,
-            choices: [
-                {
-                    name: 'Sim, deletar todas as permissões',
-                    value: 1
-                },
-                {
-                    name: 'Melhor não, deixa pra lá',
-                    value: 2
-                }
-            ]
-        },
-        {
-            name: 'mencionavel',
-            description: 'Deixar ou não qualquer um marcar este cargo?',
-            type: 4,
-            choices: [
-                {
-                    name: 'YEP! Todos podem marcar este cargo',
-                    value: 1
-                },
-                {
-                    name: 'Nop, nop! Não é para ninguém marcar este cargo.',
-                    value: 2
-                }
-            ]
-        },
-    ]
-}
-
-let colors = Object.keys(util.Colors)
-colors.length = 25
-
-for (let data of colors) {
-    editObject.options[2].choices.push({
-        name: util.ColorsTranslate[data],
-        value: data
-    })
-    createRole.options[1].choices.push({
-        name: util.ColorsTranslate[data],
-        value: data
-    })
-}
-
 module.exports = {
     name: 'cargo',
     description: '[moderation] Adicione ou remova um cargo de um membro',
@@ -156,7 +7,70 @@ module.exports = {
     default_member_permissions: util.slashCommandsPermissions.MANAGE_ROLES,
     type: 1,
     options: [
-        createRole,
+        {
+            name: 'create',
+            description: '[moderation] Crie as novas informações do cargo',
+            type: 1,
+            options: [
+                {
+                    name: 'nome',
+                    description: 'Novo nome para o cargo',
+                    required: true,
+                    type: 3
+                },
+                {
+                    name: 'cor',
+                    description: 'Escolha um cor irada para o novo cargo',
+                    type: 3,
+                    autocomplete: true
+                },
+                {
+                    name: 'visivel',
+                    description: 'Deixar o cargo visível para todos',
+                    type: 4,
+                    choices: [
+                        {
+                            name: 'Mostrar este cargo para todos',
+                            value: 1
+                        },
+                        {
+                            name: 'Deixa esse cargo escondido',
+                            value: 2
+                        }
+                    ]
+                },
+                {
+                    name: 'delete_permissions',
+                    description: 'Desative todas as permissões',
+                    type: 4,
+                    choices: [
+                        {
+                            name: 'Sim, deletar todas as permissões',
+                            value: 1
+                        },
+                        {
+                            name: 'Melhor não, deixa pra lá',
+                            value: 2
+                        }
+                    ]
+                },
+                {
+                    name: 'mencionavel',
+                    description: 'Deixar ou não qualquer um marcar este cargo?',
+                    type: 4,
+                    choices: [
+                        {
+                            name: 'YEP! Todos podem marcar este cargo',
+                            value: 1
+                        },
+                        {
+                            name: 'Nop, nop! Não é para ninguém marcar este cargo.',
+                            value: 2
+                        }
+                    ]
+                },
+            ]
+        },
         {
             name: 'add',
             description: '[moderation] Adicione um cargo a um membro',
@@ -239,7 +153,75 @@ module.exports = {
                 }
             ]
         },
-        editObject
+        {
+            name: 'edit',
+            description: '[moderation] Edite as informações do cargo',
+            type: 1,
+            options: [
+                {
+                    name: 'cargo',
+                    description: 'Escolha um cargo para editar',
+                    type: 8,
+                    required: true
+                },
+                {
+                    name: 'nome',
+                    description: 'Novo nome para o cargo',
+                    type: 3
+                },
+                {
+                    name: 'cor',
+                    description: 'Nova cor para o cargo',
+                    type: 3,
+                    autocomplete: true
+                },
+                {
+                    name: 'visivel',
+                    description: 'Deixar o cargo visível para todos',
+                    type: 4,
+                    choices: [
+                        {
+                            name: 'Mostrar este cargo para todos',
+                            value: 1
+                        },
+                        {
+                            name: 'Deixa esse cargo escondido',
+                            value: 2
+                        }
+                    ]
+                },
+                {
+                    name: 'delete_permissions',
+                    description: 'Desative todas as permissões',
+                    type: 4,
+                    choices: [
+                        {
+                            name: 'Sim, deletar todas as permissões',
+                            value: 1
+                        },
+                        {
+                            name: 'Melhor não, deixa pra lá',
+                            value: 2
+                        }
+                    ]
+                },
+                {
+                    name: 'mencionavel',
+                    description: 'Deixar ou não qualquer um marcar este cargo?',
+                    type: 4,
+                    choices: [
+                        {
+                            name: 'YEP! Todos podem marcar este cargo',
+                            value: 1
+                        },
+                        {
+                            name: 'Nop, nop! Não é para ninguém marcar este cargo.',
+                            value: 2
+                        }
+                    ]
+                },
+            ]
+        }
     ],
     async execute({ interaction: interaction, member: authorMember, emojis: e, database: Database, guildData: guildData }) {
 

@@ -1,4 +1,5 @@
 const Modals = require('./Modals')
+const util = require('../../src/structures/util')
 
 class SlashCommand extends Modals {
     constructor(interaction, client) {
@@ -105,6 +106,14 @@ class SlashCommand extends Modals {
             banned.length = 25
             let fill = banned.filter(data => data?.user.tag.includes(value) || data?.user.id.includes(value)) || []
             mapped = fill.map(data => ({ name: `${data.user.tag} - ${data.user.id} | ${data.reason || 'Sem razão definida'}`, value: data.user.id }))
+        }
+
+        if (['color', 'cor'].includes(name)) {
+
+            let colors = Object.keys(util.HexColors)
+
+            let fill = colors.filter(data => util.ColorsTranslate[data].includes(value))
+            mapped = fill.map(data => ({ name: util.ColorsTranslate[data], value: util.HexColors[data] }))
         }
 
         return await this.interaction.respond(mapped)

@@ -22,7 +22,8 @@ module.exports = {
         {
             name: 'cor',
             description: 'Troque a cor das suas mensagens usando #HEX',
-            type: 3
+            type: 3,
+            autocomplete: true
         },
         {
             name: 'título',
@@ -128,14 +129,13 @@ module.exports = {
             color = options.getString('cor'),
             msg = '', dataToSave = {}
 
-        if (title && title !== data?.Perfil?.Titulo) {
+        if (title && title !== data?.Perfil?.Titulo)
             if (!data?.Perfil?.TitlePerm)
                 msg += `\n${e.Deny} | Sem permissão para trocar de título. Que tal compra-la na loja?`
             else {
                 msg += `\n${e.Check} | Título`
                 dataToSave['Perfil.Titulo'] = title
             }
-        }
 
         if (color && color !== data.Color?.Set) {
             if (!data.Color?.Perm) {

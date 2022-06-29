@@ -126,9 +126,10 @@ const ColorsTranslate = {
     NAVY: "Oceano Apagado",
     DARK_NAVY: "Oceano Escuro",
     YELLOW: "Amarelo",
+    LUMINOUS_VIVID_RED: 'Vermelho VÍvido Luminoso'
 }
 
-const EmbedColors = {
+const HexColors = {
     DEFAULT: "#000000",
     AQUA: "#1ABC9C",
     DARK_AQUA: "#11806A",
@@ -152,7 +153,8 @@ const EmbedColors = {
     LIGHT_GREY: "#BCC0C0",
     NAVY: "#34495E",
     DARK_NAVY: "#2C3E50",
-    YELLOW: "#FFFF00"
+    YELLOW: "#FFFF00",
+    LUMINOUS_VIVID_RED: '#FF0000'
 }
 
 const Events = {
@@ -342,6 +344,6 @@ module.exports = {
     ColorsTranslate,
     Permissions,
     slashCommandsPermissions,
-    EmbedColors,
+    HexColors,
     ignoreUsersOptions
 }
