@@ -1163,12 +1163,12 @@ module.exports = {
 
                 Database.PushTransaction(
                     winner.id,
-                    `${e.gain} Ganhou ${value} Safiras no Bet Global`
+                    `${e.gain} Ganhou ${value} Safiras no Bet Global contra *${loser.tag}*`
                 )
 
                 Database.PushTransaction(
                     loser.id,
-                    `${e.loss} Perdeu ${value} Safiras no Bet Global`
+                    `${e.loss} Perdeu ${value} Safiras no Bet Global contra ${winner.tag}`
                 )
             }
 
