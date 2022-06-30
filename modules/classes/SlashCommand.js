@@ -137,7 +137,8 @@ class SlashCommand extends Modals {
                 { name: '100000', length: bets['100000']?.length }
             ]
 
-            mapped = betObject.map(d => ({ name: `${d.name} Safiras | ${d.length || 0} apostas em espera`, value: `${d.name}` }))
+            let fill = betObject.filter(d => d.name.includes(value))
+            mapped = fill.map(d => ({ name: `${d.name} Safiras | ${d.length || 0} apostas em espera`, value: `${d.name}` }))
         }
 
         return await this.interaction.respond(mapped)
