@@ -14,12 +14,24 @@ module.exports = model("Client", new Schema({
     BackgroundAcess: Array,
     BlockedUsers: Array,
     PremiumServers: Array,
+    GlobalBet: {
+        '0': Array,
+        '100': Array,
+        '2000': Array,
+        '5000': Array,
+        '10000': Array,
+        '20000': Array,
+        '30000': Array,
+        '40000': Array,
+        '50000': Array,
+        '60000': Array,
+        '70000': Array,
+        '80000': Array,
+        '90000': Array,
+        '100000': Array
+    },
     FlagGame: {
         TopOne: String
-    },
-    GlobalBet: {
-        Bets: Array,
-        totalValue: Number
     },
     Raspadinhas: {
         Bought: Number,

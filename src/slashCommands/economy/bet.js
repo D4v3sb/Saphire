@@ -91,12 +91,37 @@ module.exports = {
         {
             name: 'global',
             description: '[economy] Aposte globalmente com qualquer pessoa',
-            type: 1
+            type: 1,
+            options: [
+                {
+                    name: 'betchoice',
+                    description: 'Valor da aposta',
+                    type: 3,
+                    required: true,
+                    autocomplete: true
+                },
+                {
+                    name: 'bet',
+                    description: 'Entrar ou apostar com alguém na fila?',
+                    type: 3,
+                    required: true,
+                    choices: [
+                        {
+                            name: 'Entrar na fila',
+                            value: 'join'
+                        },
+                        {
+                            name: 'Apostar com alguém na fila',
+                            value: 'bet'
+                        }
+                    ]
+                }
+            ]
         }
     ],
-    async execute({ interaction: interaction, client: client, database: Database, emojis: e, guildData: guildData }) {
+    async execute({ interaction: interaction, client: client, database: Database, emojis: e, guildData: guildData, clientData: clientData }) {
 
-        const { options, user: author, channel } = interaction
+        const { options, user: author, channel, guild } = interaction
 
         let user = options.getUser('user'),
             subCommand = options.getSubcommand(),
@@ -105,15 +130,10 @@ module.exports = {
             authorData = await Database.User.findOne({ id: author.id }, 'Balance Timeouts'),
             money = authorData?.Balance || 0
 
-        if (subCommand === 'global')
-            return await interaction.reply({
-                content: `${e.Loading} | Este recurso está sob construção.`,
-                ephemeral: true
-            })
-
         switch (subCommand) {
             case 'simples': case 'party': betSimples(); break;
             case 'user': betUser(); break;
+            case 'global': globalBet(); break;
         }
         return
 
@@ -1060,5 +1080,107 @@ module.exports = {
 
         }
 
+        async function globalBet() {
+            let value = parseInt(options.getString('betchoice'))
+            let func = options.getString('bet')
+            let globalBets = clientData?.GlobalBet || []
+            let globalBetValids = [0, 100, 2000, 5000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]
+            let bets = globalBets[`${value}`] || []
+
+            if (!globalBetValids.includes(value))
+                return await interaction.reply({
+                    content: `${e.Deny} | Esta opção não é válida no bet global.`,
+                    ephemeral: true
+                })
+
+            if (money < value)
+                return await interaction.reply({
+                    content: `${e.Deny} | Você não tem ${value} ${e.Coin} Safiras para nesta fila.`,
+                    ephemeral: true
+                })
+
+            if (func === 'join') return registerBet(value, bets)
+
+            if (bets?.length > 0) return newBetGlobal(bets[0], value)
+
+            return await interaction.reply({
+                content: `${e.Info} | Não tem ninguém na fila ${value} Safiras. Entre na fila ou espere alguém entrar para iniciar uma aposta.`
+            })
+        }
+
+        async function registerBet(value, bets) {
+
+            if (bets?.includes(author.id))
+                return await interaction.reply({
+                    content: `${e.Deny} | Você já está nesta fila.`,
+                    ephemeral: true
+                })
+
+            await Database.Client.updateOne(
+                { id: client.user.id },
+                { $push: { [`GlobalBet.${value}`]: author.id } }
+            )
+
+            if (value !== 0)
+                Database.subtract(author.id, value)
+
+            return await interaction.reply({
+                content: `${e.Check} | Ok! Você entrou na fila de espera de ${value} Safiras. Basta esperar alguém apostar com você. Você verá o resultado no comando \`/transactions\``
+            })
+        }
+
+        async function newBetGlobal(betUserId, value) {
+
+            if (betUserId === author.id)
+                return await interaction.reply({
+                    content: `${e.Info} | Você esta em 1º lugar na fila de espera de ${value} Safiras. Espere alguém apostar com você para apostar novamente.`
+                })
+
+            let user = client.users.cache.get(betUserId)
+
+            if (!user) {
+                await Database.Client.updateOne(
+                    { id: client.user.id },
+                    { $pullAll: { [`GlobalBet.${value}`]: [betUserId] } }
+                )
+
+                if (value !== 0)
+                    Database.add(author.id, value)
+                return await interaction.reply({
+                    content: `${e.Check} | O usuário da aposta não foi encontrado. Eu devolvi seu dinheiro.`,
+                    ephemeral: true
+                })
+            }
+
+            if (value !== 0)
+                Database.subtract(author.id, value)
+
+            let winner = [user, author].random()
+            let loser = winner.id === author.id ? user : author
+
+            if (value !== 0) {
+                Database.add(winner.id, value * 2)
+
+                Database.PushTransaction(
+                    winner.id,
+                    `${e.gain} Ganhou ${value} Safiras no Bet Global`
+                )
+
+                Database.PushTransaction(
+                    loser.id,
+                    `${e.loss} Perdeu ${value} Safiras no Bet Global`
+                )
+            }
+
+            await Database.Client.updateOne(
+                { id: client.user.id },
+                { $pull: { [`GlobalBet.${value}`]: betUserId } }
+            )
+
+            let winMessage = `${e.CoolDoge} | Você ganhou o *Bet Global* contra *${loser.tag} - \`${loser.id}\`*. Seu lucro foi de ${value} ${e.Coin} Safiras`
+            let loseMessage = `${e.SaphireCry} | Você perdeu o *Bet Global* contra *${winner.tag} - \`${winner.id}\`*. Seu prejuizo foi de ${value} ${e.Coin} Safiras`
+
+            return await interaction.reply({ content: winner.id === author.id ? winMessage : loseMessage })
+        }
     }
 }

@@ -1,21 +1,5 @@
 const util = require('../../structures/util')
 
-const colorOption = {
-    name: 'color',
-    description: 'Selecione a cor da embed',
-    type: 3,
-    choices: []
-}
-
-const Colors = Object.keys(util.Colors || {})
-Colors.length = 25 // Limit of options in choices
-
-for (const color of Colors)
-    colorOption.choices.push({
-        name: util.ColorsTranslate[color],
-        value: color
-    })
-
 module.exports = {
     name: 'embed',
     description: '[moderation] Crie embeds facilmente',
@@ -28,7 +12,12 @@ module.exports = {
             description: '[moderation] Crie uma nova embed',
             type: 1,
             options: [
-                colorOption,
+                {
+                    name: 'color',
+                    description: 'Selecione a cor da embed',
+                    type: 3,
+                    autocomplete: true
+                },
                 {
                     name: 'title',
                     description: 'Título da embed',

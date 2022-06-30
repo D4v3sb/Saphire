@@ -86,8 +86,8 @@ class SlashCommand extends Modals {
     }
 
     async autoComplete() {
-        const { name, value, type } = this.interaction.options.getFocused(true)
-        let mapped = undefined
+        const { name, value } = this.interaction.options.getFocused(true)
+        let mapped = []
 
         if (name === 'channel') {
             let data = await this.Database.Guild.findOne({ id: this.guild.id }, 'Blockchannels'),
@@ -105,7 +105,7 @@ class SlashCommand extends Modals {
 
             banned.length = 25
             let fill = banned.filter(data => data?.user.tag.includes(value) || data?.user.id.includes(value)) || []
-            mapped = fill.map(data => ({ name: `${data.user.tag} - ${data.user.id} | ${data.reason || 'Sem razão definida'}`, value: data.user.id }))
+            mapped = fill.map(data => ({ name: `${data.user.tag} - ${data.user.id} | ${data.reason?.slice(0, 150) || 'Sem razão definida'}`, value: data.user.id }))
         }
 
         if (['color', 'cor'].includes(name)) {
@@ -114,6 +114,30 @@ class SlashCommand extends Modals {
 
             let fill = colors.filter(data => util.ColorsTranslate[data].includes(value))
             mapped = fill.map(data => ({ name: util.ColorsTranslate[data], value: util.HexColors[data] }))
+        }
+
+        if (name === 'betchoice') {
+            let data = await this.Database.Client.findOne({ id: this.client.user.id }, 'GlobalBet')
+            let bets = data?.GlobalBet || []
+
+            let betObject = [
+                { name: '0', length: bets['0']?.length },
+                { name: '100', length: bets['100']?.length },
+                { name: '2000', length: bets['2000']?.length },
+                { name: '5000', length: bets['5000']?.length },
+                { name: '10000', length: bets['10000']?.length },
+                { name: '20000', length: bets['20000']?.length },
+                { name: '30000', length: bets['30000']?.length },
+                { name: '40000', length: bets['40000']?.length },
+                { name: '50000', length: bets['50000']?.length },
+                { name: '60000', length: bets['60000']?.length },
+                { name: '70000', length: bets['70000']?.length },
+                { name: '80000', length: bets['80000']?.length },
+                { name: '90000', length: bets['90000']?.length },
+                { name: '100000', length: bets['100000']?.length }
+            ]
+
+            mapped = betObject.map(d => ({ name: `${d.name} Safiras | ${d.length || 0} apostas em espera`, value: `${d.name}` }))
         }
 
         return await this.interaction.respond(mapped)
