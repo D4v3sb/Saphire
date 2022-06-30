@@ -141,6 +141,7 @@ class SlashCommand extends Modals {
             mapped = fill.map(d => ({ name: `${d.name} Safiras | ${d.length || 0} apostas em espera`, value: `${d.name}` }))
         }
 
+        mapped.length = 25
         return await this.interaction.respond(mapped)
     }
 }
