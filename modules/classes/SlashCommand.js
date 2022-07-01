@@ -148,6 +148,32 @@ class SlashCommand extends Modals {
             mapped = fill.map(d => ({ name: `${d.name} Safiras | ${d.length || 0} apostas em espera`, value: `${d.name}` }))
         }
 
+        if (name === 'blocked_commands') {
+
+            let data = await this.Database.Client.findOne({ id: this.client.user.id }, 'ComandosBloqueadosSlash')
+
+            let bugs = data?.ComandosBloqueadosSlash || []
+
+            const fill = bugs.filter(bug => bug.cmd?.toLowerCase().includes(value.toLowerCase()))
+            mapped = fill.map(bug => {
+
+                let name = `${bug.cmd} | ${bug.error}`
+
+                if (name.length > 100)
+                    name = name.slice(0, 97) + '...'
+
+                return { name: name, value: bug.cmd }
+            })
+
+        }
+
+        if (name === 'commands') {
+            let commands = this.client.slashCommands.map(cmd => cmd.name)
+
+            const fill = commands.filter(cmd => cmd?.toLowerCase().includes(value.toLowerCase()))
+            mapped = fill.map(cmd => ({ name: cmd, value: cmd }))
+        }
+
         if (mapped.length > 25) mapped.length = 25
         return await this.interaction.respond(mapped)
     }

@@ -393,10 +393,10 @@ module.exports = {
                             name: 'Delete Anime From Quiz',
                             value: 'delAnime'
                         },
-                        {
-                            name: 'Comandos Bloqueados',
-                            value: 'bugs'
-                        },
+                        // {
+                        //     name: 'Comandos Bloqueados',
+                        //     value: 'bugs'
+                        // },
                         {
                             name: 'Bloquear Comando',
                             value: 'block_command'
@@ -435,6 +435,18 @@ module.exports = {
                     name: 'input',
                     description: 'Informações adicionais',
                     type: 3
+                },
+                {
+                    name: 'blocked_commands',
+                    description: 'Comandos bloqueados',
+                    type: 3,
+                    autocomplete: true
+                },
+                {
+                    name: 'commands',
+                    description: 'Lista de comandos em Slash Command',
+                    type: 3,
+                    autocomplete: true
                 },
                 {
                     name: 'input2',
@@ -1032,7 +1044,7 @@ module.exports = {
                     ephemeral: true
                 })
 
-            const commandName = input
+            const commandName = options.getString('blocked_commands') || input
 
             if (['all', 'todos', 'tudo'].includes(commandName?.toLowerCase())) {
 
@@ -1048,7 +1060,7 @@ module.exports = {
 
             if (!commandName)
                 return await interaction.reply({
-                    content: `${e.Deny} | Selecione pelo menos um comando via input`,
+                    content: `${e.Deny} | Selecione pelo menos um comando na lista de comandos bloqueados ou via input`,
                     ephemeral: true
                 })
 
@@ -1082,12 +1094,12 @@ module.exports = {
 
         async function block_command() {
 
-            const commandName = input
+            const commandName = options.getString('commands') || input
             const reason = input2 || 'Nenhuma razão informada'
 
             if (!commandName)
                 return await interaction.reply({
-                    content: `${e.Deny} | Selecione pelo menos um comando via input`,
+                    content: `${e.Deny} | Selecione pelo menos um comando na lista de comandos ou escreva via input`,
                     ephemeral: true
                 })
 
