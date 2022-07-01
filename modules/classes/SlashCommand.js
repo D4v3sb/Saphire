@@ -112,7 +112,7 @@ class SlashCommand extends Modals {
 
             let colors = Object.keys(util.HexColors)
 
-            let fill = colors.filter(data => util.ColorsTranslate[data].includes(value))
+            let fill = colors.filter(data => util.ColorsTranslate[data].toLowerCase().includes(value))
             mapped = fill.map(data => ({ name: util.ColorsTranslate[data], value: util.HexColors[data] }))
         }
 
