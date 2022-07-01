@@ -333,7 +333,8 @@ const ignoreUsersOptions = [
     'cacheDelete',
     'clanDelete',
     'set_ServerPremium',
-    'remove_ServerPremium'
+    'remove_ServerPremium',
+    'leaveServer'
 ]
 
 const Languages = {

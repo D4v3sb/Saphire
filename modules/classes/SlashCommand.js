@@ -189,6 +189,26 @@ class SlashCommand extends Modals {
             mapped = fill.map(([a, b]) => ({ name: b, value: b }))
         }
 
+        if (name === 'search_guild') {
+
+            const fill = this.client.guilds.cache.filter(guild =>
+                guild.name.toLowerCase().includes(value.toLowerCase())
+                || guild.id.includes(value)
+            )
+
+            mapped = fill.map(guild => ({ name: `(${guild.members.cache.size}) - ${guild.name} | ${guild.id}`, value: guild.id }))
+        }
+
+        if (name === 'search_user') {
+
+            const fill = this.client.users.cache.filter(user =>
+                user.tag.toLowerCase().includes(value.toLowerCase())
+                || user.id.includes(value)
+            )
+
+            mapped = fill.map(user => ({ name: `${user.tag} | ${user.id}`, value: user.id }))
+        }
+
         if (mapped.length > 25) mapped.length = 25
         return await this.interaction.respond(mapped)
     }

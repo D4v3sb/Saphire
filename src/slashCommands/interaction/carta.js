@@ -49,9 +49,10 @@ module.exports = {
                     ]
                 },
                 {
-                    name: 'user',
-                    description: 'Nome ou o ID de um usuário',
-                    type: 3
+                    name: 'search_user',
+                    description: 'Selecione um usuário',
+                    type: 3,
+                    autocomplete: true
                 },
                 {
                     name: 'letter_id',
@@ -72,14 +73,13 @@ module.exports = {
 
             let control = { collected: false, atualEmbeds: [], embedIndex: 0 },
                 func = options.getString('function'),
-                search = options.getString('user') || null,
-                resultSearch = getUser(search) || null,
+                resultSearch = client.users.cache.get(options.getString('search_user')) || null,
                 userSearch = resultSearch || user,
                 letterId = options.getString('letter_id')?.toUpperCase() || null,
-                staff = [...clientData.Moderadores, ...clientData.Administradores]//, config.ownerId,
-            invalid = search || letterId || ['delete', 'letter'].includes(func)
+                staff = [...clientData.Moderadores, ...clientData.Administradores, config.ownerId],
+                invalid = letterId || ['delete', 'letter'].includes(func)
 
-            if (search && !resultSearch && staff.includes(user.id))
+            if (!resultSearch && staff.includes(user.id))
                 return await interaction.reply({
                     content: `${e.Deny} | Nenhum usuário foi encontrado.`,
                     ephemeral: true

@@ -13,9 +13,10 @@ module.exports = {
             type: 6
         },
         {
-            name: 'search',
+            name: 'search_user',
             description: 'Pesquise por um usuário',
-            type: 3
+            type: 3,
+            autocomplete: true
         }
     ],
     async execute({ interaction: interaction, client: client, database: Database, emojis: e }) {
@@ -23,7 +24,7 @@ module.exports = {
         const { options, user: author } = interaction
         let color = await Colors(author.id)
 
-        let user = options.getUser('user') || getUser(options.getString('search'), client) || author
+        let user = options.getUser('user') || client.users.cache.get(options.getString('search_user')) || author
 
         let userData = await Database.User.findOne({ id: user?.id }, 'Transactions'),
             embeds = [],

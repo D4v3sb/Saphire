@@ -59,7 +59,19 @@ module.exports = {
                     name: 'id',
                     description: '[add] By Id',
                     type: 3,
-                }
+                },
+                {
+                    name: 'search_guild',
+                    description: '[add] Selecione um servidor',
+                    type: 3,
+                    autocomplete: true
+                },
+                {
+                    name: 'search_user',
+                    description: '[add] Selecione um usuário',
+                    type: 3,
+                    autocomplete: true
+                },
             ]
         },
         {
@@ -106,7 +118,19 @@ module.exports = {
                     name: 'id',
                     description: '[remove] By Id',
                     type: 3,
-                }
+                },
+                {
+                    name: 'search_guild',
+                    description: '[remove] Selecione um servidor',
+                    type: 3,
+                    autocomplete: true
+                },
+                {
+                    name: 'search_user',
+                    description: '[remove] Selecione um usuário',
+                    type: 3,
+                    autocomplete: true
+                },
             ]
         },
         {
@@ -200,7 +224,19 @@ module.exports = {
                     name: 'quantity',
                     description: '[set] Quantidade a ser configurada',
                     type: 4,
-                }
+                },
+                {
+                    name: 'search_guild',
+                    description: '[set] Selecione um servidor',
+                    type: 3,
+                    autocomplete: true
+                },
+                {
+                    name: 'search_user',
+                    description: '[set] Selecione um usuário',
+                    type: 3,
+                    autocomplete: true
+                },
             ]
         },
         {
@@ -241,6 +277,10 @@ module.exports = {
                         {
                             name: 'Acess to Levels Backgrounds',
                             value: 'bgacessRemove'
+                        },
+                        {
+                            name: 'Just One Server',
+                            value: 'leaveServer'
                         },
                         {
                             name: 'Servers',
@@ -289,6 +329,18 @@ module.exports = {
                     name: 'mention',
                     description: '[remove] By Mention',
                     type: 6,
+                },
+                {
+                    name: 'search_guild',
+                    description: '[remove] Selecione um servidor',
+                    type: 3,
+                    autocomplete: true
+                },
+                {
+                    name: 'search_user',
+                    description: '[remove] Selecione um usuário',
+                    type: 3,
+                    autocomplete: true
                 },
                 {
                     name: 'id',
@@ -355,7 +407,19 @@ module.exports = {
                     name: 'id',
                     description: '[delete] By Id',
                     type: 3,
-                }
+                },
+                {
+                    name: 'search_guild',
+                    description: '[delete] Selecione um servidor',
+                    type: 3,
+                    autocomplete: true
+                },
+                {
+                    name: 'search_user',
+                    description: '[delete] Selecione um usuário',
+                    type: 3,
+                    autocomplete: true
+                },
             ]
         },
         {
@@ -372,6 +436,14 @@ module.exports = {
                         {
                             name: 'Console Log',
                             value: 'terminal'
+                        },
+                        {
+                            name: 'Register Server',
+                            value: 'registerServer'
+                        },
+                        {
+                            name: 'Register User',
+                            value: 'registerUser'
                         },
                         {
                             name: 'Host Bot Status',
@@ -393,10 +465,6 @@ module.exports = {
                             name: 'Delete Anime From Quiz',
                             value: 'delAnime'
                         },
-                        // {
-                        //     name: 'Comandos Bloqueados',
-                        //     value: 'bugs'
-                        // },
                         {
                             name: 'Bloquear Comando',
                             value: 'block_command'
@@ -432,11 +500,6 @@ module.exports = {
                     ]
                 },
                 {
-                    name: 'input',
-                    description: 'Informações adicionais',
-                    type: 3
-                },
-                {
                     name: 'blocked_commands',
                     description: 'Comandos bloqueados',
                     type: 3,
@@ -449,10 +512,27 @@ module.exports = {
                     autocomplete: true
                 },
                 {
+                    name: 'search_user',
+                    description: 'Selecione um usuário',
+                    type: 3,
+                    autocomplete: true
+                },
+                {
+                    name: 'search_guild',
+                    description: 'Selecione um servidor',
+                    type: 3,
+                    autocomplete: true
+                },
+                {
+                    name: 'input',
+                    description: 'Informações adicionais',
+                    type: 3
+                },
+                {
                     name: 'input2',
                     description: 'Informações adicionais 2',
                     type: 3
-                }
+                },
             ]
         }
     ],
@@ -469,7 +549,7 @@ module.exports = {
             })
 
         let func = options.getString('function')
-        let id = options.getString('id')
+        let id = options.getString('id') || options.getString('search_user') || options.getString('search_guild')
         let input = options.getString('input')
         let input2 = options.getString('input2')
         let user = client.users.cache.get(id) || options.getUser('mention')
@@ -519,6 +599,7 @@ module.exports = {
             case 'serversRemove': remove_Servers(); break;
             case 'blacklistRemove': remove_Blacklist(); break;
             case 'remove_ServerPremium': remove_ServerPremium(); break;
+            case 'leaveServer': leaveServer(); break;
 
             case 'logregisterDelete': delete_Logregister(); break;
             case 'cacheDelete': delete_Cache(); break;
@@ -544,6 +625,8 @@ module.exports = {
             case 'newCharacter': add_Character(); break;
             case 'delAnimeCharacter': delete_Character(); break;
             case 'delAnime': delete_Anime(); break;
+            case 'registerServer': registerServer(); break;
+            case 'registerUser': registerUser(); break;
 
             default: await interaction.reply({
                 content: `${e.Deny} | **${func}** | Não é um argumento válido.`,
@@ -572,6 +655,65 @@ module.exports = {
                 ephemeral: true
             })
 
+        }
+
+        async function registerUser() {
+
+            if (!user)
+                return await interaction.reply({
+                    content: `${e.Deny} | Nenhum usuário encontrado.`,
+                    ephemeral: true
+                })
+
+            if (user.bot)
+                return await interaction.reply({
+                    content: `${e.Deny} | Bots não são registrados no banco de dados.`,
+                    ephemeral: true
+                })
+
+            let userData = await Database.User.findOne({ id: user.id }),
+                blocksArray = clientData?.Blacklist?.Users || []
+
+            if (blocksArray.some(data => data?.id === user.id))
+                return await interaction.reply({
+                    content: `${e.Deny} | Este usuário está na blacklist.`,
+                    ephemeral: true
+                })
+
+            if (userData)
+                return await interaction.reply({
+                    content: `${e.Deny} | Este usuário já foi registrado na minha database.`,
+                    ephemeral: true
+                })
+
+            Database.registerUser(user)
+            return await interaction.reply({
+                content: `${e.Check} | **${user.tag} *\`(${user.id})\`*** foi registrado com sucesso no banco de dados.`
+            })
+        }
+
+        async function registerServer() {
+
+            let guild = client.guilds.cache.get(id)
+
+            if (!guild)
+                return await interaction.reply({
+                    content: `${e.Deny} | Nenhum servidor encontrado.`,
+                    ephemeral: true
+                })
+
+            let guildData = await Database.Guild.findOne({ id: guild.id })
+
+            if (guildData)
+                return await interaction.reply({
+                    content: `${e.Deny} | Este servidor já foi registrado na minha database.`,
+                    ephemeral: true
+                })
+
+            Database.registerServer(guild, client)
+            return await interaction.reply({
+                content: `${e.Check} | **${guild.name} *\`(${guild.id})\`*** foi registrado com sucesso no banco de dados.`
+            })
         }
 
         async function delete_Character() {
@@ -874,6 +1016,29 @@ module.exports = {
                 )
                 return
             }
+        }
+
+        async function leaveServer() {
+
+            let guild = client.guilds.cache.get(id)
+
+            if (!guild)
+                return await interaction.reply({
+                    content: `${e.Deny} | Servidor não foi encontrado.`,
+                    ephemeral: true
+                })
+
+            return guild.leave()
+                .then(async () => {
+                    return await interaction.reply({
+                        content: `${e.Check} | Eu sai do servidor \`${guild.name} | ${guild.id}\`.`
+                    })
+                })
+                .catch(async err => {
+                    return await interaction.reply({
+                        content: `${e.Warn} | Houve um erro ao tentar sair de \`${guild.name} | ${guild.id}\`.\n> \`${err}\``
+                    })
+                })
         }
 
         async function comandos_bloqueados() {
