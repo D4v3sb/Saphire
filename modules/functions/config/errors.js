@@ -86,7 +86,17 @@ async function Error(message, err) {
 
         await Database.Client.updateOne(
             { id: client.user.id },
-            { $push: { ComandosBloqueados: { $each: [{ cmd: command.name, error: err?.message || 'Indefinido' }], $position: 0 } } }
+            {
+                $push: {
+                    ComandosBloqueados: {
+                        $each: [{
+                            cmd: command.name,
+                            error: err?.message || 'Indefinido'
+                        }],
+                        $position: 0
+                    }
+                }
+            }
         )
 
         Database.PushTransaction(message.author.id, `${e.gain} Recebeu 1000 Safiras por descobrir um bug`)

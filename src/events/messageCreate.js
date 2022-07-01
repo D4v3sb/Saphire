@@ -10,7 +10,7 @@ const
     Notify = require('../../modules/functions/plugins/notify'),
     Database = require('../../modules/classes/Database'),
     disableAntLinkSystem = require('../../modules/functions/plugins/disableAntLinkSystem')
-    // wait = require('node:timers/promises').setTimeout;
+// wait = require('node:timers/promises').setTimeout;
 
 client.on('messageCreate', async message => {
 
@@ -148,7 +148,8 @@ client.on('messageCreate', async message => {
     //     Database.Cache.rateLimit.delete(message.channel.id)
     // } Database.Cache.rateLimit.add(message.channel.id, 1)
 
-    return await command.execute(client, message, args, prefix, MessageEmbed, Database).catch(err => Error(message, err))
+    return await command.execute(client, message, args, prefix, MessageEmbed, Database)
+        .catch(err => Error(message, err))
 
 })
 
