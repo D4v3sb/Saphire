@@ -1,4 +1,5 @@
 const translate = require('@iamtraction/google-translate')
+const util = require('../../structures/util')
 
 module.exports = {
     name: 'translate',
@@ -7,13 +8,21 @@ module.exports = {
     type: 1,
     options: [
         {
-            name: 'language',
-            description: 'Para qual lingua devo traduzir? en pt fr lt...',
+            name: 'de',
+            description: 'De qual lingua é o texto?',
             type: 3,
-            required: true
+            required: true,
+            autocomplete: true
         },
         {
-            name: 'text',
+            name: 'para',
+            description: 'Para qual lingua devo traduzir?',
+            type: 3,
+            required: true,
+            autocomplete: true
+        },
+        {
+            name: 'texto',
             description: 'Texto a ser traduzido',
             type: 3,
             required: true
@@ -30,17 +39,20 @@ module.exports = {
             author: { name: 'Google Tradutor', iconURL: 'https://imgur.com/9kWn6Qp.png' }
         }
 
-        let language = options.getString('language')
-        let text = options.getString('text')
+        let langData = Object.entries(util.Languages)
+        let toSearch = langData.filter(([a, b]) => b === options.getString('para'))
+        let fromSearch = langData.filter(([a, b]) => b === options.getString('de'))
+        let text = options.getString('texto')
+        let to = toSearch[0][0]
+        let from = fromSearch[0][0]
 
         if (text.length < 2 || text.length > 1000)
             return await interaction.editReply({
                 content: `${e.Deny} | O texto deve conter entre 2 e 1000 caracteres.`
             })
 
-        translate(text, { to: language })
+        translate(text, { to: to, from: from })
             .then(async res => {
-
                 Embed.fields = [
                     {
                         name: 'Texto',
@@ -55,7 +67,7 @@ module.exports = {
                 return await interaction.editReply({ embeds: [Embed] })
 
             }).catch(async err => {
-                
+
                 Embed.color = client.red
                 Embed.fields = [
                     {

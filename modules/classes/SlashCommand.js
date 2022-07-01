@@ -181,6 +181,14 @@ class SlashCommand extends Modals {
             })
         }
 
+        if (['de', 'para'].includes(name)) {
+
+            let languages = Object.entries(util.Languages)
+
+            const fill = languages.filter(([a, b]) => a.includes(value.toLowerCase()) || b.toLowerCase().includes(value.toLowerCase()))
+            mapped = fill.map(([a, b]) => ({ name: b, value: b }))
+        }
+
         if (mapped.length > 25) mapped.length = 25
         return await this.interaction.respond(mapped)
     }
