@@ -94,7 +94,7 @@ class SlashCommand extends Modals {
                 channelsBlocked = data?.Blockchannels?.Channels || [],
                 named = channelsBlocked.map(channelId => this.guild.channels.cache.get(channelId))
 
-            let fill = named.filter(ch => ch?.name.includes(value)) || []
+            let fill = named.filter(ch => ch?.name.toLowerCase().includes(value?.toLowerCase())) || []
             mapped = fill.map(ch => ({ name: ch.name, value: ch.id }))
         }
 
@@ -104,15 +104,22 @@ class SlashCommand extends Modals {
             let banned = banneds.toJSON()
 
             banned.length = 25
-            let fill = banned.filter(data => data?.user.tag.includes(value) || data?.user.id.includes(value)) || []
-            mapped = fill.map(data => ({ name: `${data.user.tag} - ${data.user.id} | ${data.reason?.slice(0, 150) || 'Sem razão definida'}`, value: data.user.id }))
+            let fill = banned.filter(data => data?.user.tag.toLowerCase().includes(value.toLowerCase()) || data?.user.id.includes(value)) || []
+            mapped = fill.map(data => {
+                let nameData = `${data.user.tag} - ${data.user.id} | ${data.reason?.slice(0, 150) || 'Sem razão definida'}`
+
+                if (nameData.length > 100)
+                    nameData = nameData.slice(0, 97) + '...'
+
+                return { name: nameData, value: data.user.id }
+            })
         }
 
         if (['color', 'cor'].includes(name)) {
 
             let colors = Object.keys(util.HexColors)
 
-            let fill = colors.filter(data => util.ColorsTranslate[data].toLowerCase().includes(value))
+            let fill = colors.filter(data => util.ColorsTranslate[data].toLowerCase().includes(value.toLowerCase()))
             mapped = fill.map(data => ({ name: util.ColorsTranslate[data], value: util.HexColors[data] }))
         }
 
@@ -141,7 +148,7 @@ class SlashCommand extends Modals {
             mapped = fill.map(d => ({ name: `${d.name} Safiras | ${d.length || 0} apostas em espera`, value: `${d.name}` }))
         }
 
-        mapped.length = 25
+        if (mapped.length > 25) mapped.length = 25
         return await this.interaction.respond(mapped)
     }
 }

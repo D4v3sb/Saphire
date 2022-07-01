@@ -5,12 +5,10 @@ module.exports = {
     aliases: ['cal'],
     category: 'util',
     emoji: '🧮',
-    usage: 'Não informado',
+    usage: '/calculadora',
     description: 'Calculadora simples',
 
     execute: async (client, message, args, prefix, MessageEmbed, Database) => {
-        try {
-            await simplydjs.calculator(message, { embedColor: '#246FE0', credit: false })?.catch(() => { })
-        } catch (err) { return }
+        return message.reply(`${e.Info} | Este comando foi movido para Slash Command e será excluído em breve. Use \`/calculadora\``)
     }
 }

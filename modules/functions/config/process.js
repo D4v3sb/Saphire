@@ -17,7 +17,7 @@ process.on('unhandledRejection', async (reason) => {
      * 10062 Unknow Interaction
      */
 
-    if ([500, 10004, 10008, 50035, 11000, 50001, 10062, 50013].includes(reason.code)) return
+    if ([500, 10004, 10008, 11000, 50001, 10062, 50013].includes(reason.code)) return
 
     return await client.users.cache.get(`${config.ownerId}`)?.send({
         embeds: [
