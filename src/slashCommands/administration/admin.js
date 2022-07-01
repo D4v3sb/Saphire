@@ -443,7 +443,7 @@ module.exports = {
                     autocomplete: true
                 },
                 {
-                    name: 'commands',
+                    name: 'command',
                     description: 'Lista de comandos em Slash Command',
                     type: 3,
                     autocomplete: true
@@ -1094,7 +1094,7 @@ module.exports = {
 
         async function block_command() {
 
-            const commandName = options.getString('commands') || input
+            const commandName = options.getString('command') || input
             const reason = input2 || 'Nenhuma razão informada'
 
             if (!commandName)

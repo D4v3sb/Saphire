@@ -167,11 +167,18 @@ class SlashCommand extends Modals {
 
         }
 
-        if (name === 'commands') {
-            let commands = this.client.slashCommands.map(cmd => cmd.name)
+        if (name === 'command') {
+            let commands = this.client.slashCommands.map(cmd => ({ name: cmd.name, description: cmd.description }))
 
-            const fill = commands.filter(cmd => cmd?.toLowerCase().includes(value.toLowerCase()))
-            mapped = fill.map(cmd => ({ name: cmd, value: cmd }))
+            const fill = commands.filter(cmd => cmd.name?.toLowerCase().includes(value.toLowerCase()))
+            mapped = fill.map(cmd => {
+                let name = `${cmd.name} | ${cmd.description}`
+
+                if (name.length > 100)
+                    name = name.slice(0, 97) + '...'
+
+                return { name: name, value: cmd.name }
+            })
         }
 
         if (mapped.length > 25) mapped.length = 25
