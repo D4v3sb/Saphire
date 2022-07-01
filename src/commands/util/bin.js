@@ -5,8 +5,6 @@ module.exports = {
     name: "bin",
     aliases: ["copia"],
     category: 'util',
-    
-    
     emoji: '🖇️',
     description: "Faça uma cópia online de algum texto",
     usage: '[Texto que deseja copiar]',

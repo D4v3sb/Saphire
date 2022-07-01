@@ -4,8 +4,6 @@ module.exports = {
     name: 'dono',
     aliases: ['owner', 'lider'],
     category: 'util',
-
-
     emoji: `${e.Info}`,
     usage: '<dono>',
     description: 'Veja o dono do servidor',
