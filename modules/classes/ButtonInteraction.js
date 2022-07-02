@@ -11,7 +11,7 @@ class ButtonInteraction extends Modals {
         this.channel = interaction.channel
         this.guild = interaction.guild
     }
-    
+
     execute() {
 
         switch (this.customId) {
@@ -121,27 +121,26 @@ class ButtonInteraction extends Modals {
 
     async editProfile() {
 
-        let data = await Database.User.findOne({ id: this.user.id }, 'Perfil'),
-            title = data?.Perfil?.Titulo || null,
-            job = data?.Perfil?.Trabalho || null,
-            niver = data?.Perfil?.Aniversario || null,
-            status = data?.Perfil?.Status || null
-
+        const data = await Database.User.findOne({ id: this.user.id }, 'Perfil')
+        const title = data?.Perfil?.Titulo || null
+        const job = data?.Perfil?.Trabalho || null
+        const niver = data?.Perfil?.Aniversario || null
+        const status = data?.Perfil?.Status || null
         const modal = this.editProfileModal
 
         if (job) {
             modal.components[0].components[0].label = job ? 'Alterar Profissão' : 'Qual sua profissão?'
-            modal.components[0].components[0].value = job
+            modal.components[0].components[0].value = job.length >= 5 ? job : null
         }
 
         if (niver) {
             modal.components[1].components[0].label = niver ? 'Alterar Aniversário' : 'Digite seu aniversário'
-            modal.components[1].components[0].value = niver
+            modal.components[1].components[0].value = niver.length >= 5 ? niver : null
         }
 
         if (status) {
             modal.components[2].components[0].label = status ? 'Alterar Status' : 'Digite seu novo status'
-            modal.components[2].components[0].value = status
+            modal.components[2].components[0].value = status.length >= 5 ? status : null
         }
 
         if (data?.Perfil?.TitlePerm)
@@ -156,7 +155,7 @@ class ButtonInteraction extends Modals {
                         min_length: 3,
                         max_length: 20,
                         placeholder: "Escrever novo título",
-                        value: title
+                        value: title?.length >= 5 ? title : null
                     }
                 ]
             })

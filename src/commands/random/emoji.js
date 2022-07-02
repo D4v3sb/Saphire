@@ -16,8 +16,8 @@ module.exports = {
 
         const parsedEmoji = Util.parseEmoji(args[0]),
             emoji = {
-                id: parsedEmoji.id || null,
-                animated: parsedEmoji.animated ? ".gif" : ".png"
+                id: parsedEmoji?.id || null,
+                animated: parsedEmoji?.animated ? ".gif" : ".png"
             }
 
         if (emoji.id) {
