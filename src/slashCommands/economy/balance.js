@@ -10,9 +10,10 @@ module.exports = {
             type: 6
         },
         {
-            name: 'search',
+            name: 'search_user',
             description: 'Pesquise alguém pelo nome ou ID',
-            type: 3
+            type: 3,
+            autocomplete: true
         },
         {
             name: 'hide',
@@ -28,7 +29,7 @@ module.exports = {
         const { Config: config } = Database
 
         let hide = options.getBoolean('hide') || false
-        let user = await getUser(options.getString('search')) || client.users.cache.get(options.getMember('user')?.id) || interaction.user
+        let user = client.users.cache.get(options.getString('search_user')) || interaction.user
 
         if (user.id === client.user.id)
             return await interaction.reply({

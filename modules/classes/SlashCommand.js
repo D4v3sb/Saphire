@@ -6,6 +6,7 @@ class SlashCommand extends Modals {
         super()
         this.interaction = interaction
         this.user = interaction.user
+        this.member = interaction.member
         this.guild = interaction.guild
         this.channel = interaction.channel
         this.client = client
@@ -14,7 +15,7 @@ class SlashCommand extends Modals {
         this.e = this.Database.Emojis
     }
 
-    async execute(guildData, clientData, member) {
+    async execute(guildData, clientData) {
 
         const command = this.client.slashCommands.get(this.interaction.commandName);
         if (!command) return
@@ -35,9 +36,9 @@ class SlashCommand extends Modals {
             data: this,
             guild: this.guild,
             modals: this.modals,
+            member: this.member,
             guildData: guildData,
             clientData: clientData,
-            member: member
         }).catch(err => this.error(this, err))
 
         return this.registerCommand()
@@ -49,7 +50,6 @@ class SlashCommand extends Modals {
 
         let guildData = await Database.Guild.findOne({ id: guild?.id })
         let clientData = await Database.Client.findOne({ id: client.user.id })
-        let member = guild?.members.cache.get(user.id)
 
         if (clientData.Rebooting?.ON)
             return await interaction.reply({ content: `${e.Loading} | Reiniciando em breve...\n${e.BookPages} | ${clientData.Rebooting?.Features || 'Nenhum dado fornecido'}` })
@@ -60,7 +60,7 @@ class SlashCommand extends Modals {
                 ephemeral: true
             })
 
-        if (!member?.permissions?.toArray()?.includes('ADMINISTRATOR') && guildData?.Blockchannels?.Channels?.includes(channel.id))
+        if (!this.member?.permissions?.toArray()?.includes('ADMINISTRATOR') && guildData?.Blockchannels?.Channels?.includes(channel.id))
             return await interaction.reply({
                 content: `${e.Deny} | Meus comandos foram bloqueados neste canal.`,
                 ephemeral: true
@@ -74,7 +74,7 @@ class SlashCommand extends Modals {
                 ephemeral: true
             })
 
-        return this.execute(guildData, clientData, member)
+        return this.execute(guildData, clientData)
     }
 
     async registerCommand() {

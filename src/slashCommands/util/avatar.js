@@ -5,7 +5,7 @@ const allowedSizes = Array.from({ length: 9 }, (e, i) => 2 ** (i + 4))
 module.exports = {
     name: 'avatar',
     description: '[util] Veja o avatar e faixa de usuários',
-    dm_permission: false,
+    // dm_permission: false,
     type: 1,
     options: [
         {
@@ -25,23 +25,21 @@ module.exports = {
         const { options, user: author, guild } = interaction
 
         let user = options.getUser('user') || client.users.cache.get(options.getString('search_user')) || author
-        let member = guild.members.cache.get(user.id)
+        let member = guild?.members.cache.get(user?.id)
         let userAvatarURL = user.avatarURL({ dynamic: true, format: "png", size: 1024 })
         let memberAvatarURL = member?.avatarURL({ dynamic: true, format: "png", size: 1024 })
         let userAvatarImage = user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 })
         let memberAvatarImage = member?.displayAvatarURL({ dynamic: true, format: "png", size: 1024 })
         let Emojis = ['⬅️', '📨', '🗑️', '💙', '➡️']
-        let banner = await get(user.id, 2048, "png", true)
-        let embeds = [
-            {
-                embed: {
-                    color: client.blue,
-                    description: `${e.Download} [Clique aqui](${userAvatarURL}) para baixar o avatar original de ${user.tag}`,
-                    image: { url: userAvatarImage }
-                },
-                type: 'original'
-            }
-        ]
+        let banner = await get(user?.id, 2048, "png", true)
+        let embeds = [{
+            embed: {
+                color: client.blue,
+                description: `${e.Download} [Clique aqui](${userAvatarURL}) para baixar o avatar original de ${user.tag}`,
+                image: { url: userAvatarImage }
+            },
+            type: 'original'
+        }]
         let atualEmbed = 0
         let DmUserGuild = []
         let DmUserOriginal = []
@@ -184,7 +182,7 @@ module.exports = {
             if (DmUserOriginal.includes(u.id) && embedType === 'original') return
 
             u.send({
-                content: `Foto enviada de: ${guild.name}`,
+                content: `Foto enviada de: ${guild?.name}`,
                 embeds: [embeds[atualEmbed].embed],
                 components: []
             }).catch(async () => {

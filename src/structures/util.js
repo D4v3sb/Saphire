@@ -409,7 +409,7 @@ const Languages = {
     no: "Norueguês",
     ny: "Chichewa",
     pa: "Chichewa",
-    pl: "polonês",
+    pl: "Polonês",
     ps: "Pashto",
     pt: "Português",
     ro: "Romeno",

@@ -34,51 +34,46 @@ module.exports = {
 
         const { options } = interaction
 
-        const Embed = {
-            color: '#4295fb',
-            author: { name: 'Google Tradutor', iconURL: 'https://imgur.com/9kWn6Qp.png' }
-        }
-
-        let langData = Object.entries(util.Languages)
-        let toSearch = langData.filter(([a, b]) => b === options.getString('para'))
-        let fromSearch = langData.filter(([a, b]) => b === options.getString('de'))
+        let langData = Object.entries(util.Languages).map(([a, b]) => ({ lang: a, name: b }))
+        let toSearch = langData.find(data => data.name === options.getString('para'))
+        let fromSearch = langData.find(data => data.name === options.getString('de'))
         let text = options.getString('texto')
-        let to = toSearch[0][0]
-        let from = fromSearch[0][0]
+        let to = toSearch.lang
+        let from = fromSearch.lang
 
         if (text.length < 2 || text.length > 1000)
             return await interaction.editReply({
                 content: `${e.Deny} | O texto deve conter entre 2 e 1000 caracteres.`
             })
 
+        const Embed = {
+            color: '#4295fb',
+            author: { name: 'Google Tradutor', iconURL: 'https://imgur.com/9kWn6Qp.png' },
+            fields: [
+                {
+                    name: 'Texto',
+                    value: `\`\`\`txt\n${text}\n\`\`\``
+                }
+            ],
+            footer: { text: `Traduzido de ${fromSearch.name} para ${toSearch.name}` }
+        }
+
         translate(text, { to: to, from: from })
             .then(async res => {
-                Embed.fields = [
-                    {
-                        name: 'Texto',
-                        value: `\`\`\`txt\n${text}\n\`\`\``
-                    },
-                    {
-                        name: 'Tradução',
-                        value: `\`\`\`txt\n${res.text}\n\`\`\``
-                    }
-                ]
+                Embed.fields[1] = {
+                    name: 'Tradução',
+                    value: `\`\`\`txt\n${res.text}\n\`\`\``
+                }
 
                 return await interaction.editReply({ embeds: [Embed] })
 
             }).catch(async err => {
 
                 Embed.color = client.red
-                Embed.fields = [
-                    {
-                        name: 'Texto',
-                        value: `\`\`\`txt\n${text}\n\`\`\``
-                    },
-                    {
-                        name: 'Erro',
-                        value: `\`\`\`txt\n${err}\n\`\`\``
-                    }
-                ]
+                Embed.fields[1] = {
+                    name: 'Erro',
+                    value: `\`\`\`txt\n${err}\n\`\`\``
+                }
 
                 return await interaction.editReply({ embeds: [Embed] })
             })

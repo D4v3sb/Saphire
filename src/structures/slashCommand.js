@@ -1,5 +1,5 @@
 const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
+const { Routes } = require("discord-api-types/v10");
 const { readdirSync } = require('fs')
 
 module.exports = async (client) => {
@@ -20,7 +20,7 @@ module.exports = async (client) => {
         }
     })
 
-    const rest = new REST({ version: "9" }).setToken(process.env.DISCORD_CLIENT_BOT_TOKEN)
+    const rest = new REST({ version: "10" }).setToken(process.env.DISCORD_CLIENT_BOT_TOKEN)
 
     return (async () => {
         try {
