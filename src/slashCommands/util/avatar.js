@@ -5,7 +5,6 @@ const allowedSizes = Array.from({ length: 9 }, (e, i) => 2 ** (i + 4))
 module.exports = {
     name: 'avatar',
     description: '[util] Veja o avatar e faixa de usuários',
-    // dm_permission: false,
     type: 1,
     options: [
         {
@@ -18,6 +17,11 @@ module.exports = {
             description: 'Pesquise por um usuário para ver o avatar',
             type: 3,
             autocomplete: true
+        },
+        {
+            name: 'hide',
+            description: 'Esconder mensagem de todos',
+            type: 5
         }
     ],
     async execute({ interaction: interaction, client: client, database: Database, emojis: e }) {
@@ -25,6 +29,7 @@ module.exports = {
         const { options, user: author, guild } = interaction
 
         let user = options.getUser('user') || client.users.cache.get(options.getString('search_user')) || author
+        let ephemeral = options.getBoolean('hide') ? true : false
         let member = guild?.members.cache.get(user?.id)
         let userAvatarURL = user.avatarURL({ dynamic: true, format: "png", size: 1024 })
         let memberAvatarURL = member?.avatarURL({ dynamic: true, format: "png", size: 1024 })
@@ -84,7 +89,7 @@ module.exports = {
                     },
                     {
                         type: 2,
-                        emoji: Emojis[2], // X
+                        emoji: Emojis[2], // Delete
                         custom_id: 'x',
                         style: 'DANGER'
                     },
@@ -116,7 +121,7 @@ module.exports = {
                     },
                     {
                         type: 2,
-                        emoji: Emojis[2], // X
+                        emoji: Emojis[2], // Delete
                         custom_id: 'x',
                         style: 'DANGER'
                     },
@@ -130,11 +135,15 @@ module.exports = {
             }
         ]
 
+        if (ephemeral) buttonsWithArrows[0].components[2].disabled = true
+        if (ephemeral) buttonsWithoutArrows[0].components[1].disabled = true
+
         const buttons = embeds.length > 1 ? buttonsWithArrows : buttonsWithoutArrows
 
         let msg = await interaction.reply({
             embeds: [embeds[0].embed],
             components: buttons,
+            ephemeral: ephemeral,
             fetchReply: true
         })
 
@@ -155,14 +164,14 @@ module.exports = {
                     atualEmbed++
                     if (!embeds[atualEmbed]) atualEmbed = 0
 
-                    return msg.edit({ embeds: [embeds[atualEmbed].embed] }).catch(() => { })
+                    return await interaction.editReply({ embeds: [embeds[atualEmbed].embed] }).catch(() => { })
                 }
 
                 if (intId === 'leftArrow' && intUser.id === author.id) {
                     atualEmbed--
                     if (!embeds[atualEmbed]) atualEmbed = embeds.length - 1
 
-                    return msg.edit({ embeds: [embeds[atualEmbed].embed] }).catch(() => { })
+                    return await interaction.editReply({ embeds: [embeds[atualEmbed].embed] }).catch(() => { })
                 }
 
                 if (intId === 'x' && [author.id, user.id].includes(intUser.id))
@@ -170,7 +179,7 @@ module.exports = {
 
                 return
             })
-            .on('end', () => msg.edit({ components: [] }).catch(() => { }))
+            .on('end', async () => await interaction.editReply({ components: [] }).catch(() => { }))
 
         async function sendLetter(u, int) {
 
@@ -205,7 +214,8 @@ module.exports = {
             if (embedType === 'original') DmUserOriginal.push(u.id)
 
             return await int.followUp({
-                content: `${e.Check} | ${u} solicitou ${replaceWord} de ${user.username} para sua DM.`
+                content: `${e.Check} | ${u} solicitou ${replaceWord} de ${user.username} para sua DM.`,
+                ephemeral: true
             })
 
         }

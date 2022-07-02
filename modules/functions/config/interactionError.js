@@ -54,6 +54,11 @@ async function InteractionError({ interaction, Database, user, e, client, guild,
     return await interaction.reply({
         content: `${e.Warn} | Ocorreu um erro neste comando. Mas não se preocupe! Eu já avisei meu criador e ele vai arrumar isso rapidinho.\n${e.PandaProfit} +1500 ${moeda}`,
         ephemeral: true
+    }).catch(async () => {
+        return await interaction.followUp({
+            content: `${e.Warn} | Ocorreu um erro neste comando. Mas não se preocupe! Eu já avisei meu criador e ele vai arrumar isso rapidinho.\n${e.PandaProfit} +1500 ${moeda}`,
+            ephemeral: true
+        })
     })
 
 }
