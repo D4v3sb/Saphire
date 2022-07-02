@@ -28,23 +28,36 @@ module.exports = {
             required: true
         }
     ],
-    async execute({ interaction: interaction, client: client }) {
-
-        await interaction.deferReply({})
+    async execute({ interaction: interaction, client: client, emojis: e }) {
 
         const { options } = interaction
 
         let langData = Object.entries(util.Languages).map(([a, b]) => ({ lang: a, name: b }))
-        let toSearch = langData.find(data => data.name === options.getString('para'))
-        let fromSearch = langData.find(data => data.name === options.getString('de'))
+        let toSearch = langData.find(data => [data.lang, data.name].includes(options.getString('para')))
+        let fromSearch = langData.find(data => [data.lang, data.name].includes(options.getString('de')))
         let text = options.getString('texto')
-        let to = toSearch.lang
-        let from = fromSearch.lang
+        let to = toSearch?.lang
+        let from = fromSearch?.lang
+
+        if (!to || !from)
+            return await interaction.reply({
+                content: `${e.Deny} | Por favor, selecione uma lingua válida para que eu possa efetuar a tradução`,
+                ephemeral: true
+            })
+
+        if (fromSearch.name === toSearch.name)
+            return await interaction.reply({
+                content: `${e.Deny} | As linguas devem ser diferentes uma da outra`,
+                ephemeral: true
+            })
 
         if (text.length < 2 || text.length > 1000)
-            return await interaction.editReply({
-                content: `${e.Deny} | O texto deve conter entre 2 e 1000 caracteres.`
+            return await interaction.reply({
+                content: `${e.Deny} | O texto deve conter entre 2 e 1000 caracteres.`,
+                ephemeral: true
             })
+
+        await interaction.deferReply({})
 
         const Embed = {
             color: '#4295fb',
