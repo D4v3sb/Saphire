@@ -12,6 +12,8 @@ async function InteractionError({ interaction, Database, user, e, client, guild,
 
     /**
     * 10062 - DiscordAPIError: Unknown interaction
+    * 50001 - Missing Acess
+    * 50013 - Missing Permissions
     */
 
     if ([10062].includes(err.code)) return
