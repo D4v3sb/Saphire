@@ -69,7 +69,7 @@ class Saphire extends Client {
             Hours = Time.hours > 0 ? `${Time.hours}h` : '',
             Minutes = Time.minutes > 0 ? `${Time.minutes}m` : '',
             Seconds = Time.seconds > 0 ? `${Time.seconds}s` : '',
-            Nothing = !Day && !Hours && !Minutes && !Seconds ? 'Invalid Cooldown Acess Bad Formated' : '',
+            Nothing = !Day && !Hours && !Minutes && !Seconds ? 'Invalid Cooldown Access Bad Formated' : '',
             Dh = '', Hm = '', Ms = ''
 
         if (Time.days > 365) return '+365 dias'

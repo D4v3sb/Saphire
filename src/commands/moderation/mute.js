@@ -91,7 +91,7 @@ function GetTimeout(TimeToCooldown = 0) {
         Hours = Time.hours > 0 ? ` ${Time.hours} horas` : '',
         Minutes = Time.minutes > 0 ? ` ${Time.minutes} minutos` : '',
         Seconds = Time.seconds > 0 ? ` ${Time.seconds} segundos` : '',
-        Nothing = !Day && !Hours && !Minutes && !Seconds ? 'Invalid Cooldown Acess Bad Formated' : ''
+        Nothing = !Day && !Hours && !Minutes && !Seconds ? 'Invalid Cooldown Access Bad Formated' : ''
 
     return `${Day}${Hours}${Minutes}${Seconds}${Nothing}`
 

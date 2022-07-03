@@ -169,7 +169,7 @@ module.exports = {
                             value: 'bughunter'
                         },
                         {
-                            name: 'Acess to Level Backgrounds',
+                            name: 'Access to Level Backgrounds',
                             value: 'bgacess'
                         },
                         {
@@ -275,7 +275,7 @@ module.exports = {
                             value: 'halloweenRemove'
                         },
                         {
-                            name: 'Acess to Levels Backgrounds',
+                            name: 'Access to Levels Backgrounds',
                             value: 'bgacessRemove'
                         },
                         {

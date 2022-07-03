@@ -281,18 +281,8 @@ class SlashCommand extends Modals {
         }
 
         if (name === 'level_options') {
-            let clientData = await this.Database.Client.findOne({ id: this.client.user.id }, 'BackgroundAcess Administradores')
-            // let usersId = clientData.BackgroundAcess || []
-            // let usersMapped = usersId.map(id => {
-            //     let user = this.client.users.cache.get(id)
-
-            //     return user
-            //         ? { name: `${user.tag} - ${id}`, value: id }
-            //         : { name: `${id} - Usuário não encontrado`, value: id }
-            // })
-            //     .filter(data => data.name.toLowerCase().includes(value.toLowerCase())) || []
-
-            let arr = [{ name: 'Esconder mensagem só para mim', value: 'hide' }]
+            const clientData = await this.Database.Client.findOne({ id: this.client.user.id }, 'BackgroundAcess Administradores')
+            const arr = [{ name: 'Esconder mensagem só para mim', value: 'hide' }]
 
             if (clientData.Administradores?.includes(this.user.id))
                 arr.push({ name: 'Usuário que possuem acesso ao Backgrounds', value: 'list' })

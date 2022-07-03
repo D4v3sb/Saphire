@@ -40,7 +40,7 @@ module.exports = {
     async execute({ interaction: interaction, client: client, database: Database, emojis: e, clientData: clientData, guildData: guildData }) {
 
         const { BgLevel } = Database
-        const { options, user: author } = interaction
+        const { options, user: author, guild } = interaction
 
         let user = client.users.cache.get(options.getString('search_user')) || options.getUser('user') || author
         let level_options = options.getString('level_options')
@@ -129,7 +129,7 @@ module.exports = {
             return await interaction.reply({
                 embeds: [{
                     color: client.blue,
-                    title: `${e.ModShield} Background Free Acess`,
+                    title: `${e.ModShield} Background Free Access`,
                     description: format || 'Lista vazia'
                 }]
             })

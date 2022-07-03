@@ -135,7 +135,7 @@ client.on('messageCreate', async message => {
 
         let timeResponse = client.GetTimeout(command.cooldown || 1500, Database.Cache.get(`Timeouts.${command.name}.${message.author.id}.Time`), true)
 
-        if (timeResponse === 'Invalid Cooldown Acess Bad Formated') timeResponse = 0
+        if (timeResponse === 'Invalid Cooldown Access Bad Formated') timeResponse = 0
         return message.reply(`⏱️ | Calma, calma! Você ainda tem mais **\`${timeResponse}\`** para usar este comando novamente.`)
     }
 
