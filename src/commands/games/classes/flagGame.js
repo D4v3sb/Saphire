@@ -568,7 +568,7 @@ class flagGame {
                         Database.registerChannelControl('pull', 'Flag', message.channel?.id)
                         embed
                             .setColor(client.red)
-                            .setDescription(`${e.Deny} | Ninguém acertou o país.\n${control.atualFlag.flag} - ${formatString(control.atualFlag?.country)}\n🔄 ${control.rounds} Rounds`)
+                            .setDescription(`${e.Deny} | Ninguém acertou a bandeira.\n${control.atualFlag.flag} - ${formatString(control.atualFlag?.country)}\n🔄 ${control.rounds} Rounds`)
                             .setFooter({ text: `Flag Game encerrado.` })
                         msg.delete().catch(() => { })
 
@@ -697,7 +697,7 @@ class flagGame {
 
                     await addPoint(Message.author)
                     embed
-                        .setDescription(`${e.Check} | ${Message.author} acertou o país!\n${control.atualFlag.flag} - ${formatString(control.atualFlag?.country)}\n \n${e.Loading} Próxima bandeira...`)
+                        .setDescription(`${e.Check} | ${Message.author} acertou a bandeira!\n${control.atualFlag.flag} - ${formatString(control.atualFlag?.country)}\n \n${e.Loading} Próxima bandeira...`)
                         .setImage(null)
 
                     msg.delete().catch(() => Database.registerChannelControl('pull', 'Flag', message.channel?.id))
@@ -717,7 +717,7 @@ class flagGame {
                     Database.registerChannelControl('pull', 'Flag', message.channel?.id)
                     embed
                         .setColor(client.red)
-                        .setDescription(`${e.Deny} | Ninguém acertou o país.\n${control.atualFlag.flag} - ${formatString(control.atualFlag?.country)}\n🔄 ${control.rounds} Rounds`)
+                        .setDescription(`${e.Deny} | Ninguém acertou a bandeira.\n${control.atualFlag.flag} - ${formatString(control.atualFlag?.country)}\n🔄 ${control.rounds} Rounds`)
                         .setFooter({ text: `Flag Game encerrado.` })
                     msg.delete().catch(() => { })
 
