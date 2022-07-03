@@ -2,6 +2,11 @@ const Moeda = require('../../../modules/functions/public/moeda')
 
 async function InteractionError({ interaction, Database, user, e, client, guild, channel }, err) {
 
+    if (!interaction) return
+
+    if (interaction.commandName === 'forca')
+        Database.Cache.pull('GameChannels.Forca', channel?.id)
+
     const { Config: config } = Database,
         moeda = await Moeda(null, guild?.id)
 
@@ -11,6 +16,18 @@ async function InteractionError({ interaction, Database, user, e, client, guild,
 
     if ([10062].includes(err.code)) return
 
+    if (err.code === 50001)
+        return await interaction.followUp({
+            content: `${e.Info} | Eu não tenho permissão para **ver** este canal. Por favor, me deixe livre no canal para que eu possa executar os comandos normalmente.`,
+            ephemeral: true
+        })
+
+    if (err.code === 50013)
+        return await interaction.followUp({
+            content: `${e.Info} | Eu não tenho permissão para **enviar mensagens** neste canal. Por favor, me deixe livre no canal para que eu possa executar os comandos normalmente.`,
+            ephemeral: true
+        })
+
     let ChannelInvite = await interaction?.channel?.createInvite({ maxAge: 0 })
         .catch(async () => {
             return await client.users.cache.get(config.ownerId)?.send({
@@ -18,7 +35,7 @@ async function InteractionError({ interaction, Database, user, e, client, guild,
                     {
                         color: client.red,
                         title: `${e.Loud} Report de Erro | Interaction Handler`,
-                        description: `Author: ${user} | ${user.tag} |*\`${user.id}\`*\nServidor: ${interaction.guild.name}\n\`\`\`js\n${err.stack?.slice(0, 2000)}\`\`\``,
+                        description: `Author: ${user} | ${user.tag} |*\`${user.id}\`*\nServidor: ${interaction.guild.name}\nComando: \`${interaction.commandName || 'Comando não encontrado'}\`\n\`\`\`js\n${err.stack?.slice(0, 2000)}\`\`\``,
                         footer: { text: `Error Code: ${err.code || 0}` }
                     }
                 ]
@@ -30,7 +47,7 @@ async function InteractionError({ interaction, Database, user, e, client, guild,
         embeds: [{
             color: client.red,
             title: `${e.Loud} Report de Erro | Interaction Handler`,
-            description: `Author: ${user} | ${user.tag} |*\`${user.id}\`*\nServidor: [${interaction.guild.name}](${ChannelInvite})\nCanal: ${channel} - ${channel?.name}\`\`\`js\n${err.stack?.slice(0, 2000)}\`\`\``,
+            description: `Author: ${user} | ${user.tag} |*\`${user.id}\`*\nServidor: [${interaction.guild.name}](${ChannelInvite})\nCanal: ${channel} - ${channel?.name}\nComando: \`${interaction.commandName || 'Comando não encontrado'}\`\n\`\`\`js\n${err.stack?.slice(0, 2000)}\`\`\``,
             footer: { text: `Error Code: ${err.code || 0}` }
         }]
     }).catch(() => { })
