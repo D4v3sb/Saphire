@@ -3,6 +3,7 @@ const client = require('../../index'),
     ButtonInteraction = require('../../modules/classes/ButtonInteraction'),
     SelectMenuInteraction = require('../../modules/classes/SelectMenuInteraction'),
     SlashCommand = require('../../modules/classes/SlashCommand'),
+    Autocomplete = require('../../modules/classes/Autocomplete'),
     Database = require('../../modules/classes/Database')
 
 client.on('interactionCreate', async interaction => {
@@ -12,6 +13,6 @@ client.on('interactionCreate', async interaction => {
     if (interaction.isButton()) return new ButtonInteraction(interaction, client).execute()
     if (interaction.isSelectMenu()) return new SelectMenuInteraction(interaction).filterAndChooseFunction()
     if (interaction.isCommand() || interaction.isUserContextMenu()) return new SlashCommand(interaction, client).CheckBeforeExecute()
-    if (interaction.isAutocomplete()) return new SlashCommand(interaction, client).autoComplete()
+    if (interaction.isAutocomplete()) return new Autocomplete(interaction, client).build()
     return
 })

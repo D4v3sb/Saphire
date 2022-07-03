@@ -392,7 +392,8 @@ module.exports = {
         async function editRole() {
 
             let newName = options.getString('nome')
-            let newColor = util.Colors[options.getString('cor')]
+            let newColor = options.getString('cor')
+            let hexColor = util.HexColors[newColor]
             let hoist = options.getInteger('visivel')
             let delPermissions = options.getInteger('delete_permissions')
             let mentionable = options.getInteger('mencionavel')
@@ -404,7 +405,7 @@ module.exports = {
                     ephemeral: true
                 })
 
-            if (!newName && !newColor && !hoist && !delPermissions && !mentionable)
+            if (!newName && !hexColor && !hoist && !delPermissions && !mentionable)
                 return await interaction.reply({
                     content: `${e.Deny} | Você deve dizer pelo menos um item das opções para efetuar a edição do cargo.`,
                     ephemeral: true
@@ -428,8 +429,8 @@ module.exports = {
                 edited.push(`Permissões deletadas: \`${delPermissions === 1 ? 'Sim' : 'Não'}\``)
             }
 
-            if (newColor !== null) {
-                newData.color = newColor
+            if (hexColor !== null) {
+                newData.color = hexColor
                 edited.push(`Cor: \`${util.ColorsTranslate[options.getString('cor')]}\``)
             }
 

@@ -1,3 +1,5 @@
+const util = require('../../structures/util')
+
 module.exports = {
     name: 'editprofile',
     description: '[perfil] Edite as informações do seu perfil',
@@ -126,7 +128,7 @@ module.exports = {
             signo = options.getString('signo'),
             gender = options.getString('gênero'),
             title = options.getString('título'),
-            color = options.getString('cor'),
+            color = util.HexColors[options.getString('cor')],
             msg = '', dataToSave = {}
 
         if (title && title !== data?.Perfil?.Titulo)
@@ -143,9 +145,9 @@ module.exports = {
             } else {
 
                 let valid = /^#[0-9A-F]{6}$/i.test(color)
-                if (!valid) {
+                if (!valid)
                     msg += `${e.Deny} | Código #HEX inválido.`
-                } else {
+                else {
                     dataToSave['Color.Set'] = color
                     msg += `${e.Check} | Color`
                 }

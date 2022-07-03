@@ -126,7 +126,7 @@ const ColorsTranslate = {
     NAVY: "Oceano Apagado",
     DARK_NAVY: "Oceano Escuro",
     YELLOW: "Amarelo",
-    LUMINOUS_VIVID_RED: 'Vermelho VÍvido Luminoso'
+    LUMINOUS_VIVID_RED: 'Vermelho Vívido Luminoso'
 }
 
 const HexColors = {
