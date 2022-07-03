@@ -87,7 +87,13 @@ class SlashCommand extends Modals {
 
     async autoComplete() {
         const { name, value } = this.interaction.options.getFocused(true)
-        let mapped = []
+        let mapped = await this.executeAutoComplete(name, value)
+
+        if (mapped.length > 25) mapped.length = 25
+        return await this.interaction.respond(mapped)
+    }
+
+    async executeAutoComplete(name, value) {
 
         if (name === 'channel') {
             let data = await this.Database.Guild.findOne({ id: this.guild.id }, 'Blockchannels'),
@@ -95,7 +101,7 @@ class SlashCommand extends Modals {
                 named = channelsBlocked.map(channelId => this.guild.channels.cache.get(channelId))
 
             let fill = named.filter(ch => ch?.name.toLowerCase().includes(value?.toLowerCase())) || []
-            mapped = fill.map(ch => ({ name: ch.name, value: ch.id }))
+            return fill.map(ch => ({ name: ch.name, value: ch.id }))
         }
 
         if (name === 'users_banned') {
@@ -105,7 +111,7 @@ class SlashCommand extends Modals {
 
             banned.length = 25
             let fill = banned.filter(data => data?.user.tag.toLowerCase().includes(value.toLowerCase()) || data?.user.id.includes(value)) || []
-            mapped = fill.map(data => {
+            return fill.map(data => {
                 let nameData = `${data.user.tag} - ${data.user.id} | ${data.reason?.slice(0, 150) || 'Sem razão definida'}`
 
                 if (nameData.length > 100)
@@ -120,7 +126,7 @@ class SlashCommand extends Modals {
             let colors = Object.keys(util.HexColors)
 
             let fill = colors.filter(data => util.ColorsTranslate[data].toLowerCase().includes(value.toLowerCase()))
-            mapped = fill.map(data => ({ name: util.ColorsTranslate[data], value: util.HexColors[data] }))
+            return fill.map(data => ({ name: util.ColorsTranslate[data], value: util.HexColors[data] }))
         }
 
         if (name === 'betchoice') {
@@ -145,7 +151,7 @@ class SlashCommand extends Modals {
             ]
 
             let fill = betObject.filter(d => d.name.includes(value))
-            mapped = fill.map(d => ({ name: `${d.name} Safiras | ${d.length || 0} apostas em espera`, value: `${d.name}` }))
+            return fill.map(d => ({ name: `${d.name} Safiras | ${d.length || 0} apostas em espera`, value: `${d.name}` }))
         }
 
         if (name === 'blocked_commands') {
@@ -155,7 +161,7 @@ class SlashCommand extends Modals {
             let bugs = data?.ComandosBloqueadosSlash || []
 
             const fill = bugs.filter(bug => bug.cmd?.toLowerCase().includes(value.toLowerCase()))
-            mapped = fill.map(bug => {
+            return fill.map(bug => {
 
                 let name = `${bug.cmd} | ${bug.error}`
 
@@ -171,7 +177,7 @@ class SlashCommand extends Modals {
             let commands = this.client.slashCommands.map(cmd => ({ name: cmd.name, description: cmd.description }))
 
             const fill = commands.filter(cmd => cmd.name?.toLowerCase().includes(value.toLowerCase()))
-            mapped = fill.map(cmd => {
+            return fill.map(cmd => {
                 let name = `${cmd.name} | ${cmd.description}`
 
                 if (name.length > 100)
@@ -186,7 +192,7 @@ class SlashCommand extends Modals {
             let languages = Object.entries(util.Languages)
 
             const fill = languages.filter(([a, b]) => a.includes(value.toLowerCase()) || b.toLowerCase().includes(value.toLowerCase()))
-            mapped = fill.map(([a, b]) => ({ name: b, value: b }))
+            return fill.map(([a, b]) => ({ name: b, value: b }))
         }
 
         if (name === 'search_guild') {
@@ -196,7 +202,7 @@ class SlashCommand extends Modals {
                 || guild.id.includes(value)
             )
 
-            mapped = fill.map(guild => ({ name: `(${guild.members.cache.size}) - ${guild.name} | ${guild.id}`, value: guild.id }))
+            return fill.map(guild => ({ name: `(${guild.members.cache.size}) - ${guild.name} | ${guild.id}`, value: guild.id }))
         }
 
         if (name === 'search_user') {
@@ -206,11 +212,95 @@ class SlashCommand extends Modals {
                 || user.id.includes(value)
             )
 
-            mapped = fill.map(user => ({ name: `${user.tag} | ${user.id}`, value: user.id }))
+            return fill.map(user => ({ name: `${user.tag} | ${user.id}`, value: user.id }))
         }
 
-        if (mapped.length > 25) mapped.length = 25
-        return await this.interaction.respond(mapped)
+        if (name === 'change_background') {
+
+            const userData = await this.Database.User.findOne({ id: this.user.id }, 'Walls') || []
+            const wallSetted = userData.Walls?.Set
+            const clientData = await this.Database.Client.findOne({ id: this.client.user.id }, 'BackgroundAcess') || []
+            const userBackground = clientData?.BackgroundAcess.includes(this.user.id)
+                ? Object.keys(this.Database.BgLevel.get('LevelWallpapers'))
+                : userData.Walls?.Bg
+
+            const validWallpapers = userBackground?.map(bg => {
+                let data = this.Database.BgLevel.get(`LevelWallpapers.${bg}`)
+
+                if (!data || data.Image === wallSetted) return
+
+                return { name: `${bg} - ${data.Name}`, value: bg }
+            }) || []
+
+            if (validWallpapers.length > 0) {
+
+                return validWallpapers
+                    .filter(a => a)
+                    .filter(data => data.name.toLowerCase().includes(value.toLowerCase()))
+
+                if (wallSetted)
+                    mapped.unshift({
+                        name: 'Retirar Background Atual',
+                        value: 'bg0'
+                    })
+            }
+        }
+
+        if (name === 'buy_background') {
+
+            const clientData = await this.Database.Client.findOne({ id: this.client.user.id }, 'BackgroundAcess') || []
+            if (clientData?.BackgroundAcess.includes(this.user.id)) return []
+
+            const userData = await this.Database.User.findOne({ id: this.user.id }, 'Walls') || []
+            const userBackgrounds = userData.Walls?.Bg || []
+            const backgrounds = Object.entries(this.Database.BgLevel.get('LevelWallpapers') || {})
+            const walls = backgrounds
+                .sort((a, b) => {
+                    let num = parseInt(a[0].slice(2, 5))
+                    let num2 = parseInt(b[0].slice(2, 5))
+                    return num - num2
+                })
+                .filter(bg =>
+                    !userBackgrounds.includes(bg[0])
+                    && bg[0] !== 'bg0'
+                    && bg[1]?.Limit > 0
+                ) || []
+
+            return walls?.map(bg => {
+
+                let limit = bg[1]?.Limit > 0 ? ` | Estoque: ${bg[1]?.Limit || 0}` : ''
+                let nameData = `${bg[0]} - ${bg[1].Name} | ${bg[1].Price} Safiras${limit}`
+
+                if (nameData.length > 100)
+                    nameData = nameData.slice(0, 97) + '...'
+
+                return { name: nameData, value: bg[0] }
+
+            })
+                .filter(data => data.name.toLowerCase().includes(value.toLowerCase())) || []
+        }
+
+        if (name === 'level_options') {
+            let clientData = await this.Database.Client.findOne({ id: this.client.user.id }, 'BackgroundAcess Administradores')
+            // let usersId = clientData.BackgroundAcess || []
+            // let usersMapped = usersId.map(id => {
+            //     let user = this.client.users.cache.get(id)
+
+            //     return user
+            //         ? { name: `${user.tag} - ${id}`, value: id }
+            //         : { name: `${id} - Usuário não encontrado`, value: id }
+            // })
+            //     .filter(data => data.name.toLowerCase().includes(value.toLowerCase())) || []
+
+            let arr = [{ name: 'Esconder mensagem só para mim', value: 'hide' }]
+
+            if (clientData.Administradores?.includes(this.user.id))
+                arr.push({ name: 'Usuário que possuem acesso ao Backgrounds', value: 'list' })
+
+            return arr
+        }
+
+        return []
     }
 }
 

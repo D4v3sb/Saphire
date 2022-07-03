@@ -35,8 +35,6 @@ module.exports = model("User", new Schema({
         Letter: Number,
         Confess: Number,
         Loteria: Number,
-        LevelTrade: Number,
-        LevelImage: Number,
         Cantada: Number,
         Bitcoin: Number,
         Porquinho: Number,
