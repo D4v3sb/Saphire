@@ -70,7 +70,7 @@ module.exports = {
 
         if (bg) return setNewWallpaper()
 
-        if (guild.clientPermissions('ATTACH_FILES'))
+        if (!guild.clientPermissions('ATTACH_FILES'))
             return await interaction.reply({
                 content: `${e.Info} | Eu preciso da permissão **Enviar Arquivos** para executar este comando.`
             })
