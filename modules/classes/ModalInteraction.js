@@ -25,7 +25,7 @@ class ModalInteraction extends Modals {
         this.member = this.guild.members.cache.get(this.user.id)
 
         const flags = Database.Flags.get('Flags') || []
-        if (flags.find(data => data.country === this.customId)) return this.editFlag(this)
+        if (flags.find(data => data.country[0] === this.customId)) return this.editFlag(this)
 
         if (guildData?.ReactionRole?.find(d => d.name === this.customId)) return this.newCollectionReactionRoles()
         if (this.customId.length === 18 && !isNaN(this.customId)) return this.editRoleInReactionRole()
@@ -104,6 +104,8 @@ class ModalInteraction extends Modals {
         let flag = fields.getTextInputValue('flag')
         let image = fields.getTextInputValue('image')
         let countryName = fields.getTextInputValue('country')
+        // let syn = fields.getTextInputValue('country1')
+        // let syn3 = fields.getTextInputValue('country2')
 
         if (!image.includes('https://media.discordapp.net/attachments'))
             return await interaction.reply({
@@ -154,19 +156,17 @@ class ModalInteraction extends Modals {
 
         const flags = [...Database.Flags.get('Flags')]
         const flagEmoji = fields.getTextInputValue('flag')
-        const flag = flags.find(data => data.country == this.customId)
+        const flag = flags.find(data => data.country[0] == this.customId)
         const image = fields.getTextInputValue('image')
-        const country = fields.getTextInputValue('country')
-        const flagIndex = flags.findIndex(data => data.country === this.customId)
+        const flagIndex = flags.findIndex(data => data.country[0] === this.customId)
         const editedItens = []
-
+        console.log(flag)
         if (!image.includes('https://media.discordapp.net/attachments'))
             return await interaction.reply({
                 content: `${e.Deny} | O link fornecido não segue os padrões necessários. Verifique se o padrão segue este: \`https://media.discordapp.net/attachments\``,
                 ephemeral: true
             })
 
-        if (flag.country !== country) editedItens.push('Nome')
         if (flag.image !== image) editedItens.push('Imagem')
         if (flag.flag !== flagEmoji) editedItens.push('Emoji')
 
@@ -178,7 +178,7 @@ class ModalInteraction extends Modals {
 
         flags.splice(flagIndex, 1)
 
-        if (flags.find(data => data.flag == flagEmoji || data.country == country || data.image == image))
+        if (flags.find(data => data.flag == flagEmoji || data.image == image))
             return await interaction.reply({
                 content: `${e.Info} | Alguma informação passada já pertence a um país presente no banco de dados.`,
                 ephemeral: true
@@ -203,11 +203,11 @@ class ModalInteraction extends Modals {
         }
 
         const msg = await interaction.reply({
-            content: `${e.QuestionMark} | Efetuar edição da bandeira \`${flag.country}\`?`,
+            content: `${e.QuestionMark} | Efetuar edição da bandeira \`${flag.country[0]}\`?`,
             embeds: [{
                 color: client.blue,
                 title: `${e.Database} | Edição de bandeira`,
-                description: `Itens editados: \`${editedItens.join(', ')}\`\nDados anteriores: ${flag.flag} \`${flag.country}\`\nDados pós alteração: ${flagEmoji} \`${country}\``,
+                description: `Itens editados: \`${editedItens.join(', ')}\`\nDados anteriores: Emoji: ${flag.flag}\nDados pós alteração: Emoji: ${flagEmoji}`,
                 image: { url: image || null }
             }],
             components: [buttons],
@@ -227,7 +227,7 @@ class ModalInteraction extends Modals {
 
                 if (customId === 'false') return collector.stop()
 
-                Database.Flags.set('Flags', [{ flag: flagEmoji, country: country, image: image }, ...flags])
+                Database.Flags.set('Flags', [{ flag: flagEmoji, country: [...flag.country], image: image }, ...flags])
                 const embed = msg.embeds[0] || {}
                 embed.color = client.green
                 embed.title = `${e.Check} | Alteração realizada com sucesso.`

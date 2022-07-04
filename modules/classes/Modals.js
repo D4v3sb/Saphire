@@ -85,6 +85,30 @@ class Modals {
                 components: [
                     {
                         type: 4,
+                        custom_id: "country1",
+                        label: "Adicionar Sinônimo",
+                        style: 1,
+                        placeholder: "Brazil, Usa, Eua..."
+                    }
+                ]
+            },
+            {
+                type: 1,
+                components: [
+                    {
+                        type: 4,
+                        custom_id: "country2",
+                        label: "Adicionar Sinônimo +",
+                        style: 1,
+                        placeholder: "United States, Australia..."
+                    }
+                ]
+            },
+            {
+                type: 1,
+                components: [
+                    {
+                        type: 4,
                         custom_id: "image",
                         label: "Link da imagem da bandeira",
                         style: 1,
@@ -124,8 +148,7 @@ class Modals {
                             label: "Nome da bandeira",
                             style: 1,
                             placeholder: "Brasil, Austria, Argentina...",
-                            required: true,
-                            value: name || null
+                            value: '/bandeiras options flag-adminstration:'
                         }
                     ]
                 },

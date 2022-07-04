@@ -350,7 +350,7 @@ module.exports = {
                 embeds: [{
                     color: client.blue,
                     title: `${e.Database} ${client.user.username} Flag Info Database`,
-                    description: `**${flag.flag || '\`EMOJI NOT FOUND\`'} - ${formatString(flag.country[0]) || '\`NAME NOT FOUND\`'}**`,
+                    description: `**${flag.flag || '\`EMOJI NOT FOUND\`'} - ${flag.country?.map(name => formatString(name))?.join(', ') || '\`NAME NOT FOUND\`'}**`,
                     image: { url: flag.image || null },
                     footer: { text: 'Se não aparecer a imagem, esta bandeira possui um link que é inválido.' }
                 }]
