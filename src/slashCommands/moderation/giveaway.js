@@ -46,6 +46,12 @@ module.exports = {
                     name: 'imageurl',
                     description: 'Quer alguma imagem no sorteio?',
                     type: 3
+                },
+                {
+                    name: 'color',
+                    description: 'Selecione a cor da embed',
+                    type: 3,
+                    autocomplete: true
                 }
             ]
         },
@@ -134,6 +140,7 @@ module.exports = {
         let imageURL = options.getString('imageurl') || null
         let Channel = options.getChannel('channel')
         let subCommand = options.getSubcommand()
+        let color = util.HexColors[options.getString('color')]
         let giveawayId = options.getString('id')
         let method = options.getString('method')
         let WinnersAmount = options.getInteger('winners') || 1
@@ -269,7 +276,7 @@ module.exports = {
                     ephemeral: true
                 })
 
-            const msg = await Channel.send({ embeds: [{ color: client.blue, title: `${e.Loading} | Construindo sorteio...` }] }).catch(() => { })
+            const msg = await Channel.send({ embeds: [{ color: color || client.blue, title: `${e.Loading} | Construindo sorteio...` }] }).catch(() => { })
             if (!msg?.id)
                 return await interaction.reply({
                     content: '❌ | Falha ao obter o ID da mensagem do sorteio. Verifique se eu realmente tenho permissão para enviar mensagem no canal de sorteios.',
@@ -335,7 +342,7 @@ module.exports = {
                 }).save()
 
                 const embed = {
-                    color: 0x0099ff,
+                    color: color || 0x0099ff,
                     title: `${e.Tada} Sorteios ${guild.name}`,
                     description: `Para entrar no sorteio, basta reagir no emoji ${emoji}`,
                     fields: [

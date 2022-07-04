@@ -44,7 +44,7 @@ module.exports = {
             ephemeral: hide
         })
 
-        let bal = parseInt(userData?.Balance) || 0,
+        let bal = parseInt(userData?.Balance).currency() || 0,
             oculto = interaction.user.id === config.ownerId ? false : userData?.Perfil?.BalanceOcult,
             balance = oculto ? `||oculto ${MoedaCustom}||` : `${bal} ${MoedaCustom}`,
             NameOrUsername = user.id === interaction.user.id ? 'O seu saldo é de' : `${user?.tag} possui`

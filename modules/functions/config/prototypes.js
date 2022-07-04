@@ -17,18 +17,19 @@ const { Guild, GuildMember } = require('discord.js')
 Array.prototype.random = function (times = 0, repeat = false) {
 
     if (times > 0) {
-        let originalArray = this
         let newArray = []
 
         if (repeat)
             for (let i = 0; i < times; i++)
                 newArray.push(originalArray[~~(Math.random() * originalArray.length)])
-        else
+        else {
+            let originalArray = [...this]
             for (let i = 0; i < times; i++) {
                 let value = ~~(Math.random() * originalArray.length)
                 newArray.push(originalArray[value])
                 originalArray.splice(value, 1)
             }
+        }
 
         return newArray
     }
@@ -38,6 +39,15 @@ Array.prototype.random = function (times = 0, repeat = false) {
 
 Array.prototype.last = function () {
     return this[this.length - 1]
+}
+
+Array.prototype.randomize = function () {
+    return this.sort(() => Math.random() - Math.random())
+}
+
+Number.prototype.currency = function () {
+    let numberFormated = `${Intl.NumberFormat('pt-BR', { currency: 'BRL', style: 'currency' }).format(this)}`
+    return numberFormated.slice(3)
 }
 
 String.prototype.isURL = function () {
@@ -51,21 +61,8 @@ Date.prototype.constructor.format = function (DateInMs = 0, Shorted = false, wit
         return new Date(DateInMs + Date.now()).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" })
 
     const date = withDateNow ? new Date(DateInMs + Date.now()) : new Date(DateInMs)
-    date.setHours(date.getHours() - 3)
 
-    let Mes = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"][date.getMonth()],
-        DiaDaSemana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"][date.getDay()],
-        Dia = FormatNumber(date.getDate()),
-        Hora = FormatNumber(date.getHours()),
-        Seconds = FormatNumber(date.getSeconds()),
-        Minutes = FormatNumber(date.getMinutes()),
-        Ano = date.getFullYear()
-
-    return `${DiaDaSemana}, ${Dia} de ${Mes} de ${Ano} ás ${Hora}:${Minutes}${Seconds > 0 ? `:${Seconds}` : ''}`
-
-    function FormatNumber(data) {
-        return data < 10 ? `0${data}` : data
-    }
+    return Intl.DateTimeFormat('pt-BR', { dateStyle: 'full', timeStyle: 'medium' }).format(date)
 }
 
 String.prototype.didYouMean = function (array) { // Credits: JackSkelt#3063 - 904891162362519562

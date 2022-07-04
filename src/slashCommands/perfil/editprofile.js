@@ -146,10 +146,10 @@ module.exports = {
 
                 let valid = /^#[0-9A-F]{6}$/i.test(color)
                 if (!valid)
-                    msg += `${e.Deny} | Código #HEX inválido.`
+                    msg += `\n${e.Deny} | Código #HEX inválido.`
                 else {
                     dataToSave['Color.Set'] = color
-                    msg += `${e.Check} | Color`
+                    msg += `\n${e.Check} | Color`
                 }
             }
         }

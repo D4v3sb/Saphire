@@ -54,9 +54,7 @@ class Saphire extends Client {
         }
     }
 
-    async start() {
-        await super.login(process.env.DISCORD_CLIENT_BOT_TOKEN)
-    }
+    start = async () => await super.login(process.env.DISCORD_CLIENT_BOT_TOKEN)
 
     async off() {
         super.destroy().catch(() => { })

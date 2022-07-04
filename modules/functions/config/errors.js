@@ -19,13 +19,14 @@ async function Error(message, err) {
      * 500 - Internal Server Error
      * 50013 - DiscordAPIError: Missing Permissions
      * 50035 - message_reference - Invalid Form Body
-     * 'message_reference: Unknown message' - Mensagens apagadas antes da respostas
+     * 50001 - Missing Access
+     * message_reference: Unknown message - Mensagens apagadas antes da respostas
      */
 
     if (err.code === 50013 && !message) return
     if (err.message === 'Invalid Form Body\nmessage_reference: Unknown message') return message?.channel?.send(`${e.Deny} | Hey! Eu não consegui ver qual é a mensagem do comando... Tenta não apagar a mensagem, ok?`)
 
-    if (err?.code === 50013)
+    if ([50013, 50001].includes(err.code))
         return message?.channel?.send(`${e.Warn} | Eu não tenho permissão suficiente para prosseguir com este comando.`)
 
     if (!message || !err || [10008, 500].includes(err.code) || !message.guild || !message.channel)

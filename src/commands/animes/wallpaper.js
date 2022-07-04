@@ -33,7 +33,7 @@ module.exports = {
             if (!embeds || embeds.length < 1) return message.channel.send(`${e.Info} | Nenhum anime foi encontrado no banco de dados.`)
 
             let msg = await message.channel.send({ embeds: [embeds[control]] }).catch(() => { })
-
+            if (!msg) return
             for (const emoji of emojis) msg.react(emoji).catch(() => { })
 
             let collector = msg.createReactionCollector({

@@ -24,8 +24,10 @@ class ModalInteraction extends Modals {
         this.prefix = guildData?.Prefix || this.client.prefix
         this.member = this.guild.members.cache.get(this.user.id)
 
-        if (guildData?.ReactionRole?.find(d => d.name === this.customId)) return this.newCollectionReactionRoles()
+        const flags = Database.Flags.get('Flags') || []
+        if (flags.find(data => data.country === this.customId)) return this.editFlag(this)
 
+        if (guildData?.ReactionRole?.find(d => d.name === this.customId)) return this.newCollectionReactionRoles()
         if (this.customId.length === 18 && !isNaN(this.customId)) return this.editRoleInReactionRole()
 
         switch (this.customId) {
@@ -39,6 +41,7 @@ class ModalInteraction extends Modals {
             case 'transactionsModalReport': this.transactionsModalReport(); break;
             case 'newCollectionReactionRoles': this.newCollectionReactionRoles(); break;
             case 'newAnimeCharacter': this.addCharacter(); break;
+            case 'newFlagCreate': this.newFlagCreate(); break;
             default:
                 break;
         }
@@ -93,6 +96,155 @@ class ModalInteraction extends Modals {
             ephemeral: true
         })
 
+    }
+
+    newFlagCreate = async ({ interaction, fields, user } = this) => {
+
+        const flags = Database.Flags.get('Flags') || []
+        let flag = fields.getTextInputValue('flag')
+        let image = fields.getTextInputValue('image')
+        let countryName = fields.getTextInputValue('country')
+
+        if (!image.includes('https://media.discordapp.net/attachments'))
+            return await interaction.reply({
+                content: `${e.Deny} | Verique se o link da imagem segue com esse formato: \`https://media.discordapp.net/attachments\``,
+                ephemeral: true
+            })
+
+        let has = flags?.find(data => data.flag == flag || data.country == countryName || data.image === image)
+
+        if (has)
+            return await interaction.reply({
+                content: `${e.Deny} | Esse país já existe no banco de dados.`,
+                ephemeral: true
+            })
+
+        let msg = await interaction.reply({
+            content: `${e.QuestionMark} | Você confirma adicionar esse país no banco de dados do Flag Game?\n"**${flag} - ${countryName}**"\n${image}`,
+            fetchReply: true
+        }),
+            emojis = ['✅', '❌'], clicked = false
+
+        for (let i of emojis) msg.react(i).catch(() => { })
+        let collector = msg.createReactionCollector({
+            filter: (r, u) => emojis.includes(r.emoji.name) && u.id === user.id,
+            time: 60000,
+            max: 1,
+            erros: ['time', 'max']
+        })
+            .on('collect', async (r) => {
+
+                if (r.emoji.name === emojis[1]) {
+                    await interaction.editReply({
+                        content: `${e.Deny} | Comando cancelado.`
+                    })
+                    return collector.stop()
+                }
+
+                Database.Flags.push('Flags', { flag: flag, country: [countryName], image: image })
+                return await interaction.editReply(`${e.Check} | A bandeira "**${flag} - ${countryName}**" foi adicionada com sucesso!\n${image}`).catch(() => { })
+            })
+            .on('end', async (i, r) => {
+                if (r !== 'user') return
+                return await interaction.editReply({ content: `${e.Deny} | Comando cancelado.` }).catch(() => { })
+            })
+    }
+
+    editFlag = async ({ interaction, fields, client, user } = this) => {
+
+        const flags = [...Database.Flags.get('Flags')]
+        const flagEmoji = fields.getTextInputValue('flag')
+        const flag = flags.find(data => data.country == this.customId)
+        const image = fields.getTextInputValue('image')
+        const country = fields.getTextInputValue('country')
+        const flagIndex = flags.findIndex(data => data.country === this.customId)
+        const editedItens = []
+
+        if (!image.includes('https://media.discordapp.net/attachments'))
+            return await interaction.reply({
+                content: `${e.Deny} | O link fornecido não segue os padrões necessários. Verifique se o padrão segue este: \`https://media.discordapp.net/attachments\``,
+                ephemeral: true
+            })
+
+        if (flag.country !== country) editedItens.push('Nome')
+        if (flag.image !== image) editedItens.push('Imagem')
+        if (flag.flag !== flagEmoji) editedItens.push('Emoji')
+
+        if (editedItens.length === 0)
+            return await interaction.reply({
+                content: `${e.Info} | Nenhuma informação foi alterada.`,
+                ephemeral: true
+            })
+
+        flags.splice(flagIndex, 1)
+
+        if (flags.find(data => data.flag == flagEmoji || data.country == country || data.image == image))
+            return await interaction.reply({
+                content: `${e.Info} | Alguma informação passada já pertence a um país presente no banco de dados.`,
+                ephemeral: true
+            })
+
+        const buttons = {
+            type: 1,
+            components: [
+                {
+                    type: 2,
+                    label: 'EFETUAR EDIÇÃO',
+                    custom_id: 'true',
+                    style: 'SUCCESS'
+                },
+                {
+                    type: 2,
+                    label: 'CANCELAR EDIÇÃO',
+                    custom_id: 'false',
+                    style: 'DANGER'
+                }
+            ]
+        }
+
+        const msg = await interaction.reply({
+            content: `${e.QuestionMark} | Efetuar edição da bandeira \`${flag.country}\`?`,
+            embeds: [{
+                color: client.blue,
+                title: `${e.Database} | Edição de bandeira`,
+                description: `Itens editados: \`${editedItens.join(', ')}\`\nDados anteriores: ${flag.flag} \`${flag.country}\`\nDados pós alteração: ${flagEmoji} \`${country}\``,
+                image: { url: image || null }
+            }],
+            components: [buttons],
+            fetchReply: true
+        })
+
+        const collector = msg.createMessageComponentCollector({
+            filter: int => int.user.id === user.id,
+            max: 1,
+            time: 60000,
+            errors: ['max', 'time']
+        })
+            .on('collect', async int => {
+
+                const { customId } = int
+                int.deferUpdate().catch(() => { })
+
+                if (customId === 'false') return collector.stop()
+
+                Database.Flags.set('Flags', [{ flag: flagEmoji, country: country, image: image }, ...flags])
+                const embed = msg.embeds[0] || {}
+                embed.color = client.green
+                embed.title = `${e.Check} | Alteração realizada com sucesso.`
+                return await interaction.editReply({
+                    content: null,
+                    embeds: [embed],
+                    components: []
+                })
+            })
+            .on('end', async (i, r) => {
+                if (['time', 'user'].includes(r))
+                    return await interaction.editReply({
+                        content: `${e.Deny} | Comando cancelado.`,
+                        embeds: [], components: []
+                    })
+                return
+            })
     }
 
     async newReminder({ interaction, client, fields, user, channel } = this) {

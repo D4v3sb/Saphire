@@ -27,11 +27,49 @@ class Autocomplete {
             case 'search_user': this.allUsers(value); break;
             case 'change_background': this.changeLevelBackground(value); break;
             case 'buy_background': this.buyLevelBackground(value); break;
+            case 'select_country': this.flagSearch(value); break;
+            case 'flag-adminstration': this.flagAdminOptions(); break;
             case 'level_options': this.levelOptions(); break;
             default: this.respond(); break;
         }
 
         return
+    }
+
+    async flagAdminOptions() {
+        const data = await Database.Client.findOne({ id: client.user.id }, 'Moderadores Administradores')
+        if (![...data?.Administradores, Database.Names.Lereo, ...data?.Moderadores]?.includes(this.user.id)) return this.respond()
+
+        return this.respond([
+            {
+                name: 'Nova bandeira',
+                value: 'newFlag'
+            },
+            {
+                name: 'Editar bandeira',
+                value: 'editFlag'
+            },
+            {
+                name: 'Remover bandeira',
+                value: 'remove'
+            },
+            {
+                name: 'Lista de bandeiras',
+                value: 'list'
+            },
+            {
+                name: 'Países sem bandeiras',
+                value: 'noflaglist'
+            }
+        ])
+    }
+
+    flagSearch(value) {
+        const flags = Database.Flags.get('Flags') || []
+        const fill = flags.filter(flag => flag.country.toLowerCase().includes(value.toLowerCase()) || flag.flag === value || flag.image === value)
+        const { formatString } = require('../../src/commands/games/plugins/gamePlugins')
+        const mapped = fill.map(flag => ({ name: formatString(flag.country), value: flag.country }))
+        return this.respond(mapped)
     }
 
     async blockedChannels(value) {
@@ -156,11 +194,9 @@ class Autocomplete {
             ? Object.keys(Database.BgLevel.get('LevelWallpapers'))
             : userData.Walls?.Bg
 
-        const validWallpapers = userBackground?.map(bg => {
+        let validWallpapers = userBackground?.map(bg => {
             let data = Database.BgLevel.get(`LevelWallpapers.${bg}`)
-
             if (!data || data.Image === wallSetted) return
-
             return { name: `${bg} - ${data.Name}`, value: bg }
         }) || []
 

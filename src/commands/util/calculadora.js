@@ -1,4 +1,4 @@
-const simplydjs = require('simply-djs')
+const { e } = require('../../../JSON/emojis.json')
 
 module.exports = {
     name: 'calculadora',

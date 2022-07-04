@@ -4,7 +4,8 @@ const { readdirSync } = require('fs')
 
 module.exports = async (client) => {
 
-    let commands = [];
+    let commands = []
+    let adminCommands = [] // Ideia dada por Gorniaky - 395669252121821227
 
     readdirSync('./src/slashCommands/').forEach(dir => {
         const commandsData = readdirSync(`./src/slashCommands/${dir}/`).filter(file => file.endsWith('.js'))
@@ -14,7 +15,7 @@ module.exports = async (client) => {
 
             if (pull.name) {
                 client.slashCommands.set(pull.name, pull);
-                commands.push(pull);
+                pull.admin ? adminCommands.push(pull) : commands.push(pull);
             } else
                 continue
         }
@@ -24,6 +25,13 @@ module.exports = async (client) => {
 
     return (async () => {
         try {
+
+            let guildsId = ['888464632291917956', '986292524790464562']
+
+            for (let guild of guildsId)
+                if (client.guilds.cache.has(guild))
+                    rest.put(Routes.applicationGuildCommands(client.user.id, guild), { body: adminCommands })
+
             await rest.put(
                 Routes.applicationCommands(client.user.id),
                 { body: commands },

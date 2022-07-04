@@ -1,6 +1,6 @@
 const { Database: JSON } = require('ark.db'),
     Models = require('../database/Models')
-
+    
 class Database extends Models {
     constructor() {
         super()

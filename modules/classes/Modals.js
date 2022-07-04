@@ -50,6 +50,103 @@ class Modals {
         ]
     }
 
+    newFlag = {
+        title: "Create New Flag",
+        custom_id: "newFlagCreate",
+        components: [
+            {
+                type: 1,
+                components: [
+                    {
+                        type: 4,
+                        custom_id: "flag",
+                        label: "Emoji da bandeira",
+                        style: 1,
+                        placeholder: "emoji",
+                        required: true
+                    }
+                ]
+            },
+            {
+                type: 1,
+                components: [
+                    {
+                        type: 4,
+                        custom_id: "country",
+                        label: "Nome da bandeira",
+                        style: 1,
+                        placeholder: "Brasil, Austria, Argentina...",
+                        required: true
+                    }
+                ]
+            },
+            {
+                type: 1,
+                components: [
+                    {
+                        type: 4,
+                        custom_id: "image",
+                        label: "Link da imagem da bandeira",
+                        style: 1,
+                        placeholder: "https://media.discordapp.net/attachments/975974003229474846/990387818176065557/unknown.png",
+                        required: true
+                    }
+                ]
+            } // MAX: 5 Fields
+        ]
+    }
+
+    editFlag = (emoji, name, image) => {
+        return {
+            title: "Edit Flag Info",
+            custom_id: name,
+            components: [
+                {
+                    type: 1,
+                    components: [
+                        {
+                            type: 4,
+                            custom_id: "flag",
+                            label: "Emoji da bandeira",
+                            style: 1,
+                            placeholder: "emoji",
+                            required: true,
+                            value: emoji || null
+                        }
+                    ]
+                },
+                {
+                    type: 1,
+                    components: [
+                        {
+                            type: 4,
+                            custom_id: "country",
+                            label: "Nome da bandeira",
+                            style: 1,
+                            placeholder: "Brasil, Austria, Argentina...",
+                            required: true,
+                            value: name || null
+                        }
+                    ]
+                },
+                {
+                    type: 1,
+                    components: [
+                        {
+                            type: 4,
+                            custom_id: "image",
+                            label: "Link da imagem da bandeira",
+                            style: 1,
+                            placeholder: "https://media.discordapp.net/attachments/975974003229474846/990387818176065557/unknown.png",
+                            required: true,
+                            value: image || null
+                        }
+                    ]
+                } // MAX: 5 Fields
+            ]
+        }
+    }
+
     sendLetter = {
         title: 'New Letter',
         custom_id: "newLetter",

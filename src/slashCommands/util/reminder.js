@@ -146,6 +146,19 @@ module.exports = {
 
         async function CreateNewReminder(ReminderMessage, DefinedTime) {
 
+            let now = Date.now()
+            let allReminder = await Database.Reminder.find({})
+            let has = allReminder.find(data =>
+                new Date(data.DateNow + data.Time).setMilliseconds(0).valueOf() == (new Date(now + DefinedTime).setMilliseconds(0).valueOf())
+                && data.ChannelId === interaction.channel.id
+            )
+
+            if (has)
+                return await interaction.reply({
+                    content: `${e.Deny} | Já existe um lembrete marcado para este horário neste canal. Por favor, defina um tempo diferente. Pode ser em segundos`,
+                    ephemeral: true
+                })
+
             const PassCode = require('../../../modules/functions/plugins/PassCode'),
                 ReminderCode = PassCode(7).toUpperCase(),
                 Data = require('../../../modules/functions/plugins/data')
@@ -155,7 +168,7 @@ module.exports = {
                 userId: user.id,
                 RemindMessage: ReminderMessage,
                 Time: DefinedTime,
-                DateNow: Date.now(),
+                DateNow: now,
                 ChannelId: channel.id
             }).save()
 

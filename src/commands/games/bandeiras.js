@@ -1,16 +1,14 @@
-let flagGame = require('./classes/flagGame')
+const { e } = require('../../../JSON/emojis.json')
 
 module.exports = {
     name: 'bandeiras',
     aliases: ['flag', 'flags', 'bandeira', 'band', 'bands'],
     category: 'games',
     emoji: '🎌',
-    usage: '<bandeiras> <info>',
+    usage: '/bandeiras',
     description: 'Adivinhe o país das bandeiras',
 
     execute: async (client, message, args, prefix, MessageEmbed, Database) => {
-
-        return new flagGame().init(client, message, args, prefix, MessageEmbed, Database)
-
+        return message.reply(`${e.Info} | Este comando foi movido para Slash Command e será excluído em breve. Use \`/bandeiras\``)
     }
 }
