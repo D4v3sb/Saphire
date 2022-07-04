@@ -49,7 +49,7 @@ async function start(MessageId, Guild, ChannelId) {
         message = await channel?.messages.fetch(MessageId),
         reaction = message?.reactions.cache.get(emoji)
 
-    if (!reaction || !message) {
+    if (!reaction || !message || !channel || !emoji) {
         Database.deleteGiveaway(MessageId)
         return
     }
