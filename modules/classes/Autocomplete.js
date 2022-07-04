@@ -54,11 +54,19 @@ class Autocomplete {
                 value: 'remove'
             },
             {
+                name: 'Adicionar um sinônimo',
+                value: 'addNewSynonym'
+            },
+            {
+                name: 'Remover um sinônimo',
+                value: 'removeSynonym'
+            },
+            {
                 name: 'Lista de bandeiras',
                 value: 'list'
             },
             {
-                name: 'Países sem bandeiras',
+                name: 'Bandeiras sem imagem',
                 value: 'noflaglist'
             }
         ])
@@ -66,9 +74,15 @@ class Autocomplete {
 
     flagSearch(value) {
         const flags = Database.Flags.get('Flags') || []
-        const fill = flags.filter(flag => flag.country[0].toLowerCase().includes(value.toLowerCase()) || flag.flag === value || flag.image === value)
+
+        const fill = flags.filter(flag =>
+            flag.country.find(band => band.toLowerCase().includes(value.toLowerCase()))
+            || flag.flag === value
+            || flag.image === value
+        )
+
         const { formatString } = require('../../src/commands/games/plugins/gamePlugins')
-        const mapped = fill.map(flag => ({ name: formatString(flag.country[0]), value: flag.country[0] }))
+        const mapped = fill.map(flag => ({ name: formatString(flag.country[0]), value: flag.country[0] })).sort()
         return this.respond(mapped)
     }
 

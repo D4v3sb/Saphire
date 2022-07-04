@@ -36,7 +36,7 @@ module.exports = {
             options: [
                 {
                     name: 'select_country',
-                    description: 'Pesquise por um país',
+                    description: 'Pesquise por uma bandeira',
                     type: 3,
                     autocomplete: true
                 },
@@ -45,6 +45,11 @@ module.exports = {
                     description: 'Comandos administrativos do comando bandeiras',
                     type: 3,
                     autocomplete: true
+                },
+                {
+                    name: 'adicional',
+                    description: 'Informações adicionais administrativas',
+                    type: 3
                 }
             ]
         },
@@ -75,7 +80,7 @@ module.exports = {
         const flagSelected = options.getString('select_country')
         const mode = options.getString('mode')
         const flags = Database.Flags.get('Flags') || []
-        const flag = flags.find(f => f.country[0] === flagSelected)
+        const flag = flags.find(f => f.country.find(d => d === flagSelected))
 
         if (subCommand === 'start') return init(mode, interaction)
         if (subCommand === 'options') return optionsCommand()
@@ -92,6 +97,8 @@ module.exports = {
                 case 'remove': removeFlag(); break;
                 case 'list': listFlags(); break;
                 case 'noflaglist': flagWithoutImage(); break;
+                case 'addNewSynonym': addNewSynonym(); break;
+                case 'removeSynonym': removeSynonym(); break;
                 default:
                     await interaction.reply({
                         content: `${e.Deny} | Nenhuma função foi dada.`,
@@ -132,6 +139,123 @@ module.exports = {
                 content: `${e.Info} | ${format} acertou ${points} bandeiras no Flag Gaming.`
             })
 
+        }
+
+        async function addNewSynonym() {
+
+            const newName = options.getString('adicional')
+            const flagData = [...flags]
+
+            if (!flag)
+                return await interaction.reply({
+                    content: `${e.Deny} | Eu não achei nenhuma bandeira com os dados informados. Selecione uma na lista de bandeiras`,
+                    ephemeral: true
+                })
+
+            if (!newName)
+                return await interaction.reply({
+                    content: `${e.Deny} | Informe um sinônimo para a bandeira \`${flag.country[0]}\` no campo \`adicional\`.`,
+                    ephemeral: true
+                })
+
+            for (let f of flagData)
+                if (f.country.find(x => x.toLowerCase() === newName.toLowerCase()))
+                    return await interaction.reply({
+                        content: `${e.Deny} | O nome \`${newName}\` já existe no banco de dados.`
+                    })
+
+            const index = flagData.findIndex(f => f.flag === flag.flag)
+            const countryData = flagData.splice(index, 1)[0]
+            countryData.country.push(newName)
+            Database.Flags.set('Flags', [{ flag: countryData.flag, country: [...countryData.country], image: countryData.image }, ...flagData])
+
+            return await interaction.reply({
+                content: `${e.Check} | O sinônimo \`${newName}\` foi adicionado com sucesso a bandeira ${formatString(countryData.country[0])}. Ficando com os sequintes sinônimos:\n> ${countryData.country.map(x => `\`${x}\``).join(', ')}`
+            })
+        }
+
+        async function removeSynonym() {
+
+            const flagData = [...flags]
+
+            if (!flag)
+                return await interaction.reply({
+                    content: `${e.Deny} | Eu não achei nenhuma bandeira com os dados informados. Selecione uma bandeira na lista.`,
+                    ephemeral: true
+                })
+
+            if (flag.country.length < 2)
+                return await interaction.reply({
+                    content: `${e.Deny} | Esta bandeira contem apenas 1 nome. Não é possível a remoção dele sem um nome adicional.`
+                })
+
+            let selectMenuObject = {
+                type: 1,
+                components: [{
+                    type: 3,
+                    custom_id: 'menu',
+                    placeholder: `Sinônimos da bandeira ${formatString(flag.country[0])}`,
+                    options: []
+                }]
+            }
+
+            if (flag.country.length > 24) flag.country.length = 24
+            for (let country of flag.country)
+                selectMenuObject.components[0].options.push({
+                    label: formatString(country),
+                    emoji: e.Trash,
+                    value: country,
+                })
+
+            selectMenuObject.components[0].options.push({
+                label: 'Cancelar',
+                emoji: e.Deny,
+                value: 'cancel',
+            })
+
+            const msg = await interaction.reply({
+                content: `${e.Loading} | Selecione o sinônimo que deseja remover.`,
+                components: [selectMenuObject],
+                fetchReply: true
+            })
+
+            const collector = msg.createMessageComponentCollector({
+                filter: int => int.user.id === author.id,
+                time: 60000,
+                errors: ['time', 'max']
+            })
+                .on('collect', async int => {
+
+                    const { values } = int
+                    const value = values[0]
+
+                    collector.stop()
+
+                    if (value === 'cancel')
+                        return await interaction.editReply({
+                            content: `${e.Deny} | Exclução de sinônimos cancelada.`,
+                            components: []
+                        }).catch(() => { })
+
+                    const index = flagData.findIndex(f => f.flag === flag.flag)
+                    const countryData = flagData.splice(index, 1)[0]
+                    const countryToRemoveIndex = countryData.country.findIndex(f => f === value)
+                    countryData.country.splice(countryToRemoveIndex, 1)
+                    Database.Flags.set('Flags', [{ flag: countryData.flag, country: [...countryData.country], image: countryData.image }, ...flagData])
+
+                    return await interaction.editReply({
+                        content: `${e.Check} | O sinônimo \`${formatString(value)}\` foi removido com sucesso da bandeira ${formatString(countryData.country[0])}. Ficando com os sequintes sinônimos:\n> ${countryData.country.map(x => `\`${x}\``).join(', ')}`,
+                        components: []
+                    }).catch(() => { })
+
+                })
+                .on('end', async (i, r) => {
+                    if (r === 'user') return
+                    return await interaction.editReply({
+                        content: `${e.Deny} | Exclução de sinônimos cancelada.`,
+                        components: []
+                    }).catch(() => { })
+                })
         }
 
         async function removeFlag() {
@@ -218,7 +342,7 @@ module.exports = {
 
             if (!flag)
                 return await interaction.reply({
-                    content: `${e.Deny} | Eu não achei nenhum país com os dados informados.`,
+                    content: `${e.Deny} | Eu não achei nenhuma bandeira com os dados informados.`,
                     ephemeral: true
                 })
 
@@ -228,7 +352,7 @@ module.exports = {
                     title: `${e.Database} ${client.user.username} Flag Info Database`,
                     description: `**${flag.flag || '\`EMOJI NOT FOUND\`'} - ${formatString(flag.country[0]) || '\`NAME NOT FOUND\`'}**`,
                     image: { url: flag.image || null },
-                    footer: { text: 'Se não apareceu a imagem da bandeira, este país não possui bandeira ou o link é inválido.' }
+                    footer: { text: 'Se não aparecer a imagem, esta bandeira possui um link que é inválido.' }
                 }]
             })
         }
@@ -376,18 +500,18 @@ module.exports = {
 
             if (arr.length === 0)
                 return await interaction.reply({
-                    content: `${e.Check} | Todos os países estão com bandeiras no meu banco de dados.`,
+                    content: `${e.Check} | Todas as bandeiras estão com imagem no meu banco de dados.`,
                     ephemeral: true
                 })
 
             let format = arr.map(flag => `${flag.flag} \`${formatString(flag.country[0])}\``).join(', ')
 
             return await interaction.reply({
-                content: `${e.Warn} | Estes são os países que estão sem bandeiras.\n> ${format}`
+                content: `${e.Warn} | Estas são as bandeiras que estão sem imagem.\n> ${format}`
             }).catch(async () => {
 
                 let newFormat = format.slice(0, 1500)
-                return await interaction.reply(`${e.Warn} | Estes são os países que estão sem bandeiras.\n> ${newFormat}...`)
+                return await interaction.reply(`${e.Warn} | Estas são as bandeiras que estão sem imagem.\n> ${newFormat}...`)
             })
         }
     }
