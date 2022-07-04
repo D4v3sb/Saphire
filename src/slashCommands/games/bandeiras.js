@@ -75,7 +75,7 @@ module.exports = {
         const flagSelected = options.getString('select_country')
         const mode = options.getString('mode')
         const flags = Database.Flags.get('Flags') || []
-        const flag = flags.find(f => f.country === flagSelected)
+        const flag = flags.find(f => f.country[0] === flagSelected)
 
         if (subCommand === 'start') return init(mode, interaction)
         if (subCommand === 'options') return optionsCommand()
@@ -111,7 +111,7 @@ module.exports = {
                     ephemeral: true
                 })
 
-            return interaction.showModal(modals.editFlag(flag.flag, flag.country, flag.image))
+            return interaction.showModal(modals.editFlag(flag.flag, flag.country[0], flag.image))
         }
 
         async function userPoints() {
@@ -166,7 +166,7 @@ module.exports = {
                 embeds: [{
                     color: client.blue,
                     title: `${e.Database} Remoção de bandeira`,
-                    description: `Você confirma remoção da bandeira ${flag.flag} \`${flag.country}\` do banco de dados?`,
+                    description: `Você confirma remoção da bandeira ${flag.flag} \`${flag.country[0]}\` do banco de dados?`,
                     image: { url: flag.image || null }
                 }],
                 fetchReply: true,
@@ -185,11 +185,11 @@ module.exports = {
                     collector.stop()
 
                     if (customId === 'remove') {
-                        let newSet = flags.filter(data => data.country !== flag.country)
+                        let newSet = flags.filter(data => data.country[0] !== flag.country[0])
                         Database.Flags.set('Flags', [...newSet])
 
                         return await interaction.editReply({
-                            content: `${e.Check} | A bandeira \`${flag.country}\` foi removida com sucesso.`,
+                            content: `${e.Check} | A bandeira \`${flag.country[0]}\` foi removida com sucesso.`,
                             embeds: [],
                             components: []
                         })
@@ -226,7 +226,7 @@ module.exports = {
                 embeds: [{
                     color: client.blue,
                     title: `${e.Database} ${client.user.username} Flag Info Database`,
-                    description: `**${flag.flag || '\`EMOJI NOT FOUND\`'} - ${formatString(flag.country) || '\`NAME NOT FOUND\`'}**`,
+                    description: `**${flag.flag || '\`EMOJI NOT FOUND\`'} - ${formatString(flag.country[0]) || '\`NAME NOT FOUND\`'}**`,
                     image: { url: flag.image || null },
                     footer: { text: 'Se não apareceu a imagem da bandeira, este país não possui bandeira ou o link é inválido.' }
                 }]
@@ -330,7 +330,7 @@ module.exports = {
 
             function EmbedGenerator() {
 
-                let array = [...new Set(flags.map(x => x.country?.toLowerCase()))].sort()
+                let array = [...new Set(flags.map(x => x.country[0]?.toLowerCase()))].sort()
 
                 let amount = 15
                 let Page = 1
@@ -342,9 +342,9 @@ module.exports = {
                     let current = array.slice(i, amount),
                         description = current.map(data => {
 
-                            let f = flags.find(d => d.country?.toLowerCase() === data)
+                            let f = flags.find(d => d.country[0]?.toLowerCase() === data)
 
-                            return `> ${f.flag} **${formatString(f.country)}**`
+                            return `> ${f.flag} **${formatString(f.country[0])}**`
                         }).join("\n")
 
                     if (current.length > 0) {
@@ -380,7 +380,7 @@ module.exports = {
                     ephemeral: true
                 })
 
-            let format = arr.map(flag => `${flag.flag} \`${formatString(flag.country)}\``).join(', ')
+            let format = arr.map(flag => `${flag.flag} \`${formatString(flag.country[0])}\``).join(', ')
 
             return await interaction.reply({
                 content: `${e.Warn} | Estes são os países que estão sem bandeiras.\n> ${format}`

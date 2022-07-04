@@ -66,9 +66,9 @@ class Autocomplete {
 
     flagSearch(value) {
         const flags = Database.Flags.get('Flags') || []
-        const fill = flags.filter(flag => flag.country.toLowerCase().includes(value.toLowerCase()) || flag.flag === value || flag.image === value)
+        const fill = flags.filter(flag => flag.country[0].toLowerCase().includes(value.toLowerCase()) || flag.flag === value || flag.image === value)
         const { formatString } = require('../../src/commands/games/plugins/gamePlugins')
-        const mapped = fill.map(flag => ({ name: formatString(flag.country), value: flag.country }))
+        const mapped = fill.map(flag => ({ name: formatString(flag.country[0]), value: flag.country[0] }))
         return this.respond(mapped)
     }
 
