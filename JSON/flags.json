@@ -1,6 +1,33 @@
 {
     "Flags": [
         {
+            "flag": "🇺🇸",
+            "country": [
+                "estados unidos",
+                "United States of America",
+                "United States",
+                "usa",
+                "eua"
+            ],
+            "image": "https://media.discordapp.net/attachments/975974003229474846/978464910398857266/unknown.png?width=898&height=473"
+        },
+        {
+            "flag": "🇲🇲",
+            "country": [
+                "myanmar",
+                "mianmar"
+            ],
+            "image": "https://media.discordapp.net/attachments/975974003229474846/976083003958779954/95b1712cce9cf6ab213c315924995928.jpg?width=705&height=470"
+        },
+        {
+            "flag": "🇧🇷",
+            "country": [
+                "brasil",
+                "Brazil"
+            ],
+            "image": "https://media.discordapp.net/attachments/975974003229474846/976073823327772702/8a8836d28fe8858260a785c15862801e.jpg?width=699&height=484"
+        },
+        {
             "flag": "🇩🇿",
             "country": [
                 "argélia"
@@ -470,13 +497,6 @@
             "image": "https://media.discordapp.net/attachments/975974003229474846/978648739222781972/h_4.png"
         },
         {
-            "flag": "🇺🇸",
-            "country": [
-                "estados unidos"
-            ],
-            "image": "https://media.discordapp.net/attachments/975974003229474846/978464910398857266/unknown.png?width=898&height=473"
-        },
-        {
             "flag": "🇩🇲",
             "country": [
                 "dominica"
@@ -827,13 +847,6 @@
             "image": "https://media.discordapp.net/attachments/975974003229474846/976073037814321182/14411d1f7181e4239572c24ae63523c2.jpg"
         },
         {
-            "flag": "🇧🇷",
-            "country": [
-                "brasil"
-            ],
-            "image": "https://media.discordapp.net/attachments/975974003229474846/976073823327772702/8a8836d28fe8858260a785c15862801e.jpg?width=699&height=484"
-        },
-        {
             "flag": "🇧🇸",
             "country": [
                 "bahamas"
@@ -979,13 +992,6 @@
                 "méxico"
             ],
             "image": "https://media.discordapp.net/attachments/975974003229474846/976082748609531904/7f82b7e2bbb53962ef7a2a78e4e3ed36.jpg?width=705&height=402"
-        },
-        {
-            "flag": "🇲🇲",
-            "country": [
-                "myanmar"
-            ],
-            "image": "https://media.discordapp.net/attachments/975974003229474846/976083003958779954/95b1712cce9cf6ab213c315924995928.jpg?width=705&height=470"
         },
         {
             "flag": "🇲🇩",

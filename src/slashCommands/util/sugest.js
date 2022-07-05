@@ -8,29 +8,25 @@ module.exports = {
             name: 'enviar',
             description: '[util] Envie ideias/sugestões para o servidor ou para mim',
             type: 1,
-            options: [
-                {
-                    name: 'option',
-                    description: 'Qual opção deseja executar?',
-                    type: 3,
-                    required: true,
-                    autocomplete: true
-                }
-            ]
+            options: [{
+                name: 'option',
+                description: 'Qual opção deseja executar?',
+                type: 3,
+                required: true,
+                autocomplete: true
+            }]
         },
         {
             name: 'config',
             description: 'bla',
             type: 1,
-            options: [
-                {
-                    name: 'choose_channel',
-                    description: 'Selecione o canal',
-                    type: 3,
-                    required: true,
-                    autocomplete: true
-                }
-            ]
+            options: [{
+                name: 'choose_channel',
+                description: 'Selecione o canal',
+                type: 3,
+                required: true,
+                autocomplete: true
+            }]
         }
     ],
     async execute({ interaction: interaction, modals: modals, emojis: e, guildData: guildData, database: Database, client: client }) {
