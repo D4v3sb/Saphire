@@ -104,8 +104,8 @@ class ModalInteraction extends Modals {
         let flag = fields.getTextInputValue('flag')
         let image = fields.getTextInputValue('image')
         let countryName = fields.getTextInputValue('country')
-        // let syn = fields.getTextInputValue('country1')
-        // let syn3 = fields.getTextInputValue('country2')
+        let syn = fields.getTextInputValue('country1')
+        let syn2 = fields.getTextInputValue('country2')
 
         if (!image.includes('https://media.discordapp.net/attachments'))
             return await interaction.reply({
@@ -113,19 +113,31 @@ class ModalInteraction extends Modals {
                 ephemeral: true
             })
 
-        let has = flags?.find(data => data.flag == flag || data.country == countryName || data.image === image)
+
+        let has = flags?.find(data => {
+
+            for (let c of data.country)
+                if (
+                    c.toLowerCase() === countryName?.toLowerCase()
+                    || c.toLowerCase() === syn?.toLowerCase()
+                    || c.toLowerCase() === syn2?.toLowerCase()
+                )
+                    return true
+
+            return data.flag == flag || data.image === image
+        })
 
         if (has)
             return await interaction.reply({
-                content: `${e.Deny} | Esse país já existe no banco de dados.`,
+                content: `${e.Deny} | Algum dado presente no formulário já pertence a uma bandeira.`,
                 ephemeral: true
             })
 
         let msg = await interaction.reply({
-            content: `${e.QuestionMark} | Você confirma adicionar esse país no banco de dados do Flag Game?\n"**${flag} - ${countryName}**"\n${image}`,
+            content: `${e.QuestionMark} | Você confirma adicionar essa bandeira no banco de dados do Flag Game?\n"**${flag} - ${countryName}**"\n${image}`,
             fetchReply: true
         }),
-            emojis = ['✅', '❌'], clicked = false
+            emojis = ['✅', '❌']
 
         for (let i of emojis) msg.react(i).catch(() => { })
         let collector = msg.createReactionCollector({
@@ -142,8 +154,10 @@ class ModalInteraction extends Modals {
                     })
                     return collector.stop()
                 }
-
-                Database.Flags.push('Flags', { flag: flag, country: [countryName], image: image })
+                let countries = [countryName]
+                if (syn) countries.push(syn)
+                if (syn2) countries.push(syn2)
+                Database.Flags.push('Flags', { flag: flag, country: [...countries], image: image })
                 return await interaction.editReply(`${e.Check} | A bandeira "**${flag} - ${countryName}**" foi adicionada com sucesso!\n${image}`).catch(() => { })
             })
             .on('end', async (i, r) => {
@@ -180,7 +194,7 @@ class ModalInteraction extends Modals {
 
         if (flags.find(data => data.flag == flagEmoji || data.image == image))
             return await interaction.reply({
-                content: `${e.Info} | Alguma informação passada já pertence a um país presente no banco de dados.`,
+                content: `${e.Info} | Alguma informação passada já pertence a uma bandeira presente no banco de dados.`,
                 ephemeral: true
             })
 
