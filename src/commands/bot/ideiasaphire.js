@@ -1,14 +1,14 @@
-const { DatabaseObj: { e, config } } = require("../../../modules/functions/plugins/database")
+const { e } = require('../../../JSON/emojis.json')
 
 module.exports = {
     name: 'ideiasaphire',
     aliases: ['sendideia', 'sugerir', 'sendsugest', 'sugest'],
     category: 'bot',
     emoji: '📨',
-    usage: '<sugerir>',
+    usage: '/sugest',
     description: 'Sugira algo para que meu criador insira no meu sistema',
 
     execute: async (client, message, args, prefix, MessageEmbed, Database) => {
-        return message.reply(`${e.SaphireFeliz} | Você pode mandar suas ideias no meu formulário! Aqui está o link: ${config.GoogleForm}`)
+        return message.reply(`${e.Info} | Este comando foi movido para Slash Command e será excluído em breve. Use \`/sugest\``)
     }
 }
