@@ -28,7 +28,9 @@ class Autocomplete {
             case 'change_background': this.changeLevelBackground(value); break;
             case 'buy_background': this.buyLevelBackground(value); break;
             case 'select_country': this.flagSearch(value); break;
-            case 'choose_channel': this.ideiaChannels(value); break;
+            case 'sugest_channel': this.ideiaChannels(value); break;
+            case 'report_channel': this.reportChannels(value); break;
+            case 'log_channel': this.logChannels(value); break;
             case 'flag-adminstration': this.flagAdminOptions(); break;
             case 'level_options': this.levelOptions(); break;
             case 'option': this.ideaCommandOptions(); break;
@@ -39,9 +41,6 @@ class Autocomplete {
     }
 
     async ideiaChannels(value) {
-
-        const member = this.guild.members.cache.get(this.user.id)
-        if (!member.memberPermissions('ADMINISTRATOR')) return this.respond()
 
         const channels = this.guild.channels.cache.filter(channel => ['GUILD_TEXT', 'GUILD_NEWS'].includes(channel.type))
         const guildData = await Database.Guild.findOne({ id: this.guild.id }, 'IdeiaChannel')
@@ -58,7 +57,55 @@ class Autocomplete {
         if (channelId)
             newMapped.unshift({
                 name: 'Desativar sistema de sugestões',
-                value: 'disable'
+                value: 'disableSugestChannel'
+            })
+
+        if (newMapped.length > 24) newMapped.length = 24
+        return this.respond(newMapped)
+    }
+
+    async logChannels(value) {
+
+        const channels = this.guild.channels.cache.filter(channel => ['GUILD_TEXT', 'GUILD_NEWS'].includes(channel.type))
+        const guildData = await Database.Guild.findOne({ id: this.guild.id }, 'LogChannel')
+        const channelId = guildData?.LogChannel || null
+        const mapped = []
+
+        channels.map(channel => {
+            if (channel.id === channelId) return
+            return mapped.push({ name: channel.name, value: channel.id })
+        })
+
+        const newMapped = [...mapped.filter(data => data?.name?.toLowerCase()?.includes(value.toLowerCase()))]
+
+        if (channelId)
+            newMapped.unshift({
+                name: 'Desativar sistema GSN (Log Channel)',
+                value: 'disableLogChannel'
+            })
+
+        if (newMapped.length > 24) newMapped.length = 24
+        return this.respond(newMapped)
+    }
+
+    async reportChannels(value) {
+
+        const channels = this.guild.channels.cache.filter(channel => ['GUILD_TEXT', 'GUILD_NEWS'].includes(channel.type))
+        const guildData = await Database.Guild.findOne({ id: this.guild.id }, 'ReportChannel')
+        const channelId = guildData?.ReportChannel || null
+        const mapped = []
+
+        channels.map(channel => {
+            if (channel.id === channelId) return
+            return mapped.push({ name: channel.name, value: channel.id })
+        })
+
+        const newMapped = [...mapped.filter(data => data?.name?.toLowerCase()?.includes(value.toLowerCase()))]
+
+        if (channelId)
+            newMapped.unshift({
+                name: 'Desativar sistema de reportes',
+                value: 'disableReportChannel'
             })
 
         if (newMapped.length > 24) newMapped.length = 24
@@ -68,17 +115,21 @@ class Autocomplete {
     async ideaCommandOptions() {
 
         const mapped = [{
-            name: `(Modal) Mandar sugestão para ${client.user.username}`,
-            value: 'bot'
+            name: `(Modal) Enviar uma sugestão para ${client.user.username}`,
+            value: 'sugestBot'
         }]
 
-        const guildData = await Database.Guild.findOne({ id: this.guild.id }, 'IdeiaChannel')
-        const channelId = guildData?.IdeiaChannel
-        const channel = this.guild.channels.cache.get(channelId)
+        const guildData = await Database.Guild.findOne({ id: this.guild.id }, 'IdeiaChannel ReportChannel')
+        const channel = (channelId) => this.guild.channels.cache.has(channelId)
 
         mapped.push({
-            name: `(Modal) Mandar sugestão para ${this.guild.name}${channel ? '' : ' (Recurso desabilitado)'}`,
-            value: channel ? 'server' : 'disabled'
+            name: `(Modal) Enviar uma sugestão para ${this.guild.name}${channel(guildData?.IdeiaChannel) ? '' : ' (Recurso desabilitado)'}`,
+            value: channel(guildData?.IdeiaChannel) ? 'sugestServer' : 'disabled'
+        })
+
+        mapped.push({
+            name: `(Modal) Enviar um reporte para ${this.guild.name}${channel(guildData?.ReportChannel) ? '' : ' (Recurso desabilitado)'}`,
+            value: channel(guildData?.ReportChannel) ? 'reportServer' : 'disabled'
         })
 
         return this.respond(mapped)

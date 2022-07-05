@@ -1,8 +1,8 @@
-const Database = require('./Database'),
-    { Emojis: e, Config: config } = Database,
-    { eightyYears, Now, getUser, day } = require('../functions/plugins/eventPlugins'),
-    passCode = require('../functions/plugins/PassCode'),
-    Modals = require('./Modals')
+const Database = require('./Database')
+const { Emojis: e, Config: config } = Database
+const { eightyYears, Now, getUser, day } = require('../functions/plugins/eventPlugins')
+const passCode = require('../functions/plugins/PassCode')
+const Modals = require('./Modals')
 
 class ModalInteraction extends Modals {
     constructor(interaction, client) {
@@ -44,6 +44,7 @@ class ModalInteraction extends Modals {
             case 'newFlagCreate': this.newFlagCreate(); break;
             case 'botSugest': this.botSugest(); break;
             case 'serverSugest': this.serverSugest(); break;
+            case 'serverReport': this.serverReport(); break;
             default:
                 break;
         }
@@ -102,7 +103,7 @@ class ModalInteraction extends Modals {
 
     botSugest = async ({ interaction, fields, user, client, guild } = this) => {
 
-        const text = fields.getTextInputValue('ideia')
+        const text = fields.getTextInputValue('text')
         const guildChannel = client.channels.cache.get(config.BugsChannelId)
 
         if (!guildChannel)
@@ -141,10 +142,10 @@ class ModalInteraction extends Modals {
 
     serverSugest = async ({ interaction, fields, user, client, guild } = this) => {
 
-        const text = fields.getTextInputValue('ideia')
-        const guildData = await Database.Guild.findOne({ id: this.guild.id }, 'IdeiaChannel')
+        const text = fields.getTextInputValue('text')
+        const guildData = await Database.Guild.findOne({ id: guild.id }, 'IdeiaChannel')
         const channelId = guildData?.IdeiaChannel
-        const channel = this.guild.channels.cache.get(channelId)
+        const channel = guild.channels.cache.get(channelId)
 
         if (!channel)
             return await interaction.reply({
@@ -156,7 +157,7 @@ class ModalInteraction extends Modals {
             color: client.blue,
             author: { name: `${user.tag} enviou uma sugestão`, iconURL: user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }) },
             description: text,
-            footer: { text: '/sugest' },
+            footer: { text: '/enviar' },
             timestamp: new Date()
         }
 
@@ -173,6 +174,48 @@ class ModalInteraction extends Modals {
             .catch(async err => {
                 return await interaction.reply({
                     content: `${e.Warn} | Houve um erro com o envio da sua ideia\n> \`${err}\``,
+                    ephemeral: true
+                })
+            })
+
+    }
+
+    serverReport = async ({ interaction, fields, user, client, guild } = this) => {
+
+        const text = fields.getTextInputValue('text')
+        const guildData = await Database.Guild.findOne({ id: guild.id }, 'ReportChannel')
+        const channelId = guildData?.ReportChannel
+        const channel = guild.channels.cache.get(channelId)
+
+        if (!channel)
+            return await interaction.reply({
+                content: `${e.Info} | O canal de envio não foi encontrado.`,
+                ephemeral: true
+            })
+
+        const embed = {
+            color: client.red,
+            title: `${e.Report} Novo Reporte Recebido`,
+            thumbnail: { url: user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }) || null },
+            description: `**Conteúdo do Reporte:**\n${text}`,
+            fields: [{
+                name: '👤 Author do Reporte',
+                value: `${user} | \`${user.id}\``
+            }],
+            timestamp: new Date()
+        }
+
+        return channel.send({ embeds: [embed] })
+            .then(async msg => {
+
+                return await interaction.reply({
+                    content: `${e.Check} | O seu reporte foi enviado com sucesso ao canal designado.`,
+                    ephemeral: true
+                })
+            })
+            .catch(async err => {
+                return await interaction.reply({
+                    content: `${e.Warn} | Houve um erro com o envio do seu reporte.\n> \`${err}\``,
                     ephemeral: true
                 })
             })

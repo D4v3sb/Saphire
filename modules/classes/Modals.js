@@ -50,7 +50,7 @@ class Modals {
         ]
     }
 
-    ideia = (title, customId) => {
+    ideia = (title, customId, label, placeholder) => {
         return {
             title: title,
             custom_id: customId,
@@ -60,11 +60,11 @@ class Modals {
                     components: [
                         {
                             type: 4,
-                            custom_id: "ideia",
-                            label: "Qual é a sua sugestão?",
+                            custom_id: "text",
+                            label: label,
                             style: 2,
                             min_length: 10,
-                            placeholder: "A minha sugestão é...",
+                            placeholder: placeholder,
                             required: true
                         }
                     ]
