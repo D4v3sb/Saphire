@@ -42,6 +42,8 @@ class ModalInteraction extends Modals {
             case 'newCollectionReactionRoles': this.newCollectionReactionRoles(); break;
             case 'newAnimeCharacter': this.addCharacter(); break;
             case 'newFlagCreate': this.newFlagCreate(); break;
+            case 'botSugest': this.botSugest(); break;
+            case 'serverSugest': this.serverSugest(); break;
             default:
                 break;
         }
@@ -95,6 +97,85 @@ class ModalInteraction extends Modals {
             content: msg,
             ephemeral: true
         })
+
+    }
+
+    botSugest = async ({ interaction, fields, user, client, guild } = this) => {
+
+        const text = fields.getTextInputValue('ideia')
+        const guildChannel = client.channels.cache.get(config.BugsChannelId)
+
+        if (!guildChannel)
+            return await interaction.reply({
+                content: `${e.Info} | O canal de envio de sugestões no servidor central não foi encontrado.`,
+                ephemeral: true
+            })
+
+        const embed = {
+            color: client.blue,
+            title: `💭 ${user.tag} enviou uma ideia`,
+            description: text,
+            fields: [
+                {
+                    name: 'Extra Data',
+                    value: `UserId: ${user.id}\nGuild: ${guild.name} - \`${guild.id}\``
+                }
+            ]
+        }
+
+        return guildChannel.send({ embeds: [embed] })
+            .then(async () => {
+                return await interaction.reply({
+                    content: `${e.Check} | A sua ideia foi enviada com sucesso e se for válida, você receberá uma recompensa.`,
+                    ephemeral: true
+                })
+            })
+            .catch(async () => {
+                return await interaction.reply({
+                    content: `${e.Warn} | Houve um erro com o envio da sua ideia\n> \`${err}\``,
+                    ephemeral: true
+                })
+            })
+
+    }
+
+    serverSugest = async ({ interaction, fields, user, client, guild } = this) => {
+
+        const text = fields.getTextInputValue('ideia')
+        const guildData = await Database.Guild.findOne({ id: this.guild.id }, 'IdeiaChannel')
+        const channelId = guildData?.IdeiaChannel
+        const channel = this.guild.channels.cache.get(channelId)
+
+        if (!channel)
+            return await interaction.reply({
+                content: `${e.Info} | O canal de envio não foi encontrado.`,
+                ephemeral: true
+            })
+
+        const embed = {
+            color: client.blue,
+            author: { name: `${user.tag} enviou uma sugestão`, iconURL: user.displayAvatarURL({ dynamic: true, format: "png", size: 1024 }) },
+            description: text,
+            footer: { text: '/sugest' },
+            timestamp: new Date()
+        }
+
+        return channel.send({ embeds: [embed] })
+            .then(async msg => {
+
+                for (let i of [e.Upvote, e.DownVote, e.QuestionMark]) msg.react(i).catch(() => { })
+
+                return await interaction.reply({
+                    content: `${e.Check} | A sua ideia foi enviada com sucesso e você pode vê-la no canal ${channel}.`,
+                    ephemeral: true
+                })
+            })
+            .catch(async err => {
+                return await interaction.reply({
+                    content: `${e.Warn} | Houve um erro com o envio da sua ideia\n> \`${err}\``,
+                    ephemeral: true
+                })
+            })
 
     }
 
@@ -689,9 +770,7 @@ class ModalInteraction extends Modals {
             timestamp: new Date()
         }
 
-        const { Config } = Database
-
-        const guildChannel = client.channels.cache.get(Config.BugsChannelId)
+        const guildChannel = client.channels.cache.get(config.BugsChannelId)
 
         if (!guildChannel)
             return await interaction.reply({

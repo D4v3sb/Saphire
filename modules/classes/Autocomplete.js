@@ -28,12 +28,60 @@ class Autocomplete {
             case 'change_background': this.changeLevelBackground(value); break;
             case 'buy_background': this.buyLevelBackground(value); break;
             case 'select_country': this.flagSearch(value); break;
+            case 'choose_channel': this.ideiaChannels(value); break;
             case 'flag-adminstration': this.flagAdminOptions(); break;
             case 'level_options': this.levelOptions(); break;
+            case 'option': this.ideaCommandOptions(); break;
             default: this.respond(); break;
         }
 
         return
+    }
+
+    async ideiaChannels(value) {
+
+        const member = this.guild.members.cache.get(this.user.id)
+        if (!member.memberPermissions('ADMINISTRATOR')) return this.respond()
+
+        const channels = this.guild.channels.cache.filter(channel => ['GUILD_TEXT', 'GUILD_NEWS'].includes(channel.type))
+        const guildData = await Database.Guild.findOne({ id: this.guild.id }, 'IdeiaChannel')
+        const channelId = guildData?.IdeiaChannel || null
+        const mapped = []
+
+        channels.map(channel => {
+            if (channel.id === channelId) return
+            return mapped.push({ name: channel.name, value: channel.id })
+        })
+
+        const newMapped = [...mapped.filter(data => data?.name?.toLowerCase()?.includes(value.toLowerCase()))]
+
+        if (channelId)
+            newMapped.unshift({
+                name: 'Desativar sistema de sugestões',
+                value: 'disable'
+            })
+
+        if (newMapped.length > 24) newMapped.length = 24
+        return this.respond(newMapped)
+    }
+
+    async ideaCommandOptions() {
+
+        const mapped = [{
+            name: `(Modal) Mandar sugestão para ${client.user.username}`,
+            value: 'bot'
+        }]
+
+        const guildData = await Database.Guild.findOne({ id: this.guild.id }, 'IdeiaChannel')
+        const channelId = guildData?.IdeiaChannel
+        const channel = this.guild.channels.cache.get(channelId)
+
+        mapped.push({
+            name: `(Modal) Mandar sugestão para ${this.guild.name}${channel ? '' : ' (Recurso desabilitado)'}`,
+            value: channel ? 'server' : 'disabled'
+        })
+
+        return this.respond(mapped)
     }
 
     async flagAdminOptions() {

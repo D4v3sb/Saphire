@@ -50,6 +50,29 @@ class Modals {
         ]
     }
 
+    ideia = (title, customId) => {
+        return {
+            title: title,
+            custom_id: customId,
+            components: [
+                {
+                    type: 1,
+                    components: [
+                        {
+                            type: 4,
+                            custom_id: "ideia",
+                            label: "Qual é a sua sugestão?",
+                            style: 2,
+                            min_length: 10,
+                            placeholder: "A minha sugestão é...",
+                            required: true
+                        }
+                    ]
+                } // MAX: 5 Fields
+            ]
+        }
+    }
+
     newFlag = {
         title: "Create New Flag",
         custom_id: "newFlagCreate",
