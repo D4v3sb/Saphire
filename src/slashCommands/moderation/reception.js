@@ -23,7 +23,8 @@ module.exports = {
                             name: 'channel',
                             description: 'Canal onde as mensagens serão enviadas',
                             type: 7,
-                            required: true
+                            required: true,
+                            channel_types: [0, 5]
                         },
                         {
                             name: 'message',
@@ -98,7 +99,8 @@ module.exports = {
                             name: 'channel',
                             description: 'Canal onde as mensagens serão enviadas',
                             type: 7,
-                            required: true
+                            required: true,
+                            channel_types: [0, 5]
                         },
                         {
                             name: 'message',
@@ -405,12 +407,6 @@ module.exports = {
         }
 
         async function SetWelcomeChannel() {
-
-            if (!['GUILD_NEWS', 'GUILD_TEXT'].includes(channel.type))
-                return await interaction.reply({
-                    content: `${e.Deny} | Apenas canais de textos e anúncios são válidos aqui.`,
-                    ephemeral: true
-                })
 
             if (receptionMessage && receptionMessage.length > 2500)
                 return await interaction.reply({

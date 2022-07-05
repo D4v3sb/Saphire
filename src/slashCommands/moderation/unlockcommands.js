@@ -21,7 +21,8 @@ module.exports = {
         {
             name: 'select_channel_manually',
             description: 'Selecione um canal manualmente',
-            type: 7
+            type: 7,
+            channel_types: [0, 5]
         }
     ],
     async execute({ interaction: interaction, database: Database, emojis: e, guildData: guildData, guild: guild }) {
@@ -42,12 +43,6 @@ module.exports = {
         if (!channelsBlocked.includes(channel.id))
             return await interaction.reply({
                 content: `${e.Deny} | Este canal não está bloqueado.`,
-                ephemeral: true
-            })
-
-        if (!['GUILD_TEXT', 'GUILD_NEWS'].includes(channel.type))
-            return await interaction.reply({
-                content: `${e.Deny} | Apenas canais de texto e anúncios estão disponíveis neste comando.`,
                 ephemeral: true
             })
 

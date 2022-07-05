@@ -16,7 +16,8 @@ module.exports = {
                     name: 'channel',
                     description: 'Canal em que o anúncio será enviado',
                     type: 7,
-                    required: true
+                    required: true,
+                    channel_types: [0, 5]
                 },
                 {
                     name: 'message',
@@ -46,7 +47,8 @@ module.exports = {
                     name: 'channel',
                     description: 'Canal em que o anúncio será enviado',
                     type: 7,
-                    required: true
+                    required: true,
+                    channel_types: [0, 5]
                 },
                 {
                     name: 'message',
@@ -67,12 +69,6 @@ module.exports = {
         let channel = options.getChannel('channel')
         let color = options.getString('color')
         let title = options.getString('title') || 'Novo anúncio'
-
-        if (channel.type !== 'GUILD_TEXT')
-            return await interaction.reply({
-                content: `${e.Deny} | Apenas canais de textos são válidos neste comando.`,
-                ephemeral: true
-            })
 
         if (message.length > 4096)
             message = message.slice(4093) + '...'

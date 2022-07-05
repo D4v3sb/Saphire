@@ -50,7 +50,8 @@ module.exports = {
                     name: 'canal',
                     description: 'Canal de lançamento do reaction role',
                     type: 7,
-                    required: true
+                    required: true,
+                    channel_types: [0, 5]
                 }
             ]
         },
@@ -292,12 +293,6 @@ module.exports = {
         }
 
         async function throwReactionRole() {
-
-            if (channel.type !== 'GUILD_TEXT')
-                return await interaction.reply({
-                    content: `${e.Deny} | Apenas canais de textos são permitidos por aqui.`,
-                    ephemeral: true
-                })
 
             if (!collections || collections.length === 0)
                 return await interaction.reply({

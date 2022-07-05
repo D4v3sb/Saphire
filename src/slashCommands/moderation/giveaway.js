@@ -29,7 +29,8 @@ module.exports = {
                     name: 'channel',
                     description: 'Canal do sorteio',
                     type: 7,
-                    required: true
+                    required: true,
+                    channel_types: [0, 5]
                 },
                 {
                     name: 'winners',
@@ -156,12 +157,6 @@ module.exports = {
         return
 
         async function createGiveaway() {
-
-            if (!['GUILD_NEWS', 'GUILD_TEXT'].includes(Channel.type))
-                return await interaction.reply({
-                    content: `${e.Deny} | Apenas canais de textos e anúncios são válidos aqui.`,
-                    ephemeral: true
-                })
 
             if (WinnersAmount > 20 || WinnersAmount < 1)
                 return await interaction.reply({

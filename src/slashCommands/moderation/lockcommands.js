@@ -11,7 +11,8 @@ module.exports = {
             name: 'channel',
             description: 'Canal em que os comandos serão bloqueados',
             type: 7,
-            required: true
+            required: true,
+            channel_types: [0, 5]
         },
         {
             name: 'bots',
@@ -25,11 +26,6 @@ module.exports = {
 
         let channel = options.getChannel('channel')
         let blockBots = options.getBoolean('bots')
-
-        if (!['GUILD_TEXT', 'GUILD_NEWS'].includes(channel.type))
-            return await interaction.reply({
-                content: `${e.Deny} | Apenas canais de texto e anúncios estão disponíveis neste comando.`
-            })
 
         if (blockBots) return BloquearBots()
 
