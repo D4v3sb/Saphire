@@ -1,6 +1,7 @@
-const { Client, Collection } = require('discord.js'),
-    Database = require('./Database'),
-    ms = require('parse-ms')
+const { Client, Collection } = require('discord.js')
+const Database = require('./Database')
+const ms = require('parse-ms')
+const { Config: config } = Database
 
 require('dotenv').config()
 
@@ -17,7 +18,14 @@ class Saphire extends Client {
         this.commands = new Collection()
         this.aliases = new Collection()
         this.slashCommands = new Collection()
-        this.commandsNames = () => [...this.commands.map(cmd => cmd.name), ...this.aliases.map((a, b) => b)]
+        this.commandsNames = () => [
+            ...this.commands.map(cmd => cmd.name),
+            ...this.aliases.map((a, b) => b)
+        ]
+        this.staff = [
+            "327496267007787008", // San O.
+            config.ownerId
+        ]
         this.blue = '#246FE0'
         this.red = '#ED4245'
         this.green = '#57f287'

@@ -2,7 +2,7 @@ module.exports = {
     name: 'staff',
     description: '[administration] Comandos exclusivos para os membros da Saphire\'s Team',
     dm_permission: false,
-    admin: true,
+    staff: true,
     type: 1,
     options: [
         {
@@ -138,8 +138,8 @@ module.exports = {
         async function logoMarca() {
 
             const subCommand = options.getSubcommand()
-            const newLogoMarca = require('./staff/newLogoMarca')
-            const viewLogoMarca = require('./staff/viewLogoMarca')
+            const newLogoMarca = require('./src/new.LogoMarca')
+            const viewLogoMarca = require('./src/view.LogoMarca')
             // const editLogoMarca = require('./staff/editLogoMarca')
 
             switch (subCommand) {

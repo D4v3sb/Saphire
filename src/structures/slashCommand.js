@@ -16,7 +16,7 @@ module.exports = async (client) => {
 
             if (pull.name) {
                 client.slashCommands.set(pull.name, pull);
-                pull.admin ? adminCommands.push(pull) : commands.push(pull);
+                pull.admin || pull.staff ? adminCommands.push(pull) : commands.push(pull);
                 continue
             }
 

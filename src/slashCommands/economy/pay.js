@@ -53,7 +53,7 @@ module.exports = {
                 ephemeral: true
             })
 
-        let money = authorData.Balance || 0
+        let money = authorData?.Balance || 0
 
         if (money <= 0)
             return await interaction.reply({

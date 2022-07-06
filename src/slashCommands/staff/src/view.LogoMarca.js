@@ -54,8 +54,8 @@ async function viewLogoMarca(interaction) {
             const url = logo.images.censored === embed.image.url ? logo.images.uncensored : logo.images.censored
             buttons[0].components[0].label = buttons[0].components[0].label === 'VER IMAGEM CENSURADA' ? 'VER IMAGEM SEM CENSURADA' : 'VER IMAGEM CENSURADA'
             embed.image = { url: url || null }
-            await int.deferUpdate()
-            return await interaction.editReply({ embeds: [embed], components: buttons })
+            await interaction.editReply({ embeds: [embed], components: buttons })
+            return await int.deferUpdate()
         })
         .on('end', async () => await interaction.editReply({ components: [] }).catch(() => { }))
 

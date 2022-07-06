@@ -1,14 +1,14 @@
 const Modals = require('./Modals')
+const client = require('../../index')
 
 class SlashCommand extends Modals {
-    constructor(interaction, client) {
+    constructor(interaction) {
         super()
         this.interaction = interaction
         this.user = interaction.user
         this.member = interaction.member
         this.guild = interaction.guild
         this.channel = interaction.channel
-        this.client = client
         this.error = require('../functions/config/interactionError')
         this.Database = require('./Database')
         this.e = this.Database.Emojis
@@ -16,14 +16,21 @@ class SlashCommand extends Modals {
 
     async execute(guildData, clientData) {
 
-        const command = this.client.slashCommands.get(this.interaction.commandName);
+        const command = client.slashCommands.get(this.interaction.commandName);
         if (!command) return
 
-        let staff = [...clientData.Administradores, this.Database.Config.ownerId]
+        const admins = [...clientData.Administradores, this.Database.Config.ownerId]
+        const staff = [...clientData.Administradores, ...client.staff]
 
-        if (command.admin && !staff.includes(this.interaction.user.id))
+        if (command.admin && !admins.includes(this.interaction.user.id))
             return await this.interaction.reply({
                 content: `${this.e.Deny} | Este comando é exclusivo para meus administradores.`,
+                ephemeral: true
+            })
+
+        if (command.staff && !staff.includes(this.interaction.user.id))
+            return await this.interaction.reply({
+                content: `${this.e.Deny} | Este comando é exclusivo para os membros da equipe Saphire's Team.`,
                 ephemeral: true
             })
 
@@ -31,7 +38,7 @@ class SlashCommand extends Modals {
             interaction: this.interaction,
             emojis: this.e,
             database: this.Database,
-            client: this.client,
+            client: client,
             data: this,
             guild: this.guild,
             modals: this.modals,
@@ -45,7 +52,7 @@ class SlashCommand extends Modals {
 
     async CheckBeforeExecute() {
 
-        const { guild, client, e, Database, interaction, user, channel } = this
+        const { guild, e, Database, interaction, user, channel } = this
 
         let guildData = await Database.Guild.findOne({ id: guild?.id })
         let clientData = await Database.Client.findOne({ id: client.user.id })
@@ -78,8 +85,13 @@ class SlashCommand extends Modals {
 
     async registerCommand() {
         return await this.Database.Client.updateOne(
-            { id: this.client.user.id },
-            { $inc: { ComandosUsados: 1 } },
+            { id: client.user.id },
+            {
+                $inc: {
+                    ComandosUsados: 1,
+                    [`CommandsCount.${this.interaction.commandName}`]: 1
+                }
+            },
             { upsert: true }
         )
     }
