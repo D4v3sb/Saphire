@@ -20,6 +20,12 @@
         "GoogleForm": "https://forms.gle/4sQ1mgRdP4b1fUnx7",
         "SaphiDocs": "https://saphire.gitbook.io/saphire/",
         "TopGGLink": "UNDEFINED",
+        "guildsToPrivateCommands": [
+            "986292524790464562",
+            "888464632291917956",
+            "882475447387054081",
+            "818260805119377448"
+        ],
         "Perms": {
             "CREATE_INSTANT_INVITE": "Criar convite",
             "KICK_MEMBERS": "Expulsar membros",
@@ -95,6 +101,6 @@
             "Greyple": "Verde Acinzentado",
             "DarkButNotBlack": "Escuro, mas não preto",
             "NotQuiteBlack": "Não tão preto"
-          }
+        }
     }
 }

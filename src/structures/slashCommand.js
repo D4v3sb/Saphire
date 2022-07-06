@@ -1,6 +1,7 @@
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v10");
 const { readdirSync } = require('fs')
+const { config } = require('../../JSON/config.json')
 
 module.exports = async (client) => {
 
@@ -16,8 +17,10 @@ module.exports = async (client) => {
             if (pull.name) {
                 client.slashCommands.set(pull.name, pull);
                 pull.admin ? adminCommands.push(pull) : commands.push(pull);
-            } else
                 continue
+            }
+
+            continue
         }
     })
 
@@ -26,7 +29,7 @@ module.exports = async (client) => {
     return (async () => {
         try {
 
-            let guildsId = ['888464632291917956', '986292524790464562']
+            let guildsId = config.guildsToPrivateCommands || []
 
             for (let guild of guildsId)
                 if (client.guilds.cache.has(guild))

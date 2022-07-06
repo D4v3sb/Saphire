@@ -64,7 +64,7 @@ async function executeNewGame(Msg, interaction, embed = {}) {
                     return channel.send({ embeds: [embed] }).catch(() => { })
                 }
 
-                embed.description = `${e.Check} | ${winners.length > 1 ? `${winners.slice(0, 4)?.map(u => u.username).join(', ')}${winners.length - 4 > 0 ? ` e mais ${winners.length - 4} jogadores` : ''} acertaram` : `${winners[0].username} acertou`} o país!\n${control.atualFlag.flag} - ${formatString(control.atualFlag?.country[0])}\n \n${e.Loading} Próxima bandeira...`
+                embed.description = `${e.Check} | ${winners.length > 1 ? `${winners.slice(0, 4)?.map(u => u.username).join(', ')}${winners.length - 4 > 0 ? ` e mais ${winners.length - 4} jogadores` : ''} acertaram` : `${winners[0].username} acertou`} a bandeira!\n${control.atualFlag.flag} - ${formatString(control.atualFlag?.country[0])}\n \n${e.Loading} Próxima bandeira...`
                 embed.image = { url: null }
                 msg.delete().catch(() => Database.Cache.pull('Flag', channel?.id))
 

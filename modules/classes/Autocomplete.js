@@ -1,12 +1,13 @@
 const util = require('../../src/structures/util')
 const Database = require('./Database')
 const client = require('../../index')
-
+const { formatString } = require('../../src/commands/games/plugins/gamePlugins')
 class Autocomplete {
     constructor(interaction) {
         this.interaction = interaction
         this.user = interaction.user
         this.member = interaction.member
+        this.options = interaction.options
         this.guild = interaction.guild
         this.channel = interaction.channel
         this.e = Database.Emojis
@@ -14,7 +15,7 @@ class Autocomplete {
 
     async build() {
 
-        const { name, value } = this.interaction.options.getFocused(true)
+        const { name, value } = this.options.getFocused(true)
 
         switch (name) {
             case 'channel': this.blockedChannels(value); break;
@@ -32,12 +33,35 @@ class Autocomplete {
             case 'report_channel': this.reportChannels(value); break;
             case 'log_channel': this.logChannels(value); break;
             case 'flag-adminstration': this.flagAdminOptions(); break;
+            case 'select_logo_marca': this.select_logo_marca(value); break;
+            case 'remove_sinonimo': this.remove_sinonimo(); break;
             case 'level_options': this.levelOptions(); break;
             case 'option': this.ideaCommandOptions(); break;
             default: this.respond(); break;
         }
 
         return
+    }
+
+    async select_logo_marca(value) {
+        const logoData = Database.Logomarca.get('LogoMarca') || []
+        const fill = logoData.filter(marca => marca?.name.find(x => x.includes(value.toLowerCase())))
+        const mapped = fill.map(marca => ({ name: formatString(marca?.name[0]), value: marca?.name[0] }))
+        return this.respond(mapped)
+    }
+
+    async remove_sinonimo() {
+        const logoData = Database.Logomarca.get('LogoMarca') || []
+        const selectLogo = this.options.getString('select_logo_marca') || null
+
+        if (!selectLogo) return this.respond()
+
+        const logo = logoData.find(data => data.name[0] === selectLogo)
+
+        if (!logo || logo?.name.length === 1) return this.respond()
+
+        const mapped = logo.name.slice(1).map(name => ({ name: formatString(name), value: name }))
+        return this.respond(mapped)
     }
 
     async ideiaChannels(value) {
@@ -180,7 +204,6 @@ class Autocomplete {
             || flag.image === value
         )
 
-        const { formatString } = require('../../src/commands/games/plugins/gamePlugins')
         const mapped = fill.map(flag => ({ name: formatString(flag.country[0]), value: flag.country[0] })).sort()
         return this.respond(mapped)
     }
@@ -190,7 +213,11 @@ class Autocomplete {
         const channelsBlocked = data?.Blockchannels?.Channels || []
         const named = channelsBlocked.map(channelId => this.guild.channels.cache.get(channelId))
         const fill = named.filter(ch => ch && ch?.name.toLowerCase().includes(value?.toLowerCase())) || []
-        return this.respond(fill.map(ch => ({ name: ch.name, value: ch.id })))
+        const mapped = fill.map(ch => {
+            const nameWithCategory = `${ch.name}${ch.parent ? ` - ${ch.parent.name}` : ''}`
+            return { name: nameWithCategory, value: ch.id }
+        })
+        return this.respond(mapped)
     }
 
     async usersBanned(value) {

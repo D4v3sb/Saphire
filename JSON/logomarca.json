@@ -1,0 +1,24 @@
+{
+    "LogoMarca": [
+        {
+            "name": [
+                "guaraná antarctica",
+                "guaraná"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/994074646712438794/106_Sem_Titulo_20220705235703.png?width=473&height=473",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994074646402039828/images.jpeg?width=473&height=473"
+            }
+        },
+        {
+            "name": [
+                "windows",
+                "windows 10"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994087647490363493/Windows_logo_-_2012_dark_blue.svg.png?width=473&height=473"
+            }
+        }
+    ]
+}

@@ -9,6 +9,7 @@ class Database extends Models {
         this.Frases = new JSON('../../JSON/frases.json')
         this.Characters = new JSON('../../JSON/characters.json')
         this.Flags = new JSON('../../JSON/flags.json')
+        this.Logomarca = new JSON('../../JSON/logomarca.json')
         this.Cache = Database.Cache
         this.Emojis = Database.Emojis
         this.Config = Database.Config
@@ -30,10 +31,10 @@ class Database extends Models {
     static LogRegister = require('../database/models/LogRegister')
     static Lotery = require('../database/models/Lotery')
     static User = require('../database/models/User')
-    static Cache = new JSON('../../cache.json')
     static EmojisJSON = new JSON('../../JSON/emojis.json')
-    static Emojis = Database.EmojisJSON.get('e')
     static ConfigJSON = new JSON('../../JSON/config.json')
+    static Cache = new JSON('../../cache.json')
+    static Emojis = Database.EmojisJSON.get('e')
     static Config = Database.ConfigJSON.get('config')
 
     MongoConnect = async (client) => {
