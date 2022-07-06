@@ -1,6 +1,7 @@
 const Moeda = require('../../../modules/functions/public/moeda')
+const client = require('../../../index')
 
-async function InteractionError({ interaction, Database, user, e, client, guild, channel }, err) {
+async function InteractionError({ interaction, Database, user, e, guild, channel }, err) {
 
     if (!interaction) return
 
