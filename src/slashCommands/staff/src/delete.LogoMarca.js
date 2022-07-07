@@ -58,7 +58,7 @@ async function deleteLogoMarca(interaction) {
 
     return msg.createMessageComponentCollector({
         filter: int => int.user.id === user.id,
-        time: 1000,
+        time: 30000,
         max: 1,
         errors: ['max']
     })
