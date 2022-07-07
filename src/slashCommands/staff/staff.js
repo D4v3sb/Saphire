@@ -139,15 +139,12 @@ module.exports = {
         async function logoMarca() {
 
             const subCommand = options.getSubcommand()
-            const newLogoMarca = require('./src/new.LogoMarca')
-            const viewLogoMarca = require('./src/view.LogoMarca')
-            const editLogoMarca = require('./src/edit.LogoMarca')
 
             switch (subCommand) {
-                case 'new': newLogoMarca(interaction); break;
-                case 'view': viewLogoMarca(interaction); break;
-                case 'edit': editLogoMarca(interaction); break;
-                // case 'delete': deleteLogoMarca(); break;
+                case 'new': require('./src/new.LogoMarca')(interaction); break;
+                case 'view': require('./src/view.LogoMarca')(interaction); break;
+                case 'edit': require('./src/edit.LogoMarca')(interaction); break;
+                case 'delete': require('./src/delete.LogoMarca')(interaction); break;
                 default: await interaction.reply({
                     content: `${e.Deny} | Nenhuma função foi encontrada`,
                     ephemeral: true
