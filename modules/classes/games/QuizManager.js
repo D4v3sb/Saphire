@@ -1,14 +1,14 @@
-const quizData = require('../../../JSON/quiz.json'),
-    { formatString, emoji, formatNumberCaracters, getUser } = require('../../../src/commands/games/plugins/gamePlugins'),
-    Database = require('../Database'),
-    { e } = require('../../../JSON/emojis.json')
+const quizData = require('../../../JSON/quiz.json')
+const { formatString, emoji, formatNumberCaracters, getUser } = require('../../../src/commands/games/plugins/gamePlugins')
+const Database = require('../Database')
+const { e } = require('../../../JSON/emojis.json')
 
 class QuizManager {
     constructor(data, options) {
         this.interaction = data.interaction
         this.options = options
         this.author = data.interaction.user
-        this.client = data.client
+        this.client = require('../../../index')
         this.prefix = data.guildData?.Prefix || this.client.prefix
         this.channel = data.interaction.channel
         this.guild = data.interaction.guild
