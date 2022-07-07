@@ -34,13 +34,18 @@ class Autocomplete {
             case 'log_channel': this.logChannels(value); break;
             case 'flag-adminstration': this.flagAdminOptions(); break;
             case 'select_logo_marca': this.select_logo_marca(value); break;
-            case 'remove_sinonimo': this.remove_sinonimo(); break;
+            case 'remove_sinonimo': this.remove_sinonimo(value); break;
             case 'level_options': this.levelOptions(); break;
             case 'option': this.ideaCommandOptions(); break;
+            case 'editar_imagem_com_censura': this.editImageLogoMarca(); break;
             default: this.respond(); break;
         }
 
         return
+    }
+
+    async editImageLogoMarca() {
+        return this.respond([{ name: 'Excluir imagem censurada', value: 'null' }])
     }
 
     async select_logo_marca(value) {
@@ -50,7 +55,7 @@ class Autocomplete {
         return this.respond(mapped)
     }
 
-    async remove_sinonimo() {
+    async remove_sinonimo(value) {
         const logoData = Database.Logomarca.get('LogoMarca') || []
         const selectLogo = this.options.getString('select_logo_marca') || null
 
@@ -60,7 +65,11 @@ class Autocomplete {
 
         if (!logo || logo?.name.length === 1) return this.respond()
 
-        const mapped = logo.name.slice(1).map(name => ({ name: formatString(name), value: name }))
+        const mapped = logo.name
+            .slice(1)
+            .filter(name => name?.toLowerCase()?.includes(value?.toLowerCase()))
+            .map(name => ({ name: formatString(name), value: name }))
+
         return this.respond(mapped)
     }
 

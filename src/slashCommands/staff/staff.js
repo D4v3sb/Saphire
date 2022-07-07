@@ -58,55 +58,56 @@ module.exports = {
                         }
                     ]
                 },
-                // {
-                //     name: 'edit',
-                //     description: '[staff] Edite uma marca',
-                //     type: 1,
-                //     options: [
-                //         {
-                //             name: 'select_logo_marca',
-                //             description: 'Selecione uma logo/marca',
-                //             type: 3,
-                //             required: true,
-                //             autocomplete: true
-                //         },
-                //         {
-                //             name: 'add_sinonimo',
-                //             description: 'Adicionar um novo sinônimo',
-                //             type: 3
-                //         },
-                //         {
-                //             name: 'remove_sinonimo',
-                //             description: 'Adicionar um novo sinônimo',
-                //             type: 3,
-                //             autocomplete: true
-                //         },
-                //         {
-                //             name: 'editar_imagem_com_censura',
-                //             description: 'Editar imagem da logo/marca',
-                //             type: 3
-                //         },
-                //         {
-                //             name: 'editar_imagem_sem_censura',
-                //             description: 'Editar imagem da logo/marca',
-                //             type: 3
-                //         }
-                //     ]
-                // },
-                // {
-                //     name: 'delete',
-                //     description: '[staff] Deletar uma logo/marca',
-                //     type: 1,
-                //     options: [
-                //         {
-                //             name: 'select_logo_marca',
-                //             description: 'Selecione uma logo/marca',
-                //             type: 3,
-                //             required: true,
-                //             autocomplete: true
-                //         }
-                //     ]
-                // }
+                {
+                    name: 'edit',
+                    description: '[staff] Edite uma marca',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'select_logo_marca',
+                            description: 'Selecione uma logo/marca',
+                            type: 3,
+                            required: true,
+                            autocomplete: true
+                        },
+                        {
+                            name: 'add_sinonimo',
+                            description: 'Adicionar um novo sinônimo',
+                            type: 3
+                        },
+                        {
+                            name: 'remove_sinonimo',
+                            description: 'Adicionar um novo sinônimo',
+                            type: 3,
+                            autocomplete: true
+                        },
+                        {
+                            name: 'editar_imagem_com_censura',
+                            description: 'Editar imagem da logo/marca',
+                            type: 3,
+                            autocomplete: true
+                        },
+                        {
+                            name: 'editar_imagem_sem_censura',
+                            description: 'Editar imagem da logo/marca',
+                            type: 3
+                        }
+                    ]
+                },
+                {
+                    name: 'delete',
+                    description: '[staff] Deletar uma logo/marca',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'select_logo_marca',
+                            description: 'Selecione uma logo/marca',
+                            type: 3,
+                            required: true,
+                            autocomplete: true
+                        }
+                    ]
+                }
             ]
         }
     ],
@@ -140,12 +141,12 @@ module.exports = {
             const subCommand = options.getSubcommand()
             const newLogoMarca = require('./src/new.LogoMarca')
             const viewLogoMarca = require('./src/view.LogoMarca')
-            // const editLogoMarca = require('./staff/editLogoMarca')
+            const editLogoMarca = require('./src/edit.LogoMarca')
 
             switch (subCommand) {
                 case 'new': newLogoMarca(interaction); break;
                 case 'view': viewLogoMarca(interaction); break;
-                // case 'edit': editLogoMarca(interaction); break;
+                case 'edit': editLogoMarca(interaction); break;
                 // case 'delete': deleteLogoMarca(); break;
                 default: await interaction.reply({
                     content: `${e.Deny} | Nenhuma função foi encontrada`,
