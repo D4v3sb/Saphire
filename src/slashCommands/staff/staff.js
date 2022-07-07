@@ -107,7 +107,19 @@ module.exports = {
                             autocomplete: true
                         }
                     ]
-                }
+                },
+                // {
+                //     name: 'list',
+                //     description: '[staff] Lista de todas as logo/marcas',
+                //     type: 1,
+                //     options: [
+                //         {
+                //             name: 'filter',
+                //             description: 'Pesquise pelas letras iniciais',
+                //             type: 3
+                //         }
+                //     ]
+                // }
             ]
         }
     ],
@@ -145,6 +157,7 @@ module.exports = {
                 case 'view': require('./src/view.LogoMarca')(interaction); break;
                 case 'edit': require('./src/edit.LogoMarca')(interaction); break;
                 case 'delete': require('./src/delete.LogoMarca')(interaction); break;
+                // case 'list': require('./src/delete.LogoMarca')(interaction); break;
                 default: await interaction.reply({
                     content: `${e.Deny} | Nenhuma função foi encontrada`,
                     ephemeral: true

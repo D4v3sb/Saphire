@@ -17,7 +17,7 @@ function formatString(string) {
         result = ''
 
     for (let word of format)
-        if (word.length > 2 || word === 'el')
+        if (word.length > 2 || ['el', 'lg'].includes(word))
             if (tras)
                 result += word[0].toUpperCase() + word.substring(1) + ' '
             else result += word[0].toUpperCase() + word.substring(1) + ' '
