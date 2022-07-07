@@ -29,6 +29,12 @@ module.exports = {
                     type: 3
                 }
             ]
+        },
+        {
+            name: 'new_game',
+            description: '[games] Começar o quiz de logo/marcas',
+            type: 1,
+            options: []
         }
     ],
     async execute({ interaction: interaction, emojis: e }) {
@@ -39,6 +45,7 @@ module.exports = {
         switch (subCommand) {
             case 'list': require('./src/list.LogoMarca')(interaction); break;
             case 'view': require('./src/view.LogoMarca')(interaction); break;
+            case 'new_game': require('./src/newGame.LogoMarca')(interaction); break;
             default:
                 await interaction.reply({
                     content: `${e.Loading} | Este comando está sob construção.`

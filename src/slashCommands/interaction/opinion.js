@@ -3,7 +3,7 @@ const { MessageAttachment } = require('discord.js')
 
 module.exports = {
     name: 'opinion',
-    description: '[interaction]',
+    description: '[interaction] Um pai deve respeitar a opinião do filho',
     dm_permission: false,
     type: 1,
     options: [
