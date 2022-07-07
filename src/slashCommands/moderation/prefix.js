@@ -8,67 +8,21 @@ module.exports = {
     type: 1,
     options: [
         {
-            name: 'new_prefix',
+            name: 'set_prefix',
             description: 'Escolha o novo prefixo do bot',
-            type: 3
-        },
-        {
-            name: 'reset_prefix',
-            description: 'Resete o prefixo do servidor para "-"',
-            type: 5
-        },
-        {
-            name: 'more_options',
-            description: 'Opções de prefixo',
             type: 3,
-            choices: [
-                {
-                    name: '+',
-                    value: '+'
-                },
-                {
-                    name: '!',
-                    value: '!'
-                },
-                {
-                    name: '$',
-                    value: '$'
-                },
-                {
-                    name: '*',
-                    value: '*'
-                },
-                {
-                    name: 's',
-                    value: 's'
-                },
-                {
-                    name: '&',
-                    value: '&'
-                },
-                {
-                    name: '.',
-                    value: '.'
-                },
-                {
-                    name: ',',
-                    value: ','
-                }
-                
-            ]
+            required: true,
+            autocomplete: true
         }
     ],
-    async execute({ interaction: interaction, emojis: e, database: Database, guildData: guildData }) {
+    async execute({ interaction: interaction, emojis: e, database: Database, guildData: guildData, client: client }) {
 
         const { options, guild } = interaction
 
-        const new_prefix = options.getString('new_prefix')
-        const more_options = options.getString('more_options')
-        const reset_prefix = options.getBoolean('reset_prefix')
+        const newPrefix = options.getString('set_prefix')
         const atualPrefix = guildData?.Prefix
-        const newPrefix = new_prefix || more_options
 
-        if (reset_prefix) {
+        if ([client.prefix, 'reset'].includes(newPrefix)) {
 
             if (!atualPrefix)
                 return await interaction.reply({
@@ -82,12 +36,6 @@ module.exports = {
                 content: `${e.Check} | Prefixo resetado com sucesso para \`-\`.`
             })
         }
-
-        if (!newPrefix)
-            return await interaction.reply({
-                content: `${e.Deny} | Selecione ou diga pelo menos um novo prefixo.`,
-                ephemeral: true
-            })
 
         if (newPrefix?.length > 2)
             return await interaction.reply({

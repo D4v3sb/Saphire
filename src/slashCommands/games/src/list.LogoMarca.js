@@ -100,7 +100,7 @@ async function logoMarcaList(interaction) {
 
             current.map((data, i) => fields.push({
                 name: `${formatString(data.name[0])}`,
-                value: data.name.slice(1).map(x => `> \`${x}\``).join(', ') || '> `Nenhum Sinônimo`'
+                value: data.name.slice(1).map(x => `> \`${formatString(x)}\``).join('\n') || '> `Nenhum Sinônimo`'
             }))
 
             const pageCount = length > 1 ? ` ${page}/${length}` : ''

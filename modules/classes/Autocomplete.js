@@ -2,6 +2,7 @@ const util = require('../../src/structures/util')
 const Database = require('./Database')
 const client = require('../../index')
 const { formatString } = require('../../src/commands/games/plugins/gamePlugins')
+
 class Autocomplete {
     constructor(interaction) {
         this.interaction = interaction
@@ -38,6 +39,7 @@ class Autocomplete {
             case 'level_options': this.levelOptions(); break;
             case 'option': this.ideaCommandOptions(); break;
             case 'editar_imagem_com_censura': this.editImageLogoMarca(); break;
+            case 'set_prefix': this.prefix(); break;
             default: this.respond(); break;
         }
 
@@ -46,6 +48,54 @@ class Autocomplete {
 
     async editImageLogoMarca() {
         return this.respond([{ name: 'Excluir imagem censurada', value: 'null' }])
+    }
+
+    async prefix() {
+
+        const data = await Database.Guild.findOne({ id: this.guild.id }, 'Prefix')
+        const atualPrefix = data?.Prefix || null
+        const choices = [
+            {
+                name: '+',
+                value: '+'
+            },
+            {
+                name: '!',
+                value: '!'
+            },
+            {
+                name: '$',
+                value: '$'
+            },
+            {
+                name: '*',
+                value: '*'
+            },
+            {
+                name: 's',
+                value: 's'
+            },
+            {
+                name: '&',
+                value: '&'
+            },
+            {
+                name: '.',
+                value: '.'
+            },
+            {
+                name: ',',
+                value: ','
+            }
+        ]
+
+        if (atualPrefix && atualPrefix !== client.prefix)
+            choices.unshift({ name: 'Resetar prefixo para: -', value: 'reset' })
+
+        const fill = choices.filter(p => p.name !== atualPrefix)
+
+        return this.respond(fill)
+
     }
 
     async select_logo_marca(value) {
