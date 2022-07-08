@@ -11,7 +11,7 @@ async function startGameWithoutButtons(interaction) {
 
     let Msg = await interaction.reply({ embeds: [embed], fetchReply: true })
 
-    setTimeout(() => start(Msg, interaction, embed), 4000)
+    return setTimeout(() => start(Msg, interaction, embed), 4000)
 }
 
 module.exports = startGameWithoutButtons

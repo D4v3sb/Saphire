@@ -1,14 +1,20 @@
-// const Database = require('../../../../modules/classes/Database')
-// const client = require('../../../../index')
-// const { formatString } = require('../../../commands/games/plugins/gamePlugins')
+const Database = require('../../../../modules/classes/Database')
+const LogoMarcaGame = require('../../../../modules/classes/games/logoMarca')
 const { e } = require('../../../../JSON/emojis.json')
 
 async function newLogoMarcaGame(interaction) {
 
-    return await interaction.reply({
-        content: `${e.Loading} | Game em construção.`,
-        ephemeral: true
-    })
+    const { channel } = interaction
+    const logoData = Database.Logomarca.get('LogoMarca') || []
+    const inChannelGame = Database.Cache.get('logomarca')?.includes(channel.id)
+
+    if (inChannelGame)
+        return await interaction.reply({
+            content: `${e.Deny} | Já tem um LogoMarca Game rolando neste chat. Por favor, espere ele acabar para iniciar um novo.`,
+            ephemeral: true
+        })
+
+    return new LogoMarcaGame(interaction, logoData).registerNewGameAndStart()
 
 }
 

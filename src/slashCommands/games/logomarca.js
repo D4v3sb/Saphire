@@ -34,7 +34,14 @@ module.exports = {
             name: 'new_game',
             description: '[games] Começar o quiz de logo/marcas',
             type: 1,
-            options: []
+            options: [
+                {
+                    name: 'color',
+                    description: 'Escolher cor do embed do jogo',
+                    type: 3,
+                    autocomplete: true
+                }
+            ]
         }
     ],
     async execute({ interaction: interaction, emojis: e }) {

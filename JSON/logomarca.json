@@ -2,11 +2,29 @@
     "LogoMarca": [
         {
             "name": [
+                "adidas"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/994574480372416592/114_Sem_Titulo_20220707090258.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994574480082993152/SeekPng.com_adidas-png_34969.png"
+            }
+        },
+        {
+            "name": [
                 "alfa romeo"
             ],
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/993753019801939968/94_Sem_Titulo_20220705023849.png?width=428&height=408",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993753019516719124/1656999358643.png?width=428&height=408"
+            }
+        },
+        {
+            "name": [
+                "all star"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/994572617816211568/113_Sem_Titulo_20220707085611.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994572617572946025/logo-all-star.png.webp"
             }
         },
         {
@@ -58,6 +76,15 @@
         },
         {
             "name": [
+                "brahma"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/994645497354666105/brahma2.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994645497107206154/brahma.png"
+            }
+        },
+        {
+            "name": [
                 "burger king"
             ],
             "images": {
@@ -76,11 +103,29 @@
         },
         {
             "name": [
+                "calvin klein"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994567001240506449/pixeleap_1656365224061.jpg"
+            }
+        },
+        {
+            "name": [
                 "caoa chery"
             ],
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/993706405158715452/90_Sem_Titulo_20220704233340.png",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993706404940615770/images.jpeg"
+            }
+        },
+        {
+            "name": [
+                "chanel"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/994569834413162516/112_Sem_Titulo_20220707084501.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994569834195071006/Chanel-Logo-650x366.png"
             }
         },
         {
@@ -140,6 +185,24 @@
         },
         {
             "name": [
+                "fanta"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/994642107379744849/fantaII.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994642107086147634/fanta.png"
+            }
+        },
+        {
+            "name": [
+                "fiat"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/994651613883027516/fiat2.png?width=408&height=408",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994651613585215570/fiat.png?width=408&height=408"
+            }
+        },
+        {
+            "name": [
                 "firefox"
             ],
             "images": {
@@ -176,7 +239,8 @@
         },
         {
             "name": [
-                "google chrome"
+                "google chrome",
+                "chrome"
             ],
             "images": {
                 "censored": null,
@@ -240,6 +304,15 @@
         },
         {
             "name": [
+                "lacoste"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/994564555709620294/110_Sem_Titulo_20220707082347.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994564555487330384/images.png"
+            }
+        },
+        {
+            "name": [
                 "land rover"
             ],
             "images": {
@@ -263,6 +336,25 @@
             "images": {
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994092525583339580/1657080513728.png?width=484&height=484"
+            }
+        },
+        {
+            "name": [
+                "louis vuitton"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994571307649863821/images-removebg-preview.png"
+            }
+        },
+        {
+            "name": [
+                "mcdonalds",
+                "mcdonald's"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993576083427426424/mcdonalds.png"
             }
         },
         {
@@ -376,6 +468,15 @@
         },
         {
             "name": [
+                "pringles"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994772845651574894/imagem_2022-07-07_221125182.png"
+            }
+        },
+        {
+            "name": [
                 "puma"
             ],
             "images": {
@@ -427,6 +528,15 @@
             "images": {
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993629502460674108/imagem_2022-07-04_182557175-removebg-preview_3.png?width=410&height=408"
+            }
+        },
+        {
+            "name": [
+                "sony"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/994764949878485002/sony2.jpg",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994764949647794337/sony.jpg"
             }
         },
         {
@@ -532,15 +642,6 @@
         },
         {
             "name": [
-                "windowns 10"
-            ],
-            "images": {
-                "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994087647490363493/Windows_logo_-_2012_dark_blue.svg.png?width=473&height=473"
-            }
-        },
-        {
-            "name": [
                 "windows 7"
             ],
             "images": {
@@ -573,70 +674,6 @@
             "images": {
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993574816500166726/xiaomi-removebg-preview_1.png?width=408&height=408"
-            }
-        },
-        {
-            "name": [
-                "lacoste"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/994564555709620294/110_Sem_Titulo_20220707082347.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994564555487330384/images.png"
-            }
-        },
-        {
-            "name": [
-                "calvin klein"
-            ],
-            "images": {
-                "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994567001240506449/pixeleap_1656365224061.jpg"
-            }
-        },
-        {
-            "name": [
-                "mcdonalds",
-                "mcdonald's"
-            ],
-            "images": {
-                "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993576083427426424/mcdonalds.png"
-            }
-        },
-        {
-            "name": [
-                "chanel"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/994569834413162516/112_Sem_Titulo_20220707084501.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994569834195071006/Chanel-Logo-650x366.png"
-            }
-        },
-        {
-            "name": [
-                "louis vuitton"
-            ],
-            "images": {
-                "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994571307649863821/images-removebg-preview.png"
-            }
-        },
-        {
-            "name": [
-                "all star"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/994572617816211568/113_Sem_Titulo_20220707085611.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994572617572946025/logo-all-star.png.webp"
-            }
-        },
-        {
-            "name": [
-                "adidas"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/994574480372416592/114_Sem_Titulo_20220707090258.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994574480082993152/SeekPng.com_adidas-png_34969.png"
             }
         }
     ]

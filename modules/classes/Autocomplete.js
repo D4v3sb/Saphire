@@ -54,40 +54,9 @@ class Autocomplete {
 
         const data = await Database.Guild.findOne({ id: this.guild.id }, 'Prefix')
         const atualPrefix = data?.Prefix || null
-        const choices = [
-            {
-                name: '+',
-                value: '+'
-            },
-            {
-                name: '!',
-                value: '!'
-            },
-            {
-                name: '$',
-                value: '$'
-            },
-            {
-                name: '*',
-                value: '*'
-            },
-            {
-                name: 's',
-                value: 's'
-            },
-            {
-                name: '&',
-                value: '&'
-            },
-            {
-                name: '.',
-                value: '.'
-            },
-            {
-                name: ',',
-                value: ','
-            }
-        ]
+        const prefixes = ['+', '!', '$', '*', 's', '&', '.', ',']
+        const choices = []
+        for (let i of prefixes) choices.push({ name: i, value: i })
 
         if (atualPrefix && atualPrefix !== client.prefix)
             choices.unshift({ name: 'Resetar prefixo para: -', value: 'reset' })
@@ -95,7 +64,6 @@ class Autocomplete {
         const fill = choices.filter(p => p.name !== atualPrefix)
 
         return this.respond(fill)
-
     }
 
     async select_logo_marca(value) {
