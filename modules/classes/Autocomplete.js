@@ -30,6 +30,7 @@ class Autocomplete {
             case 'change_background': this.changeLevelBackground(value); break;
             case 'buy_background': this.buyLevelBackground(value); break;
             case 'select_country': this.flagSearch(value); break;
+            case 'command': this.commandList(value); break;
             case 'sugest_channel': this.ideiaChannels(value); break;
             case 'report_channel': this.reportChannels(value); break;
             case 'log_channel': this.logChannels(value); break;
@@ -292,6 +293,13 @@ class Autocomplete {
 
         const fill = betObject.filter(d => d.name.includes(value))
         const mapped = fill.map(d => ({ name: `${d.name} Safiras | ${d.length || 0} apostas em espera`, value: `${d.name}` }))
+        return this.respond(mapped)
+    }
+
+    async commandList(value) {
+        const cmds = client.slashCommands.map(x => x.name) || []
+        const fill = cmds.filter(cmdName => cmdName?.toLowerCase().includes(value.toLowerCase()))
+        const mapped = fill.map(cmdName => ({ name: cmdName, value: cmdName }))
         return this.respond(mapped)
     }
 
