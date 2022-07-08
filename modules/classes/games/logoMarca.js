@@ -11,6 +11,7 @@ class LogoMarcaGame {
         this.channel = interaction.channel
         this.channelId = this.channel.id
         this.gameData = { counter: 0, round: 0, users: [], lifes: 0 }
+        this.collectors = {}
         this.msg = undefined
         this.embed = { color: util.HexColors[this.interaction.options.getString('color')] || '#9BFF85' }
     }
@@ -51,32 +52,39 @@ class LogoMarcaGame {
             ? await this.channel.send({ embeds: [this.embed] })
             : await this.interaction.reply({ embeds: [this.embed], fetchReply: true })
 
-        return this.initCollector()
+        return this.initCollectors()
     }
 
-    async initCollector() {
+    async initCollectors() {
 
         this.gameData.round++
 
-        const collector = this.channel.createMessageCollector({
+        this.collectors.collectorCounter = this.channel.createMessageCollector({
             filter: msg => true,
             time: 20000
         })
             .on('collect', async msg => {
 
-                const correctAnswer = !msg.author.bot && this.gameData.logo.name.find(name => name.toLowerCase() === msg.content?.toLowerCase())
-
                 this.gameData.counter++
+                if (this.gameData.counter < 10) return
+                this.msg.delete().catch(() => { })
+                this.gameData.counter = 0
+                return this.msg = await msg.channel.send({ embeds: [this.embed] })
 
-                if (this.gameData.counter > 10) {
+            })
+            .on('end', (i, r) => {
+                if (r === 'user') return
+                this.collectors.collectorRightAnswer?.stop()
+                return this.finish()
+            })
 
-                    this.msg.delete().catch(() => { })
-                    this.gameData.counter = 0
-                    this.msg = await msg.channel.send({ embeds: [this.embed] })
-                }
+        this.collectors.collectorRightAnswer = this.channel.createMessageCollector({
+            filter: msg => !msg.author.bot && this.gameData.logo.name.find(name => name.toLowerCase() === msg.content?.toLowerCase()),
+            max: 1
+        })
+            .on('collect', async msg => {
 
-                if (!correctAnswer) return
-                collector.stop()
+                this.collectors.collectorCounter?.stop()
                 this.addAccept(msg.author)
                 this.embed.image = { url: this.gameData.logo.images.uncensored }
                 this.embed.description = `${e.Check} | ${msg.author} acertou a marca \`${formatString(this.gameData.logo.name[0])}\`\n${e.Loading} | Carregando próximo round...`
@@ -91,10 +99,6 @@ class LogoMarcaGame {
                     ]
                 })
                 return setTimeout(() => this.game(), 5000)
-            })
-            .on('end', (i, r) => {
-                if (r === 'user') return
-                return this.finish()
             })
 
         return
