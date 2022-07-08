@@ -10,7 +10,7 @@ class LogoMarcaGame {
         this.logoData = logoData
         this.channel = interaction.channel
         this.channelId = this.channel.id
-        this.gameData = { counter: 0, round: 0, users: [], lifes: 0 }
+        this.gameData = { counter: 0, round: 1, users: [], lifes: 0 }
         this.collectors = {}
         this.msg = undefined
         this.embed = { color: util.HexColors[this.interaction.options.getString('color')] || '#9BFF85' }
@@ -85,7 +85,7 @@ class LogoMarcaGame {
             .on('collect', async msg => {
 
                 this.collectors.collectorCounter?.stop()
-                this.gameData.round = 0
+                this.gameData.counter = 0
                 this.addAccept(msg.author)
                 this.embed.image = { url: this.gameData.logo.images.uncensored }
                 this.embed.description = `${e.Check} | ${msg.author} acertou a marca \`${formatString(this.gameData.logo.name[0])}\`\n${e.Loading} | Carregando próximo round...`
