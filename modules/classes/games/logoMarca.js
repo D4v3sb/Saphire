@@ -22,7 +22,7 @@ class LogoMarcaGame {
 
         const embed = [{
             color: client.blue,
-            title: `${e.logomarca} ${client.user.username}'s Logo/Marca Quiz`,
+            title: `${e.logomarca} ${client.user.username}'s Logo & Marca Quiz`,
             description: `${e.Loading} | Carregando Logos & Marcas e registrando canal...`
         }]
 
@@ -44,7 +44,7 @@ class LogoMarcaGame {
 
         this.gameData.logo = logo
         this.embed.image = { url: logo.images.censored ?? logo.images.uncensored }
-        this.embed.title = `${e.logomarca} ${client.user.username}'s Logo/Marca Quiz`
+        this.embed.title = `${e.logomarca} ${client.user.username}'s Logo & Marca Quiz`
         this.embed.description = `${e.Loading} Qual o nome desta marca?`
         this.embed.footer = { text: `Round: ${this.gameData.round}` }
         this.msg?.delete().catch(() => { })
@@ -85,6 +85,7 @@ class LogoMarcaGame {
             .on('collect', async msg => {
 
                 this.collectors.collectorCounter?.stop()
+                this.gameData.round = 0
                 this.addAccept(msg.author)
                 this.embed.image = { url: this.gameData.logo.images.uncensored }
                 this.embed.description = `${e.Check} | ${msg.author} acertou a marca \`${formatString(this.gameData.logo.name[0])}\`\n${e.Loading} | Carregando próximo round...`

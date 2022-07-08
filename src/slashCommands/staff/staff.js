@@ -71,6 +71,11 @@ module.exports = {
                             autocomplete: true
                         },
                         {
+                            name: 'name',
+                            description: 'Edite o nome da logo/marca',
+                            type: 3
+                        },
+                        {
                             name: 'add_sinonimo',
                             description: 'Adicionar um novo sinônimo',
                             type: 3
@@ -107,19 +112,7 @@ module.exports = {
                             autocomplete: true
                         }
                     ]
-                },
-                // {
-                //     name: 'list',
-                //     description: '[staff] Lista de todas as logo/marcas',
-                //     type: 1,
-                //     options: [
-                //         {
-                //             name: 'filter',
-                //             description: 'Pesquise pelas letras iniciais',
-                //             type: 3
-                //         }
-                //     ]
-                // }
+                }
             ]
         }
     ],

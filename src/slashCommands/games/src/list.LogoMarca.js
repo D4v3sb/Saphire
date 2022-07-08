@@ -21,7 +21,6 @@ async function logoMarcaList(interaction) {
         })
 
     const embeds = EmbedGenerator(fill)
-    console.log(embeds.length)
 
     if (embeds.length <= 1)
         return await interaction.reply({ embeds: [embeds[0]] })

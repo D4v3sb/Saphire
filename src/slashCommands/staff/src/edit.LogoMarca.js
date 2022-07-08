@@ -18,12 +18,13 @@ async function editLogoMarca(interaction) {
 
     const command = []
 
-    for (let optionName of ['add_sinonimo', 'remove_sinonimo', 'editar_imagem_com_censura', 'editar_imagem_sem_censura'])
+    for (let optionName of ['name', 'add_sinonimo', 'remove_sinonimo', 'editar_imagem_com_censura', 'editar_imagem_sem_censura'])
         if (options.get(optionName))
             command.push(options.get(optionName)?.name)
 
     switch (command[0]) {
         case 'add_sinonimo': add_sinonimo(); break;
+        case 'name': editName(); break;
         case 'remove_sinonimo': remove_sinonimo(); break;
         case 'editar_imagem_com_censura': editImage(); break;
         case 'editar_imagem_sem_censura': editImage(true); break;
@@ -95,21 +96,22 @@ async function editLogoMarca(interaction) {
 
     }
 
-    async function add_sinonimo() {
+    async function editName() {
 
-        const newSinonimo = options.getString('add_sinonimo')
+        const newName = options.getString('name')?.toLowerCase()
+        const logoName = logo.name[0]
 
         for (let logo of logoData)
-            if (logo?.name?.find(logoName => logoName?.toLowerCase() === newSinonimo.toLowerCase()))
+            if (logo?.name?.find(logoName => logoName?.toLowerCase() === newName))
                 return await interaction.reply({
                     content: `${e.Deny} | Este nome ou sinônimo de logo/marca já existe no banco de dados.`,
                     ephemeral: true
                 })
 
-        logoData[logoIndex].name.push(newSinonimo)
+        logoData[logoIndex].name[0] = newName
         Database.Logomarca.set('LogoMarca', logoData)
         return await interaction.reply({
-            content: `${e.Check} | O sinônimo ${newSinonimo} foi adicionado a logo/marca ${formatString(logo.name[0])}`,
+            content: `${e.Check} | O nome da logo/marca foi alterado de \`${formatString(logoName)}\` para ${formatString(newName)}.`,
             ephemeral: true
         })
     }
