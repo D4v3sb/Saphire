@@ -10,7 +10,7 @@ class LogoMarcaGame {
         this.logoData = [...logoData].randomize()
         this.channel = interaction.channel
         this.channelId = this.channel.id
-        this.gameData = { counter: 0, round: 1, users: [], lifes: 0 }
+        this.gameData = { counter: 0, round: 1, users: [], lifes: 3 }
         this.collectors = {}
         this.msg = undefined
         this.embed = { color: util.HexColors[this.interaction.options.getString('color')] || '#9BFF85' }
@@ -147,11 +147,11 @@ class LogoMarcaGame {
                     components: [
                         {
                             type: 2,
-                            label: 'CONTINUAR',
+                            label: `CONTINUAR (${this.gameData.lifes}/3)`,
                             emoji: '🍃',
                             custom_id: 'continue',
                             style: 'SUCCESS',
-                            disabled: true
+                            disabled: this.gameData.lifes <= 0
                         },
                         {
                             type: 2,
@@ -179,6 +179,7 @@ class LogoMarcaGame {
 
                 if (customId === 'continue') {
                     this.embed.color = util.HexColors[this.interaction.options.getString('color')] || '#9BFF85'
+                    this.gameData.lifes--
                     this.msg.edit({ components: [] }).catch(() => { })
                     return this.registerNewGameAndStart()
                 }
