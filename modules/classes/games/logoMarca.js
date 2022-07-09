@@ -171,7 +171,7 @@ class LogoMarcaGame {
 
         return this.msg.createMessageComponentCollector({
             filter: int => true,
-            time: 15000
+            time: 60000
         })
             .on('collect', async int => {
 
@@ -185,7 +185,7 @@ class LogoMarcaGame {
                 }
 
                 if (customId === 'reset') {
-                    this.gameData = { counter: 0, round: 0, users: [] }
+                    this.gameData = { counter: 0, round: 0, users: [], lifes: 3 }
                     this.embed = { color: util.HexColors[this.interaction.options.getString('color')] || '#9BFF85' }
                     this.msg.edit({ components: [] }).catch(() => { })
                     return this.registerNewGameAndStart()
