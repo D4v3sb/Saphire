@@ -47,7 +47,7 @@ Array.prototype.randomize = function () {
 
 Number.prototype.currency = function () {
     let numberFormated = `${Intl.NumberFormat('pt-BR', { currency: 'BRL', style: 'currency' }).format(this)}`
-    return numberFormated.slice(3)
+    return numberFormated.substring(0, numberFormated.length - 3).slice(3)
 }
 
 String.prototype.isURL = function () {
