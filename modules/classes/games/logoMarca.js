@@ -7,7 +7,7 @@ const { formatString, emoji } = require('../../../src/commands/games/plugins/gam
 class LogoMarcaGame {
     constructor(interaction, logoData) {
         this.interaction = interaction
-        this.logoData = logoData
+        this.logoData = [...logoData].randomize()
         this.channel = interaction.channel
         this.channelId = this.channel.id
         this.gameData = { counter: 0, round: 1, users: [], lifes: 0 }
@@ -34,7 +34,13 @@ class LogoMarcaGame {
     }
 
     getLogo() {
-        return this.logoData.random()
+        const logo = this.logoData[0]
+        if (!logo) {
+            this.logoData = Database.Logomarca.get('LogoMarca')?.randomize()
+            return this.getLogo()
+        }
+        this.logoData.splice(0, 1)
+        return logo
     }
 
     async game() {

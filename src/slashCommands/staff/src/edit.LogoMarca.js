@@ -83,6 +83,25 @@ async function editLogoMarca(interaction) {
         })
     }
 
+    async function add_sinonimo() {
+
+        const newSinonimo = options.getString('add_sinonimo')
+
+        for (let logo of logoData)
+            if (logo?.name?.find(logoName => logoName?.toLowerCase() === newSinonimo.toLowerCase()))
+                return await interaction.reply({
+                    content: `${e.Deny} | Este nome ou sinônimo de logo/marca já existe no banco de dados.`,
+                    ephemeral: true
+                })
+
+        logoData[logoIndex].name.push(newSinonimo)
+        Database.Logomarca.set('LogoMarca', logoData)
+        return await interaction.reply({
+            content: `${e.Check} | O sinônimo ${formatString(newSinonimo.toLowerCase())} foi adicionado a logo/marca ${formatString(logo.name[0])}`,
+            ephemeral: true
+        })
+    }
+
     async function remove_sinonimo() {
 
         const synToRemove = options.getString('remove_sinonimo')

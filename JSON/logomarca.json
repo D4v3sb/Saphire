@@ -56,6 +56,34 @@
         },
         {
             "name": [
+                "banco do brasil"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994960795215597598/banco-do-brasil-5.jpg"
+            }
+        },
+        {
+            "name": [
+                "banco itaú",
+                "itaú"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995000905244086422/itau2.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995000905038581820/itau.png"
+            }
+        },
+        {
+            "name": [
+                "banco nubank"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994961641454186566/Novo-Logo-002.jpg"
+            }
+        },
+        {
+            "name": [
                 "beto carrero world",
                 "beto carrero"
             ],
@@ -259,11 +287,12 @@
         },
         {
             "name": [
-                "habib's"
+                "habib's",
+                "habibs"
             ],
             "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/993582362996781137/habibs.png?width=408&height=408",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993582362728353872/habibs2.png?width=408&height=408"
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/993582362996781137/habibs.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993582362728353872/habibs2.png"
             }
         },
         {
@@ -471,8 +500,8 @@
                 "pringles"
             ],
             "images": {
-                "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994772845651574894/imagem_2022-07-07_221125182.png"
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/994992338982146078/unknown.png?width=725&height=408",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994992338663383141/unknown.png?width=725&height=408"
             }
         },
         {
@@ -510,6 +539,16 @@
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/993565175309402142/1656954701231.png",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993565175087112212/kisspng-samsung-galaxy-logo-company-lenovo-logo-5ac00e848801c4.3133116215225360685571.png"
+            }
+        },
+        {
+            "name": [
+                "saphire moon",
+                "saphire"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994966919188860938/saphire_dream2.jpg"
             }
         },
         {
@@ -642,6 +681,15 @@
         },
         {
             "name": [
+                "windows 10"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994087647490363493/Windows_logo_-_2012_dark_blue.svg.png"
+            }
+        },
+        {
+            "name": [
                 "windows 7"
             ],
             "images": {
@@ -674,6 +722,54 @@
             "images": {
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993574816500166726/xiaomi-removebg-preview_1.png?width=408&height=408"
+            }
+        },
+        {
+            "name": [
+                "starbucks coffee",
+                "starbucks"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995085423346978928/starbucks2.png?width=408&height=408",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995085423107907724/starbucks.png?width=408&height=408"
+            }
+        },
+        {
+            "name": [
+                "levi's",
+                "levis"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995087234577465354/levis2.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995087234350977114/levis.png"
+            }
+        },
+        {
+            "name": [
+                "playstation"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995088305169379438/playstation2.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995088304955457627/playstation.png"
+            }
+        },
+        {
+            "name": [
+                "monster energy",
+                "monster"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995090044278812752/imagem_2022-07-08_191156003.png?width=393&height=408"
+            }
+        },
+        {
+            "name": [
+                "pizza hut"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995091149641490493/pizza_hut2.png?width=418&height=408",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995091149243035738/pizza_hut.png?width=418&height=408"
             }
         }
     ]
