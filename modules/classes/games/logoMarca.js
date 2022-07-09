@@ -10,7 +10,7 @@ class LogoMarcaGame {
         this.logoData = [...logoData].randomize()
         this.channel = interaction.channel
         this.channelId = this.channel.id
-        this.gameData = { counter: 0, round: 1, users: [], lifes: 3 }
+        this.gameData = { counter: 0, round: 1, users: [], sandBox: false }
         this.collectors = {}
         this.msg = undefined
         this.embed = { color: util.HexColors[this.interaction.options.getString('color')] || '#9BFF85' }
@@ -34,12 +34,13 @@ class LogoMarcaGame {
     }
 
     getLogo() {
-        const logo = this.logoData[0]
+        let logo = this.gameData.sandBox ? this.logoData.random() : this.logoData[0]
         if (!logo) {
-            this.logoData = Database.Logomarca.get('LogoMarca')?.randomize()
-            return this.getLogo()
+            this.gameData.sandBox = true
+            this.logoData = [...Database.Logomarca.get('LogoMarca')]?.randomize()
+            logo = this.logoData[0]
         }
-        this.logoData.splice(0, 1)
+        if (!this.gameData.sandBox) this.logoData.splice(0, 1)
         return logo
     }
 
@@ -52,7 +53,7 @@ class LogoMarcaGame {
         this.embed.image = { url: logo.images.censored ?? logo.images.uncensored }
         this.embed.title = `${e.logomarca} ${client.user.username}'s Logo & Marca Quiz`
         this.embed.description = `${e.Loading} Qual o nome desta marca?`
-        this.embed.footer = { text: `Round: ${this.gameData.round} | ${this.logoData.length} Imagens Restantes ` }
+        this.embed.footer = { text: `Round: ${this.gameData.round} | ${this.gameData.sandBox ? 'SANDBOX ATIVADO' : `${this.logoData.length} Imagens Restantes`}` }
         this.msg?.delete().catch(() => { })
         this.msg = this.interaction.replied
             ? await this.channel.send({ embeds: [this.embed] })
@@ -125,7 +126,7 @@ class LogoMarcaGame {
     async format() {
 
         const field = this.embed.fields || []
-        const mapped = this.gameData.users.slice(0, 4).map((u, i) => `${emoji(i)} ${this.interaction.guild.members.cache.get(u.id)} - ${u.points} Pontos`).join('\n')
+        const mapped = this.gameData.users.sort((a, b) => b.points - a.points).slice(0, 5).map((u, i) => `${emoji(i)} ${this.interaction.guild.members.cache.get(u.id)} - ${u.points} Pontos`).join('\n')
 
         return field.length > 0
             ? this.embed.fields[0] = { name: 'Pontuação', value: mapped || 'Nenhum usuário foi encontrado' }
@@ -144,23 +145,13 @@ class LogoMarcaGame {
             components: [
                 {
                     type: 1,
-                    components: [
-                        {
-                            type: 2,
-                            label: `CONTINUAR (${this.gameData.lifes}/3)`,
-                            emoji: '🍃',
-                            custom_id: 'continue',
-                            style: 'SUCCESS',
-                            disabled: this.gameData.lifes <= 0
-                        },
-                        {
-                            type: 2,
-                            label: 'REINICIAR',
-                            emoji: '🔄',
-                            custom_id: 'reset',
-                            style: 'PRIMARY'
-                        }
-                    ]
+                    components: [{
+                        type: 2,
+                        label: 'REINICIAR',
+                        emoji: '🔄',
+                        custom_id: 'reset',
+                        style: 'PRIMARY'
+                    }]
                 }
             ]
         })
@@ -177,19 +168,10 @@ class LogoMarcaGame {
 
                 const { customId } = int
 
-                if (customId === 'continue') {
-                    this.embed.color = util.HexColors[this.interaction.options.getString('color')] || '#9BFF85'
-                    this.gameData.lifes--
-                    this.msg.edit({ components: [] }).catch(() => { })
-                    return this.registerNewGameAndStart()
-                }
-
-                if (customId === 'reset') {
-                    this.gameData = { counter: 0, round: 0, users: [], lifes: 3 }
-                    this.embed = { color: util.HexColors[this.interaction.options.getString('color')] || '#9BFF85' }
-                    this.msg.edit({ components: [] }).catch(() => { })
-                    return this.registerNewGameAndStart()
-                }
+                this.gameData = { counter: 0, round: 0, users: [], sandBox: false }
+                this.embed = { color: util.HexColors[this.interaction.options.getString('color')] || '#9BFF85' }
+                this.msg.edit({ components: [] }).catch(() => { })
+                return this.registerNewGameAndStart()
             })
             .on('end', () => this.msg.edit({ components: [] }).catch(() => { }))
 
