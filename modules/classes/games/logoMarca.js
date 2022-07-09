@@ -52,7 +52,7 @@ class LogoMarcaGame {
         this.embed.image = { url: logo.images.censored ?? logo.images.uncensored }
         this.embed.title = `${e.logomarca} ${client.user.username}'s Logo & Marca Quiz`
         this.embed.description = `${e.Loading} Qual o nome desta marca?`
-        this.embed.footer = { text: `Round: ${this.gameData.round}` }
+        this.embed.footer = { text: `Round: ${this.gameData.round} | ${this.logoData.length} Imagens Restantes ` }
         this.msg?.delete().catch(() => { })
         this.msg = this.interaction.replied
             ? await this.channel.send({ embeds: [this.embed] })
