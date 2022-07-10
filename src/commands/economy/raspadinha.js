@@ -10,7 +10,6 @@ module.exports = {
     description: 'Jogue na raspadinha e tente a sorte grande!',
 
     execute: async (client, message, args, prefix, MessageEmbed, Database) => {
-        
         return new Raspadinha().start(client, message, args, prefix, MessageEmbed, Database)
     }
 }

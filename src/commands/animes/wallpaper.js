@@ -1,9 +1,9 @@
-const { DatabaseObj: { config, e } } = require('../../../modules/functions/plugins/database'),
-    Error = require('../../../modules/functions/config/errors'),
-    IsUrl = require('../../../modules/functions/plugins/isurl'),
-    Colors = require('../../../modules/functions/plugins/colors'),
-    Ark = require('ark.db'),
-    BgWall = new Ark.Database('../../../JSON/wallpaperanime.json')
+const { DatabaseObj: { config, e } } = require('../../../modules/functions/plugins/database')
+const Error = require('../../../modules/functions/config/errors')
+const IsUrl = require('../../../modules/functions/plugins/isurl')
+const Colors = require('../../../modules/functions/plugins/colors')
+const Ark = require('ark.db')
+const BgWall = new Ark.Database('../../../JSON/wallpaperanime.json')
 
 module.exports = {
     name: 'wallpaper',
