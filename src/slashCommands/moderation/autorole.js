@@ -88,11 +88,11 @@ module.exports = {
                 ephemeral: true
             })
 
-        let role = options.getRole('role'),
-            information = options.getString('select') || options.getString('roles_in_autorole'),
-            password = options.getString('password'),
-            addOrRemove = options.getSubcommand(),
-            rolesId = guildData?.Autorole || []
+        let role = options.getRole('role')
+        let information = options.getString('select') || options.getString('roles_in_autorole')
+        let password = options.getString('password')
+        let addOrRemove = options.getSubcommand()
+        let rolesId = guildData?.Autorole || []
 
         if (information === 'info') return await interaction.reply({
             embeds: [
