@@ -121,7 +121,7 @@ module.exports = {
     ],
     async execute({ interaction: interaction, client: client, database: Database, emojis: e, guildData: guildData, clientData: clientData }) {
 
-        const { options, user: author, channel, guild } = interaction
+        const { options, user: author, channel } = interaction
 
         let user = options.getUser('user'),
             subCommand = options.getSubcommand(),

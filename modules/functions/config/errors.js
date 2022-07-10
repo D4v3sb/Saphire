@@ -24,7 +24,7 @@ async function Error(message, err) {
      */
 
     if (err.code === 50013 && !message) return
-    if (err.message === 'Invalid Form Body\nmessage_reference: Unknown message') return message?.channel?.send(`${e.Deny} | Hey! Eu não consegui ver qual é a mensagem do comando... Tenta não apagar a mensagem, ok?`)
+    if (['DiscordAPIError: Invalid Form Body\nmessage_reference: Unknown message', 'Invalid Form Body\nmessage_reference: Unknown message'].includes(err.message)) return message?.channel?.send(`${e.Deny} | Hey! Eu não consegui ver qual é a mensagem do comando... Tenta não apagar a mensagem, ok?`)
 
     if ([50013, 50001].includes(err.code))
         return message?.channel?.send(`${e.Warn} | Eu não tenho permissão suficiente para prosseguir com este comando.`)
