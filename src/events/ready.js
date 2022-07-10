@@ -1,12 +1,12 @@
-const
-    { DatabaseObj: { e, config } } = require('../../modules/functions/plugins/database'),
-    client = require('../../index'),
-    Data = require('../../modules/functions/plugins/data'),
-    Database = require('../../modules/classes/Database'),
-    init = require('../../modules/functions/plugins/initSystems')
+const { DatabaseObj: { e, config } } = require('../../modules/functions/plugins/database')
+const client = require('../../index')
+const Data = require('../../modules/functions/plugins/data')
+const Database = require('../../modules/classes/Database')
+const init = require('../../modules/functions/plugins/initSystems')
+const client = require('../../index')
 
 client.on("ready", async () => {
-    
+
     await Database.MongoConnect(client)
 
     Database.registerClient(client.user.id)
