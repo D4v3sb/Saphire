@@ -1,6 +1,6 @@
-const { e } = require('../../../JSON/emojis.json'),
-    Moeda = require('../../../modules/functions/public/moeda'),
-    { config } = require('../../../JSON/config.json')
+const { e } = require('../../../JSON/emojis.json')
+const Moeda = require('../../../modules/functions/public/moeda')
+const { config } = require('../../../JSON/config.json')
 
 module.exports = {
     name: 'rifa',
@@ -15,10 +15,10 @@ module.exports = {
         let moeda = await Moeda(message)
         if (!args[0] || ['info', 'help', 'ajuda'].includes(args[0]?.toLowerCase())) return rifaInfo()
 
-        let rifa = await Database.Raffle.find({}) || [],
-            userData = await Database.User.findOne({ id: message.author.id }, 'Balance'),
-            clientRifa = rifa.find(data => data.ClientId === client.user.id),
-            isClose = clientRifa?.Close
+        let rifa = await Database.Raffle.find({}) || []
+        let userData = await Database.User.findOne({ id: message.author.id }, 'Balance')
+        let clientRifa = rifa.find(data => data.ClientId === client.user.id)
+        let isClose = clientRifa?.Close
 
         if (['buy', 'comprar', 'b'].includes(args[0]?.toLowerCase())) return newTicket()
         if (['stats', 'status', 's'].includes(args[0]?.toLowerCase())) return raffleStats()

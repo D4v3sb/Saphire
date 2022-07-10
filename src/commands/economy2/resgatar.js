@@ -16,12 +16,12 @@ module.exports = {
 
         if (!codes || codes.length === 0) return message.reply(`${e.Deny} | Não há nenhum código vip em aberto no momento.`)
 
-        let userData = await Database.User.findOne({ id: message.author.id }, 'Vip'),
-            vipData = userData?.Vip,
-            TimeRemaing = vipData?.TimeRemaing || 0,
-            DateNow = vipData?.DateNow || Date.now(),
-            Permanent = vipData?.Permanent,
-            Code = args[0]
+        let userData = await Database.User.findOne({ id: message.author.id }, 'Vip')
+        let vipData = userData?.Vip
+        let TimeRemaing = vipData?.TimeRemaing || 0
+        let DateNow = vipData?.DateNow || Date.now()
+        let Permanent = vipData?.Permanent
+        let Code = args[0]
 
         if (Permanent)
             return message.reply(`${e.Info} | Você não pode resgatar códigos vip pois o seu é permanente.`)

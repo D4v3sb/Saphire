@@ -17,18 +17,18 @@ module.exports = {
 
         if (!data) return message.reply(`${e.Database} | DATABASE | Nenhum dado encontrado.`)
 
-        let avatar = user?.displayAvatarURL({ dynamic: true }),
-            color = await Colors(user.id),
-            Cartas = data.Slot?.Cartas,
-            Dogname = data.Slot?.Dogname,
-            raspadinhas = data.Slot?.Raspadinhas > 0 ? `\n${e.raspadinha} ${data.Slot?.Raspadinhas} Raspadinhas` : '',
-            title = data.Perfil.TitlePerm ? "\n🔰 Título" : '',
-            cartas = Cartas ? `\n💌 Cartas: ${Cartas}` : '',
-            dogname = Dogname ? `\n${e.Doguinho} ${Dogname}` : '',
-            cores = data.Color?.Perm ? '\n🎨 Cores' : '',
-            skip = data.Slot?.Skip > 0 ? `⏩ Quiz Skip: ${data.Slot?.Skip}` : '',
-            nada2 = !cores && !title ? 'Não há nada aqui' : '',
-            nada = !cartas && !skip && !dogname && !raspadinhas ? 'Não há nada aqui' : ''
+        let avatar = user?.displayAvatarURL({ dynamic: true })
+        let color = await Colors(user.id)
+        let Cartas = data.Slot?.Cartas
+        let Dogname = data.Slot?.Dogname
+        let raspadinhas = data.Slot?.Raspadinhas > 0 ? `\n${e.raspadinha} ${data.Slot?.Raspadinhas} Raspadinhas` : ''
+        let title = data.Perfil.TitlePerm ? "\n🔰 Título" : ''
+        let cartas = Cartas ? `\n💌 Cartas: ${Cartas}` : ''
+        let dogname = Dogname ? `\n${e.Doguinho} ${Dogname}` : ''
+        let cores = data.Color?.Perm ? '\n🎨 Cores' : ''
+        let skip = data.Slot?.Skip > 0 ? `⏩ Quiz Skip: ${data.Slot?.Skip}` : ''
+        let nada2 = !cores && !title ? 'Não há nada aqui' : ''
+        let nada = !cartas && !skip && !dogname && !raspadinhas ? 'Não há nada aqui' : ''
 
         if (['bg', 'wallpaper', 'w', 'fundo', 'level'].includes(args[0]?.toLowerCase()))
             return SlotBackgrouds()
