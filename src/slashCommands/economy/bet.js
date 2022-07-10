@@ -89,6 +89,20 @@ module.exports = {
             ]
         },
         {
+            name: 'colors',
+            description: '[economy] Aposte na sua cor e boa sorte',
+            type: 1,
+            options: [
+                {
+                    name: 'value',
+                    description: 'Quantia a ser apostada',
+                    type: 4,
+                    min_value: 1,
+                    required: true
+                }
+            ]
+        },
+        {
             name: 'global',
             description: '[economy] Aposte globalmente com qualquer pessoa',
             type: 1,
@@ -134,6 +148,7 @@ module.exports = {
             case 'simples': case 'party': betSimples(); break;
             case 'user': betUser(); break;
             case 'global': globalBet(); break;
+            case 'colors': require('./bet source/colors.Bet')(interaction, value, money, moeda); break;
         }
         return
 
