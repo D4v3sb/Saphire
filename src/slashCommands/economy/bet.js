@@ -123,12 +123,12 @@ module.exports = {
 
         const { options, user: author, channel } = interaction
 
-        let user = options.getUser('user'),
-            subCommand = options.getSubcommand(),
-            value = options.getInteger('value'),
-            moeda = guildData?.Moeda || `${e.Coin} Safiras`,
-            authorData = await Database.User.findOne({ id: author.id }, 'Balance Timeouts'),
-            money = authorData?.Balance || 0
+        let user = options.getUser('user')
+        let subCommand = options.getSubcommand()
+        let value = options.getInteger('value')
+        let moeda = guildData?.Moeda || `${e.Coin} Safiras`
+        let authorData = await Database.User.findOne({ id: author.id }, 'Balance Timeouts')
+        let money = authorData?.Balance || 0
 
         switch (subCommand) {
             case 'simples': case 'party': betSimples(); break;
