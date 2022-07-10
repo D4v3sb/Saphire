@@ -32,10 +32,11 @@ module.exports = {
             type: 1,
             options: [
                 {
-                    name: 'role',
+                    name: 'roles_in_autorole',
                     description: 'Cargo a ser removido do autorole',
+                    type: 3,
                     required: true,
-                    type: 8
+                    autocomplete: true
                 }
             ]
         },
@@ -88,11 +89,10 @@ module.exports = {
             })
 
         let role = options.getRole('role'),
-            information = options.getString('select'),
+            information = options.getString('select') || options.getString('roles_in_autorole'),
             password = options.getString('password'),
-            addOrRemove = options.getSubcommand()
-        rolesId = guildData?.Autorole || [],
-            prefix = guildData?.Prefix || client.prefix
+            addOrRemove = options.getSubcommand(),
+            rolesId = guildData?.Autorole || []
 
         if (information === 'info') return await interaction.reply({
             embeds: [
@@ -116,12 +116,12 @@ module.exports = {
                         },
                         {
                             name: '• Comando informativos',
-                            value: `\`/autorole inforamtion info\` Este painel de ajuda\n\`/autorole information status\` Status do autorole`,
+                            value: `\`/autorole information info\` Este painel de ajuda\n\`/autorole information status\` Status do autorole`,
                             inline: true
                         },
                         {
                             name: `${e.SaphireObs} Forte recomendação`,
-                            value: `Ative a função \`${prefix}logs\`.\nLá eu mandarei relatórios se qualquer coisa der errado ou algum bobinho(a) fizer besteira com os cargos.`
+                            value: `Ative a função \`/config log_channel:\`.\nLá eu mandarei relatórios se qualquer coisa der errado ou algum bobinho(a) fizer besteira com os cargos.`
                         }
                     ]
                 }
@@ -281,23 +281,25 @@ module.exports = {
 
         async function removeAutorole() {
 
+            const role = guild.roles.cache.get(options.getString('roles_in_autorole'))
+
             if (rolesId.length <= 0)
                 return await interaction.reply({
                     content: `${e.Deny} | O autorole deste servidor não possui nenhum cargo definido.`,
                     ephemeral: true
                 })
 
-            if (!rolesId.includes(role.id))
+            if (!rolesId.includes(role?.id))
                 return await interaction.reply({
                     content: `${e.Deny} | Este cargo não foi configurado como autorole.`,
                     ephemeral: true
                 })
 
-            const emojis = ['✅', '❌'],
-                msg = await interaction.reply({
-                    content: `${e.QuestionMark} | Você deseja remover o cargo "${role} *\`${role.id}\`*" do autorole?`,
-                    fetchReply: true
-                })
+            const emojis = ['✅', '❌']
+            const msg = await interaction.reply({
+                content: `${e.QuestionMark} | Você deseja remover o cargo "${role} *\`${role.id}\`*" do autorole?`,
+                fetchReply: true
+            })
 
             for (const emoji of emojis) msg.react(emoji).catch(() => { })
 

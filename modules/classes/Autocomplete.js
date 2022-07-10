@@ -37,6 +37,7 @@ class Autocomplete {
             case 'flag-adminstration': this.flagAdminOptions(); break;
             case 'select_logo_marca': this.select_logo_marca(value); break;
             case 'remove_sinonimo': this.remove_sinonimo(value); break;
+            case 'roles_in_autorole': this.roles_in_autorole(value); break;
             case 'level_options': this.levelOptions(); break;
             case 'option': this.ideaCommandOptions(); break;
             case 'editar_imagem_com_censura': this.editImageLogoMarca(); break;
@@ -49,6 +50,31 @@ class Autocomplete {
 
     async editImageLogoMarca() {
         return this.respond([{ name: 'Excluir imagem censurada', value: 'null' }])
+    }
+
+    async roles_in_autorole(value) {
+
+        const guildData = await Database.Guild.findOne({ id: this.guild.id }, 'Autorole')
+        const rolesInAutorole = guildData?.Autorole || []
+        if (rolesInAutorole.length === 0) return this.respond([{ name: 'Nenhum cargo configurado.', value: 'info' }])
+
+        const fill = rolesInAutorole.filter(id => id.includes(value?.toLowerCase()))
+        const mapped = fill.map(id => {
+            const role = this.guild.roles.cache.get(id)
+            if (!role) removeRole(id)
+
+            return { name: `${role.name || 'Cargo não encontrado'}`, value: `${role?.id || `${id}.`}` }
+        })
+
+        const removeRole = async (id) => {
+            await Database.Guild.updateOne(
+                { id: this.guild.id },
+                { $pull: { Autorole: id } }
+            )
+            return
+        }
+
+        return this.respond(mapped)
     }
 
     async prefix() {
