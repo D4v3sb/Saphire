@@ -2,6 +2,15 @@
     "LogoMarca": [
         {
             "name": [
+                "99 taxi"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995465489402834944/pngwing.com.png"
+            }
+        },
+        {
+            "name": [
                 "adidas"
             ],
             "images": {
@@ -180,6 +189,17 @@
         },
         {
             "name": [
+                "caixa",
+                "banco caixa",
+                "caixa economia federal"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995488560029380668/Picsart_22-07-09_21-05-26-621.png?width=473&height=473",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995488559727398982/Picsart_22-07-09_21-03-13-159.png?width=473&height=473"
+            }
+        },
+        {
+            "name": [
                 "calvin klein"
             ],
             "images": {
@@ -235,6 +255,15 @@
         },
         {
             "name": [
+                "deezer"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995464805030825987/118_Sem_Titulo_20220709200124.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995464804804329513/images_1.jpeg"
+            }
+        },
+        {
+            "name": [
                 "devianart"
             ],
             "images": {
@@ -268,6 +297,15 @@
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/995428909137010688/doritos2.png",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995428908835029054/imagem_2022-07-09_173852155.png"
+            }
+        },
+        {
+            "name": [
+                "editora vagalume"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995467854939951134/images.png"
             }
         },
         {
@@ -370,6 +408,15 @@
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/994074646712438794/106_Sem_Titulo_20220705235703.png?width=473&height=473",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994074646402039828/images.jpeg?width=473&height=473"
+            }
+        },
+        {
+            "name": [
+                "gucci"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995488575443456111/Picsart_22-07-09_20-56-49-354.jpg?width=473&height=473"
             }
         },
         {
@@ -893,6 +940,15 @@
         },
         {
             "name": [
+                "spotify"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995461551291125780/spotify-logo-png-7057_copy_512x512.png"
+            }
+        },
+        {
+            "name": [
                 "sprite"
             ],
             "images": {
@@ -926,6 +982,15 @@
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/993620440331321405/submarino2_1.jpg?width=612&height=408",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993620440075477072/submarino_1.jpg?width=612&height=408"
+            }
+        },
+        {
+            "name": [
+                "supreme"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995488503653728297/Picsart_22-07-09_20-55-02-660.png?width=473&height=473",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995488503464988682/5a7f5f47abc3d121aba71181.png?width=473&height=473"
             }
         },
         {
@@ -980,6 +1045,24 @@
             "images": {
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993531912599642112/twitter-logo-3.png?width=408&height=408"
+            }
+        },
+        {
+            "name": [
+                "uber"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995464481075376178/Picsart_22-07-09_19-59-59-534.jpg",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995464480739823676/Picsart_22-07-09_19-55-09-444.jpg"
+            }
+        },
+        {
+            "name": [
+                "vevo"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995488528777617488/Picsart_22-07-09_20-56-00-681.jpg?width=473&height=473",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995488528370761759/Picsart_22-07-09_20-56-27-310.jpg?width=473&height=473"
             }
         },
         {
@@ -1067,85 +1150,179 @@
         },
         {
             "name": [
-                "spotify"
+                "atelier 801"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995554000332128276/119_Sem_Titulo_20220710015506.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995554000088866906/8506562_orig.png"
+            }
+        },
+        {
+            "name": [
+                "toei animation",
+                "toei"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995555198766415892/120_Sem_Titulo_20220710015958.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995555198401527848/120_Sem_Titulo_20220710015857.png"
+            }
+        },
+        {
+            "name": [
+                "tv tokyo"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995556861111705710/121_Sem_Titulo_20220710020713.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995556860901998592/TV_Tokyo_logo_20110629.svg.png"
+            }
+        },
+        {
+            "name": [
+                "the sims 4",
+                "the sims"
             ],
             "images": {
                 "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995461551291125780/spotify-logo-png-7057_copy_512x512.png"
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995557922446790716/kindpng_5033037.png"
             }
         },
         {
             "name": [
-                "uber"
+                "level up"
             ],
             "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/995464481075376178/Picsart_22-07-09_19-59-59-534.jpg",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995464480739823676/Picsart_22-07-09_19-55-09-444.jpg"
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995559256008949891/122_Sem_Titulo_20220710021631.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995559253848895508/images_1.jpeg"
             }
         },
         {
             "name": [
-                "deezer"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/995464805030825987/118_Sem_Titulo_20220709200124.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995464804804329513/images_1.jpeg"
-            }
-        },
-        {
-            "name": [
-                "99 taxi"
+                "league of legends"
             ],
             "images": {
                 "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995465489402834944/pngwing.com.png"
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995560266999791626/images__2_-removebg-preview.png"
             }
         },
         {
             "name": [
-                "editora vagalume"
+                "minecraft",
+                "mine"
             ],
             "images": {
                 "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995467854939951134/images.png"
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995561213222203452/imgbin_minecraft-logo-png.png"
             }
         },
         {
             "name": [
-                "supreme"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/995488503653728297/Picsart_22-07-09_20-55-02-660.png?width=473&height=473",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995488503464988682/5a7f5f47abc3d121aba71181.png?width=473&height=473"
-            }
-        },
-        {
-            "name": [
-                "vevo"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/995488528777617488/Picsart_22-07-09_20-56-00-681.jpg?width=473&height=473",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995488528370761759/Picsart_22-07-09_20-56-27-310.jpg?width=473&height=473"
-            }
-        },
-        {
-            "name": [
-                "caixa",
-                "banco caixa",
-                "caixa economia federal"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/995488560029380668/Picsart_22-07-09_21-05-26-621.png?width=473&height=473",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995488559727398982/Picsart_22-07-09_21-03-13-159.png?width=473&height=473"
-            }
-        },
-        {
-            "name": [
-                "gucci"
+                "mojang"
             ],
             "images": {
                 "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995488575443456111/Picsart_22-07-09_20-56-49-354.jpg?width=473&height=473"
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995561731143241728/mojang_logo_icon_170945.png"
+            }
+        },
+        {
+            "name": [
+                "terraria"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995562188649537586/images_3.jpeg"
+            }
+        },
+        {
+            "name": [
+                "habbo"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995562749331525672/images_1.png"
+            }
+        },
+        {
+            "name": [
+                "club penguin"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995564096328048710/pngwing.com.png"
+            }
+        },
+        {
+            "name": [
+                "transformice",
+                "mice"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995564840842178690/transformice-logo.png"
+            }
+        },
+        {
+            "name": [
+                "winrar"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995707914415263794/images_2.jpeg"
+            }
+        },
+        {
+            "name": [
+                "brainly"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995708699186315364/images.png"
+            }
+        },
+        {
+            "name": [
+                "tinder"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995713271522926652/images__4_-removebg-preview.png"
+            }
+        },
+        {
+            "name": [
+                "emissora band",
+                "band"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995714481025986732/images-removebg-preview.png"
+            }
+        },
+        {
+            "name": [
+                "dc comics",
+                "dc"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995717162540994570/123_Sem_Titulo_20220710124004.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995717162176086126/images_1.png"
+            }
+        },
+        {
+            "name": [
+                "messenger"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995746484760883300/Facebook_Messenger_logo_2020.svg.png"
+            }
+        },
+        {
+            "name": [
+                "cna"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995748424056045688/124_Sem_Titulo_20220710144828.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995748423833759815/Logo-CNA-2018.png"
             }
         }
     ]
