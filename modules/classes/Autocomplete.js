@@ -383,7 +383,6 @@ class Autocomplete {
         )
         const mapped = fill.map(user => ({ name: `${user.tag} | ${user.id}`, value: user.id }))
         return this.respond(mapped)
-
     }
 
     async changeLevelBackground(value) {

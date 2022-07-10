@@ -84,8 +84,8 @@ function checkSimilarity(str1, str2) { // Credits: JackSkelt#3063 - 904891162362
     const hash1 = []
     const hash2 = []
 
-    for (var i = 0; i < len1; i++)
-        for (var j = Math.max(0, i - maxDist); j < Math.min(len2, i + maxDist + 1); j++)
+    for (let i = 0; i < len1; i++)
+        for (let j = Math.max(0, i - maxDist); j < Math.min(len2, i + maxDist + 1); j++)
             if (str1.charAt(i) === str2.charAt(j) && !hash2[j]) {
                 hash1[i] = 1
                 hash2[j] = 1
@@ -98,7 +98,7 @@ function checkSimilarity(str1, str2) { // Credits: JackSkelt#3063 - 904891162362
     let t = 0
     let point = 0
 
-    for (var k = 0; k < len1; k++)
+    for (let k = 0; k < len1; k++)
         if (hash1[k]) {
             while (!hash2[point])
                 point++

@@ -1,12 +1,12 @@
-const { DatabaseObj: { e, config } } = require('../../modules/functions/plugins/database'),
-    { MessageEmbed, Permissions } = require('discord.js'),
-    client = require('../../index'),
-    Database = require('../../modules/classes/Database')
+const { DatabaseObj: { e, config } } = require('../../modules/functions/plugins/database')
+const { MessageEmbed, Permissions } = require('discord.js')
+const client = require('../../index')
+const Database = require('../../modules/classes/Database')
 
 client.on("guildCreate", async (guild) => {
 
-    let clientData = await Database.Client.findOne({ id: client.user.id }, 'Blacklist'),
-        blacklistServers = clientData?.Blacklist?.Guilds || []
+    let clientData = await Database.Client.findOne({ id: client.user.id }, 'Blacklist')
+    let blacklistServers = clientData?.Blacklist?.Guilds || []
 
     if (blacklistServers.some(data => data?.id === guild.id))
         return guild.leave().catch(async err => client.users.cache.get(config.ownerId).send(`${e.Deny} | Não foi possível sair da ${guild.id} \`${guild.id}\` que está na blacklist.\n\`${err}\``).catch(() => { }))

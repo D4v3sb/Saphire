@@ -169,6 +169,11 @@ class Saphire extends Client {
 
     }
 
+    // topGGAutoPoster() {
+    //     const { AutoPoster } = require('topgg-autoposter')
+    //     AutoPoster('topggtoken', this)
+    // }
+
 }
 
 module.exports = Saphire

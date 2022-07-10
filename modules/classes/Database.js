@@ -1,6 +1,6 @@
-const { Database: JSON } = require('ark.db'),
-    Models = require('../database/Models')
-    
+const { Database: JSON } = require('ark.db')
+const Models = require('../database/Models')
+
 class Database extends Models {
     constructor() {
         super()
@@ -384,6 +384,9 @@ class Database extends Models {
     }
 
     newCommandRegister = async (message, date, clientId, commandName) => {
+
+        const statcord = require('../../statcord')
+        statcord.postCommand(commandName, message.author.id)
 
         new Database.LogRegister({
             Author: `${message.author.tag} - ${message.author.id}` || 'Indefinido',

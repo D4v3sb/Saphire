@@ -1,7 +1,6 @@
-const
-    { readdirSync } = require("fs"),
-    { MessageSelectMenu, MessageActionRow } = require("discord.js"),
-    { e } = require('../../../JSON/emojis.json')
+const { readdirSync } = require("fs")
+const { MessageSelectMenu, MessageActionRow } = require("discord.js")
+const { e } = require('../../../JSON/emojis.json')
 
 module.exports = {
     name: 'help',
@@ -29,10 +28,8 @@ module.exports = {
                 .addField('🛰️ Global System Notification', `Ative o \`${prefix}logs\` no servidor e aproveite do meu sistema avançado de notificação. Eu vou te avisar desde os bans/kicks até Autoroles com permissões editadas.`)
                 .addField(`${e.SaphireTimida} Saphire`, `Você pode [me adicionar](${SaphireInviteLink}) no seu servidor e também pode entrar no [meu servidor de suporte](${config.SupportServerLink}) pra tirar algumas dúvidas${serverInvite}`)
                 .addField(`${e.CoroaDourada} Premium Stage`, `Tem interesse em desbloquear comandos únicos? Use \`${prefix}premium\` e descubra mais.`)
-                .addField('🆕 Atualizações', 'Acesse a segunda aba do painel de ajuda e fique por dentro de tudo.')
-                .addField(`${e.Stonks} New Reaction Role System`, `Siiiim! Agora eu possuo um sistema de Reaction Role! Vem dar uma olhada! \`${prefix}reactionrole\``)
                 .addField(`⭐ Slash Commands`, `Alguns comandos foram movidos para Slash Commands. Use \`/help\` e confira as alterações. Caso o Slash Commands não esteja aparecendo para você, [atualize as minhas permissões](${attInvite})`)
-                .addField(`${e.bug} Discord Bugs`, 'Devido a uma instabilidade da API do Discord, a economia global da Saphire foi resetada. Um sistema de segurança já foi criado para que isso não aconteça novamente.')
+                .addField(`${e.Gear} Status`, `Acompanhe todos os Status da Saphire [clicando aqui](${config.statcordURL}${client.user.id})`)
                 .setFooter({ text: 'Este painel se fechará após 1 minuto de inatividade' }),
 
             painel = new MessageActionRow()

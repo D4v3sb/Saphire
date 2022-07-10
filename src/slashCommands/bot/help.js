@@ -1,6 +1,5 @@
-
-const { readdirSync } = require("fs"),
-    Colors = require('../../../modules/functions/plugins/colors')
+const { readdirSync } = require("fs")
+const Colors = require('../../../modules/functions/plugins/colors')
 
 module.exports = {
     name: 'help',
@@ -10,10 +9,9 @@ module.exports = {
     options: [],
     async execute({ interaction: interaction, client: client, database: Database, emojis: e, guildData: guildData, clientData: clientData }) {
 
-        const { Config: config } = Database,
-            prefix = guildData?.Prefix || client.prefix,
-            { user } = interaction,
-            color = await Colors(user.id)
+        const { Config: config } = Database
+        const { user } = interaction
+        const color = await Colors(user.id)
 
         let SaphireInviteLink = `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=applications.commands%20bot`,
             ghostServer = client.guilds.cache.get(config.saphiresHome),
@@ -31,6 +29,10 @@ module.exports = {
                     {
                         name: `⭐ Comandos movidos para Slash Commands`,
                         value: 'Vários comandos estão sendo movidos para Slash Commands por causa das quantidades de sub-comandos que estes comandos portavam. No Slash Commands, os sub-comandos ficam visíveis e muito mais fácil de mexer com os comandos.'
+                    },
+                    {
+                        name: `${e.Gear} Status`,
+                        value: `Acompanhe todos os Status da Saphire [clicando aqui](${config.statcordURL}${client.user.id})`
                     }
                 ],
                 footer: { text: 'Este painel se fechará após 1 minuto de inatividade' }

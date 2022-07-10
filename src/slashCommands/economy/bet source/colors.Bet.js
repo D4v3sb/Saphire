@@ -115,7 +115,7 @@ async function betColor(interaction, value, authorMoney, moeda) {
             return winners()
 
             async function nobody() {
-                embed.fields[1].value = `O botão **${color}** foi sortado. Porém, não havia ninguém nesta cor.\nO prêmio de **(${control.prize} ${moeda})** foi perdido.`
+                embed.fields[1].value = `O botão **${color}** foi sortado. Porém, não havia ninguém nesta cor.\nO prêmio de **${control.prize} ${moeda}** foi perdido.`
                 embed.color = client.red
                 embed.footer = { text: `${control.usersInColors.length} Apostadores | Aposta encerrada` }
                 return await interaction.editReply({

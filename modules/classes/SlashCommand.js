@@ -1,5 +1,6 @@
 const Modals = require('./Modals')
 const client = require('../../index')
+const statcord = require('../../statcord')
 
 class SlashCommand extends Modals {
     constructor(interaction) {
@@ -84,6 +85,7 @@ class SlashCommand extends Modals {
     }
 
     async registerCommand() {
+        statcord.postCommand(this.interaction.commandName, this.user.id)
         return await this.Database.Client.updateOne(
             { id: client.user.id },
             {

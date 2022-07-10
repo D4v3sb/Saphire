@@ -3,11 +3,15 @@ const client = require('../../index')
 const Data = require('../../modules/functions/plugins/data')
 const Database = require('../../modules/classes/Database')
 const init = require('../../modules/functions/plugins/initSystems')
-const client = require('../../index')
+const statcord = require('../../statcord')
 
 client.on("ready", async () => {
 
     await Database.MongoConnect(client)
+
+    // EXTERNAL SERVICES
+    statcord.autopost()
+    // client.topGGAutoPoster()
 
     Database.registerClient(client.user.id)
     Database.openLotery(client.user.id)
@@ -17,11 +21,12 @@ client.on("ready", async () => {
 
     await Database.Client.updateOne(
         { id: client.user.id },
-        { $unset: { Rebooting: 1 } })
+        { $unset: { Rebooting: 1 } }
+    )
 
     if (data?.Rebooting?.ON) {
-        let channel = client.channels.cache.get(data.Rebooting?.ChannelId),
-            msg = await channel?.messages.fetch(data.Rebooting.MessageId)
+        let channel = client.channels.cache.get(data.Rebooting?.ChannelId)
+        let msg = await channel?.messages.fetch(data.Rebooting.MessageId)
 
         if (msg)
             msg?.edit(`${e.Check} | Reboot concluído com sucesso!`).catch(() => { })

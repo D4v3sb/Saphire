@@ -14,7 +14,7 @@ module.exports = async (client) => {
         for (let file of commandsData) {
             let pull = require(`../slashCommands/${dir}/${file}`)
 
-            if (pull.name) {
+            if (pull && pull.name) {
                 client.slashCommands.set(pull.name, pull);
                 pull.admin || pull.staff ? adminCommands.push(pull) : commands.push(pull);
                 continue
