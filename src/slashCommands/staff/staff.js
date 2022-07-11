@@ -120,7 +120,7 @@ module.exports = {
 
         const { Config: config } = Database
         const { options, user } = interaction
-        const adms = [...clientData.Administradores, clientData.Moderadores, config.ownerId, '327496267007787008']
+        const adms = [...clientData.Administradores, ...clientData.Moderadores, config.ownerId, '327496267007787008']
 
         if (!adms.includes(user.id))
             return await interaction.reply({
@@ -150,7 +150,6 @@ module.exports = {
                 case 'view': require('./src/view.LogoMarca')(interaction); break;
                 case 'edit': require('./src/edit.LogoMarca')(interaction); break;
                 case 'delete': require('./src/delete.LogoMarca')(interaction); break;
-                // case 'list': require('./src/delete.LogoMarca')(interaction); break;
                 default: await interaction.reply({
                     content: `${e.Deny} | Nenhuma função foi encontrada`,
                     ephemeral: true

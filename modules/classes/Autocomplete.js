@@ -377,11 +377,13 @@ class Autocomplete {
     }
 
     allUsers(value) {
-        const fill = client.users.cache.filter(user =>
-            user.tag.toLowerCase().includes(value.toLowerCase())
-            || user.id.includes(value)
-        )
-        const mapped = fill.map(user => ({ name: `${user.tag} | ${user.id}`, value: user.id }))
+        const fill = client.users.cache.filter(user => {
+            if (!user) return
+
+            return user.tag?.toLowerCase().includes(value.toLowerCase())
+                || user.id?.includes(value)
+        })
+        const mapped = fill.filter(x => x).map(user => ({ name: `${user.tag} | ${user.id}`, value: user.id }))
         return this.respond(mapped)
     }
 

@@ -76,7 +76,7 @@ module.exports = {
                     },
                     {
                         name: `${e.Info} Informações`,
-                        value: `Criado em: ${DataFormatada}\nExiste á: ${criadoA}\n\`*\nNotificações: ${Notifications}\nFiltro de Conteúdo Explícito: ${ConteudoExplicito}${guild.premiumSubscriptionCount > 0 ? `\nBoosts: ${guild.premiumSubscriptionCount}` : ''}${Tier ? `\nTier: ${Tier}` : ''}${LevelVerification ? `\nNivel de Verificação: ${LevelVerification}` : ''}${guild.verified ? '\nVerificado: Sim' : ''}${LevelNSFW ? `\nFiltro NSFW: ${LevelNSFW}` : ''}${guild.partnered ? `\nParceiro: ${guild.partnered}` : ''}`
+                        value: `Criado em: ${DataFormatada}\nExiste á: ${criadoA}\nNotificações: ${Notifications}\nFiltro de Conteúdo Explícito: ${ConteudoExplicito}${guild.premiumSubscriptionCount > 0 ? `\nBoosts: ${guild.premiumSubscriptionCount}` : ''}${Tier ? `\nTier: ${Tier}` : ''}${LevelVerification ? `\nNivel de Verificação: ${LevelVerification}` : ''}${guild.verified ? '\nVerificado: Sim' : ''}${LevelNSFW ? `\nFiltro NSFW: ${LevelNSFW}` : ''}${guild.partnered ? `\nParceiro: ${guild.partnered}` : ''}`
                     },
                     {
                         name: `📊 Contagem`,

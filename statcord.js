@@ -10,12 +10,13 @@ statcord.on("post", status => {
 
     const Database = require('./modules/classes/Database')
     const { Config } = Database
+    
     return client.users.cache.get(Config.ownerId)?.send({
         embeds: [
             {
                 color: client.red,
                 title: 'STATCORD ERROR',
-                description: `\`\`\`txt\n${status?.slice(0, 4090)}\n\`\`\``
+                description: `\`\`\`txt\n${`${status}`?.slice(0, 4090)}\n\`\`\``
             }
         ]
     })

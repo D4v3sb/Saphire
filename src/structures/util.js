@@ -443,6 +443,37 @@ const Languages = {
     zu: "Zulu",
 }
 
+const Flags = {
+    BotHTTPInteractions: "Bot de integração via HTTP",
+    BugHunterLevel1: "Bug Hunter Level 1",
+    BugHunterLevel2: "Bug Hunter Level 2",
+    CertifiedModerator: "Moderador certificado pelo Discord",
+    Hypesquad: "Membro do evento HypeSquad",
+    HypeSquadOnlineHouse1: "Membro da House Bravery",
+    HypeSquadOnlineHouse2: "Membro da House Brilliance",
+    HypeSquadOnlineHouse3: "Membro da House Balance",
+    Partner: "Proprietário de Servidor parceiro",
+    PremiumEarlySupporter: "Apoiador Inicial",
+    Quarantined: "Usuário em quarentana por atos recentes",
+    Spammer: "Usuário punido por spam",
+    Staff: "Empregado do Discord",
+    TeamPseudoUser: "Usuário é uma equipe",
+    VerifiedBot: "Bot Verificado",
+    VerifiedDeveloper: "Desenvolvedor de bot inicial",
+    DISCORD_EMPLOYEE: 'Empregado do Discord',
+    DISCORD_PARTNER: 'Parceiro do Discord',
+    HYPESQUAD_EVENTS: 'HypeSquad Events',
+    HOUSE_BRAVERY: 'House of Bravery',
+    HOUSE_BRILLIANCE: 'House of Brilliance',
+    HOUSE_BALANCE: 'House of Balance',
+    EARLY_SUPPORTER: 'Apoiador inicial',
+    TEAM_USER: 'Usuário de Time',
+    SYSTEM: 'Sistema',
+    VERIFIED_BOT: 'Bot Verificado',
+    VERIFIED_DEVELOPER: 'Verified Bot Developer',
+    BOT_HTTP_INTERACTIONS: 'Bot de Interação HTTP'
+}
+
 module.exports = {
     RawClientEvents,
     Colors,
@@ -453,5 +484,6 @@ module.exports = {
     slashCommandsPermissions,
     HexColors,
     ignoreUsersOptions,
-    Languages
+    Languages,
+    Flags
 }

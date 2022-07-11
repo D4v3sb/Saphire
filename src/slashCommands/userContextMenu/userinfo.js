@@ -1,39 +1,25 @@
+const { Flags: flags } = require('../../structures/util')
+
 module.exports = {
     name: 'User Info',
     dm_permission: false,
     type: 2,
     async execute({ interaction: interaction, client: client, database: Database, emojis: e }) {
 
-        const { targetId, guild, user: author } = interaction,
-            Data = require('../../../modules/functions/plugins/data'),
-            { Config: config } = Database,
-            Colors = require('../../../modules/functions/plugins/colors')
+        const { targetUser: user, targetMember: member, guild, user: author } = interaction
+        const Data = require('../../../modules/functions/plugins/data')
+        const { Config: config } = Database
+        const Colors = require('../../../modules/functions/plugins/colors')
+        const components = []
+        const userData = {}
+        const memberData = {}
 
-        let user = client.users.cache.get(targetId),
-            member = guild.members.cache.get(user.id),
-            userData = {},
-            memberData = {},
-            flags = {
-                DISCORD_EMPLOYEE: 'Empregado do Discord',
-                DISCORD_PARTNER: 'Parceiro do Discord',
-                HYPESQUAD_EVENTS: 'HypeSquad Events',
-                HOUSE_BRAVERY: 'House of Bravery',
-                HOUSE_BRILLIANCE: 'House of Brilliance',
-                HOUSE_BALANCE: 'House of Balance',
-                EARLY_SUPPORTER: 'Apoiador inicial',
-                TEAM_USER: 'Usuário de Time',
-                SYSTEM: 'Sistema',
-                VERIFIED_BOT: 'Bot Verificado',
-                VERIFIED_DEVELOPER: 'Verified Bot Developer',
-                BOT_HTTP_INTERACTIONS: 'Bot de Interação HTTP'
-            }
-
-        let userflags = user?.flags?.toArray() || []
+        const userflags = user?.flags?.toArray() || []
         userData.Bandeiras = `${userflags.length > 0 ? userflags.map(flag => `\`${flags[flag] ? flags[flag] : flag}\``).join(', ') : 'Nenhuma'}`
         userData.system = user.system ? '\n🧑‍💼 `\`Usuário do Sistema\``' : ''
         userData.avatar = user.avatarURL({ dynamic: true, format: "png", size: 1024 })
         userData.bot = user.bot ? '\`Sim\`' : '\`Não\`'
-        userData.createAccount = Data(user.createdAt.getTime(), false, false)
+        userData.createAccount = `<t:${parseInt(user.createdAt.getTime() / 1000)}:f>`
         userData.timeoutAccount = client.formatTimestamp(user.createdAt.getTime())
 
         if (member) {
@@ -52,10 +38,10 @@ module.exports = {
             })()
         }
 
-        let colorData = member ? await Colors(user.id) : client.blue,
-            whoIs = user.id === author.id ? 'Suas Informações' : `Informações de ${user.username}`
+        const colorData = member ? await Colors(user.id) : client.blue
+        const whoIs = user.id === author.id ? 'Suas Informações' : `Informações de ${user.username}`
 
-        let embeds = [
+        const embeds = [
             {
                 color: colorData,
                 title: `${e.Info} ${whoIs}`,
@@ -94,7 +80,29 @@ module.exports = {
             }
         ]
 
-        return await interaction.reply({ embeds: embeds, ephemeral: true })
+        const integrations = await guild.fetchIntegrations() || []
+        const application = integrations.find(data => data.application.id === user.id)?.application
+
+        if (application) {
+            const embed = { color: client.blue, title: `🤖 Informações da Integração` }
+
+            embed.description = application.description || null
+            embeds.push(embed)
+            components.push({
+                type: 1,
+                components: [
+                    {
+                        type: 2,
+                        label: 'ADICIONAR BOT',
+                        emoji: '🔗',
+                        url: `https://discord.com/oauth2/authorize?client_id=${application.id}&scope=bot%20applications.commands&permissions=2146958847`,
+                        style: 'LINK'
+                    }
+                ]
+            })
+        }
+
+        return await interaction.reply({ embeds: embeds, ephemeral: true, components: components })
 
     }
 }

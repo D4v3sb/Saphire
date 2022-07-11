@@ -186,7 +186,23 @@ module.exports = {
 
         if (args[0]) return HelpWithArgs(args[0])
 
-        const msg = await message.reply({ embeds: [PrincipalEmbed], components: [painel] }),
+        const components = [painel]
+
+        if (message.member.memberPermissions('MANAGE_GUILD'))
+            components.push({
+                type: 1,
+                components: [
+                    {
+                        type: 2,
+                        label: 'Atualizar Permissões',
+                        emoji: '🔄',
+                        url: `https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot%20applications.commands&permissions=2146958847&guild_id=888464632291917956&disable_guild_select=true`,
+                        style: 'LINK'
+                    }
+                ]
+            })
+
+        const msg = await message.reply({ embeds: [PrincipalEmbed], components: components }),
             collector = msg.createMessageComponentCollector({
                 filtro: (interaction) => interaction.customId === 'menu' && interaction.user.id === message.author.id,
                 idle: 60000
@@ -208,7 +224,7 @@ module.exports = {
             let valor = collected.values[0]
             collected.deferUpdate().catch(() => { })
 
-            if (valor === 'PainelPrincipal') return msg.edit({ embeds: [PrincipalEmbed], components: [painel] }).catch(() => { })
+            if (valor === 'PainelPrincipal') return msg.edit({ embeds: [PrincipalEmbed], components: components }).catch(() => { })
             if (valor === 'afk') return Afk()
             if (valor === 'att') return atualization()
             if (valor === 'Close') return collector.stop()
@@ -253,23 +269,23 @@ module.exports = {
 
             async function HelpPainel(x) {
 
-                let cots = [],
-                    catts = [],
-                    clientData = await Database.Client.findOne({ id: client.user.id }, 'ComandosBloqueados'),
-                    cmdsBlocked = clientData.ComandosBloqueados || [],
-                    formatedBlock = cmdsBlocked.map(data => data.cmd)?.flat() || []
+                let cots = []
+                let catts = []
+                let clientData = await Database.Client.findOne({ id: client.user.id }, 'ComandosBloqueados')
+                let cmdsBlocked = clientData.ComandosBloqueados || []
+                let formatedBlock = cmdsBlocked.map(data => data.cmd)?.flat() || []
 
                 readdirSync("./src/commands/").forEach(dir => {
                     if (dir.toLowerCase() !== x.toLowerCase()) return
                     const commands = readdirSync(`./src/commands/${dir}/`).filter(file => file.endsWith(".js"))
 
                     const cmds = commands.map(command => {
-                        let file = require(`../../commands/${dir}/${command}`),
-                            name = file.name?.replace(".js", ""),
-                            des = client.commands.get(name)?.description || "Sem descrição",
-                            emo = client.commands.get(name)?.emoji || 'X',
-                            format = `\`${prefix}${name}\``,
-                            correctNameByAlias = formatedBlock.map(data => client.aliases.get(`${data}`))
+                        let file = require(`../../commands/${dir}/${command}`)
+                        let name = file.name?.replace(".js", "")
+                        let des = client.commands.get(name)?.description || "Sem descrição"
+                        let emo = client.commands.get(name)?.emoji || 'X'
+                        let format = `\`${prefix}${name}\``
+                        let correctNameByAlias = formatedBlock.map(data => client.aliases.get(`${data}`))
 
                         if (correctNameByAlias.includes(name)) {
                             emo = '🔒'
