@@ -338,6 +338,7 @@ const ignoreUsersOptions = [
 ]
 
 const Languages = {
+    "pt-BR": "Português",
     af: "Africano",
     am: "Amárico",
     ar: "Arábico",

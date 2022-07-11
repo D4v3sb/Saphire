@@ -12,7 +12,7 @@ client.on('interactionCreate', async interaction => {
     if (interaction.isModalSubmit()) return new ModalInteraction(interaction, client).submitModalFunctions()
     if (interaction.isButton()) return new ButtonInteraction(interaction, client).execute()
     if (interaction.isSelectMenu()) return new SelectMenuInteraction(interaction).filterAndChooseFunction()
-    if (interaction.isCommand() || interaction.isUserContextMenu()) return new SlashCommand(interaction).CheckBeforeExecute()
+    if (interaction.isCommand() || interaction.isContextMenu()) return new SlashCommand(interaction).CheckBeforeExecute()
     if (interaction.isAutocomplete()) return new Autocomplete(interaction, client).build()
     return
 })
