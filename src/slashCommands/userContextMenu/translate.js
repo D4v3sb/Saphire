@@ -23,7 +23,7 @@ module.exports = {
         }
 
         if (!text)
-            return await interaction.reply({
+            return await interaction.editReply({
                 content: `${e.Deny} | Não há nenhum texto para traduzir.`,
                 ephemeral: true
             })
