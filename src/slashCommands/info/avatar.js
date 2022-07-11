@@ -4,7 +4,7 @@ const allowedSizes = Array.from({ length: 9 }, (e, i) => 2 ** (i + 4))
 
 module.exports = {
     name: 'avatar',
-    description: '[util] Veja o avatar e faixa de usuários',
+    description: '[info] Veja o avatar e faixa de usuários',
     type: 1,
     options: [
         {

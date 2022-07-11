@@ -1,6 +1,6 @@
 module.exports = {
     name: 'instagram',
-    description: '[util] Veja os status de um usuário no Instagram',
+    description: '[info] Veja os status de um usuário no Instagram',
     dm_permission: false,
     type: 1,
     options: [
