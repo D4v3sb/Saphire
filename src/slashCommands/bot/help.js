@@ -1,5 +1,7 @@
 const { readdirSync } = require("fs")
 const Colors = require('../../../modules/functions/plugins/colors')
+const Topgg = require('@top-gg/sdk')
+const api = new Topgg.Api(process.env.TOP_GG_TOKEN)
 
 module.exports = {
     name: 'help',
@@ -12,107 +14,113 @@ module.exports = {
         const { Config: config } = Database
         const { user } = interaction
         const color = await Colors(user.id)
+        const hasVoted = await api.hasVoted(user.id)
+        const SaphireInviteLink = `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=applications.commands%20bot`
+        const ghostServer = client.guilds.cache.get(config.saphiresHome)
+        const serverInvite = ghostServer ? ` ou quem sabe entrar na [${ghostServer.name}](${config.MoonServerLink}) para se divertir?` : ''
 
-        let SaphireInviteLink = `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=applications.commands%20bot`,
-            ghostServer = client.guilds.cache.get(config.saphiresHome),
-            serverInvite = ghostServer ? ` ou quem sabe entrar na [${ghostServer.name}](${config.MoonServerLink}) para se divertir?` : '',
-            PrincipalEmbed = {
-                color: color,
-                title: `${e.BlueHeart} Centralzinha de Ajuda da ${client.user.username}`,
-                url: SaphireInviteLink,
-                image: { url: 'https://media.discordapp.net/attachments/893361065084198954/939681589724598282/teste.png?width=720&height=223' },
-                fields: [
+        let PrincipalEmbed = {
+            color: color,
+            title: `${e.BlueHeart} Centralzinha de Ajuda da ${client.user.username}`,
+            url: SaphireInviteLink,
+            image: { url: 'https://media.discordapp.net/attachments/893361065084198954/939681589724598282/teste.png?width=720&height=223' },
+            fields: [
+                {
+                    name: `${e.SaphireTimida} ${client.user.username}`,
+                    value: `Você pode [me adicionar](${SaphireInviteLink}) no seu servidor e também pode entrar no [meu servidor de suporte](${config.SupportServerLink}) pra tirar algumas dúvidas${serverInvite}`
+                },
+                {
+                    name: `⭐ Comandos movidos para Slash Commands`,
+                    value: 'Vários comandos estão sendo movidos para Slash Commands por causa das quantidades de sub-comandos que estes comandos portavam. No Slash Commands, os sub-comandos ficam visíveis e muito mais fácil de mexer com os comandos.'
+                },
+                {
+                    name: `${e.Gear} Status`,
+                    value: `Acompanhe todos os Status da Saphire [clicando aqui](${config.statcordURL}${client.user.id})`
+                },
+                {
+                    name: `${e.topgg} Vote e ganhe e resgate (${hasVoted ? 'Você já votou 💞' : 'Voto disponível'})`,
+                    value: `Vote em mim no Top.gg e resgate seu prêmio usando \`/vote\`. Você pode votar [clicando aqui](${config.TopGGLink})`
+                }
+            ],
+            footer: { text: 'Este painel se fechará após 1 minuto de inatividade' }
+        }
+
+        let painel = {
+            type: 1,
+            components: [{
+                type: 3,
+                custom_id: 'menu',
+                placeholder: 'Escolher uma categoria',
+                options: [
                     {
-                        name: `${e.SaphireTimida} ${client.user.username}`,
-                        value: `Você pode [me adicionar](${SaphireInviteLink}) no seu servidor e também pode entrar no [meu servidor de suporte](${config.SupportServerLink}) pra tirar algumas dúvidas${serverInvite}`
+                        label: 'Painel Inicial',
+                        description: 'Painel Principal',
+                        emoji: `${e.BlueHeart}`,
+                        value: 'PainelPrincipal',
                     },
                     {
-                        name: `⭐ Comandos movidos para Slash Commands`,
-                        value: 'Vários comandos estão sendo movidos para Slash Commands por causa das quantidades de sub-comandos que estes comandos portavam. No Slash Commands, os sub-comandos ficam visíveis e muito mais fácil de mexer com os comandos.'
+                        label: 'Admin',
+                        description: `${client.user.username}\'s Team Administrator`,
+                        emoji: `${e.Admin}`,
+                        value: 'administration',
                     },
                     {
-                        name: `${e.Gear} Status`,
-                        value: `Acompanhe todos os Status da Saphire [clicando aqui](${config.statcordURL}${client.user.id})`
+                        label: 'Bot, vulgo Eu',
+                        description: 'Todos os comandos ligados a euzinha aqui',
+                        emoji: `${e.Gear}`,
+                        value: 'bot',
+                    },
+                    {
+                        label: 'Economia',
+                        description: 'Economy Global System',
+                        emoji: `${e.PandaProfit}`,
+                        value: 'economy',
+                    },
+                    {
+                        label: 'Games/Jogos',
+                        description: 'Que tal só se divertir?',
+                        emoji: '🎮',
+                        value: 'games',
+                    },
+                    {
+                        label: 'Gifs',
+                        description: 'Interagir com os outros é muito legal',
+                        emoji: '🖼',
+                        value: 'gifs',
+                    },
+                    {
+                        label: 'Moderação/Administração',
+                        description: 'Comandos só pros Mod/Adm de plantão',
+                        emoji: `${e.ModShield}`,
+                        value: 'moderation',
+                    },
+                    {
+                        label: 'Perfil',
+                        description: 'Comandos do perfil pessoal de cada um',
+                        emoji: '👤',
+                        value: 'perfil',
+                    },
+                    {
+                        label: 'Random',
+                        description: 'Pensa numas coisas aleatórias',
+                        emoji: `${e.CoolDoge}`,
+                        value: 'random',
+                    },
+                    {
+                        label: 'Utilidades',
+                        description: 'Comandos uteis',
+                        emoji: `${e.SaphireOk}`,
+                        value: 'util',
+                    },
+                    {
+                        label: 'Fechar o painel de ajuda',
+                        description: 'Desativa o painel rápido',
+                        emoji: `${e.Deny}`,
+                        value: 'Close',
                     }
-                ],
-                footer: { text: 'Este painel se fechará após 1 minuto de inatividade' }
-            },
-            painel = {
-                type: 1,
-                components: [{
-                    type: 3,
-                    custom_id: 'menu',
-                    placeholder: 'Escolher uma categoria',
-                    options: [
-                        {
-                            label: 'Painel Inicial',
-                            description: 'Painel Principal',
-                            emoji: `${e.BlueHeart}`,
-                            value: 'PainelPrincipal',
-                        },
-                        {
-                            label: 'Admin',
-                            description: `${client.user.username}\'s Team Administrator`,
-                            emoji: `${e.Admin}`,
-                            value: 'administration',
-                        },
-                        {
-                            label: 'Bot, vulgo Eu',
-                            description: 'Todos os comandos ligados a euzinha aqui',
-                            emoji: `${e.Gear}`,
-                            value: 'bot',
-                        },
-                        {
-                            label: 'Economia',
-                            description: 'Economy Global System',
-                            emoji: `${e.PandaProfit}`,
-                            value: 'economy',
-                        },
-                        {
-                            label: 'Games/Jogos',
-                            description: 'Que tal só se divertir?',
-                            emoji: '🎮',
-                            value: 'games',
-                        },
-                        {
-                            label: 'Gifs',
-                            description: 'Interagir com os outros é muito legal',
-                            emoji: '🖼',
-                            value: 'gifs',
-                        },
-                        {
-                            label: 'Moderação/Administração',
-                            description: 'Comandos só pros Mod/Adm de plantão',
-                            emoji: `${e.ModShield}`,
-                            value: 'moderation',
-                        },
-                        {
-                            label: 'Perfil',
-                            description: 'Comandos do perfil pessoal de cada um',
-                            emoji: '👤',
-                            value: 'perfil',
-                        },
-                        {
-                            label: 'Random',
-                            description: 'Pensa numas coisas aleatórias',
-                            emoji: `${e.CoolDoge}`,
-                            value: 'random',
-                        },
-                        {
-                            label: 'Utilidades',
-                            description: 'Comandos uteis',
-                            emoji: `${e.SaphireOk}`,
-                            value: 'util',
-                        },
-                        {
-                            label: 'Fechar o painel de ajuda',
-                            description: 'Desativa o painel rápido',
-                            emoji: `${e.Deny}`,
-                            value: 'Close',
-                        }
-                    ]
-                }]
-            }
+                ]
+            }]
+        }
 
         const msg = await interaction.reply({
             embeds: [PrincipalEmbed],

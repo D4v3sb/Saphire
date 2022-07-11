@@ -1,20 +1,20 @@
-const { DatabaseObj: { config } } = require('../../../../modules/functions/plugins/database'),
-    Moeda = require('../../../../modules/functions/public/moeda'),
-    Vip = require('../../../../modules/functions/public/vip'),
-    Database = require('../../../../modules/classes/Database'),
-    e = Database.Emojis,
-    dailyPrizes = require('../../../../modules/functions/plugins/dailyPrizes'),
-    Reminder = require('../../../../modules/classes/Reminder')
+const { DatabaseObj: { config } } = require('../../../../modules/functions/plugins/database')
+const Moeda = require('../../../../modules/functions/public/moeda')
+const Vip = require('../../../../modules/functions/public/vip')
+const Database = require('../../../../modules/classes/Database')
+const e = Database.Emojis
+const dailyPrizes = require('../../../../modules/functions/plugins/dailyPrizes')
+const Reminder = require('../../../../modules/classes/Reminder')
 
 class Daily {
 
     async execute(client, message, args, prefix, MessageEmbed, Database) {
 
-        let authorData = await Database.User.findOne({ id: message.author.id }, 'Timeouts DailyCount'),
-            clientData = await Database.Client.findOne({ id: client.user.id }, 'Titles.BugHunter PremiumServers'),
-            bugHunters = clientData?.Titles.BugHunter || [],
-            dailyTimeout = authorData?.Timeouts?.Daily || 0,
-            count = authorData?.DailyCount || 0
+        let authorData = await Database.User.findOne({ id: message.author.id }, 'Timeouts DailyCount')
+        let clientData = await Database.Client.findOne({ id: client.user.id }, 'Titles.BugHunter PremiumServers')
+        let bugHunters = clientData?.Titles.BugHunter || []
+        let dailyTimeout = authorData?.Timeouts?.Daily || 0
+        let count = authorData?.DailyCount || 0
 
         if (['status', 's', 'stats'].includes(args[0]?.toLowerCase())) return dailyUserInfo()
 

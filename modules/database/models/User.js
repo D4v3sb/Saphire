@@ -38,6 +38,7 @@ module.exports = model("User", new Schema({
         Cantada: Number,
         Bitcoin: Number,
         Porquinho: Number,
+        TopGGVote: Number,
         Rep: Number,
     },
     Cache: { ComprovanteOpen: Boolean },

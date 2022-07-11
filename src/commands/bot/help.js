@@ -1,6 +1,8 @@
 const { readdirSync } = require("fs")
 const { MessageSelectMenu, MessageActionRow } = require("discord.js")
 const { e } = require('../../../JSON/emojis.json')
+const Topgg = require('@top-gg/sdk')
+const api = new Topgg.Api(process.env.TOP_GG_TOKEN)
 
 module.exports = {
     name: 'help',
@@ -14,6 +16,7 @@ module.exports = {
     execute: async (client, message, args, prefix, MessageEmbed, Database) => {
 
         const { Config: config } = Database
+        const hasVoted = await api.hasVoted(message.author.id)
 
         let SaphireInviteLink = `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=applications.commands%20bot`,
             ghostServer = client.guilds.cache.get(config.saphiresHome),
@@ -30,6 +33,7 @@ module.exports = {
                 .addField(`${e.CoroaDourada} Premium Stage`, `Tem interesse em desbloquear comandos únicos? Use \`${prefix}premium\` e descubra mais.`)
                 .addField(`⭐ Slash Commands`, `Alguns comandos foram movidos para Slash Commands. Use \`/help\` e confira as alterações. Caso o Slash Commands não esteja aparecendo para você, [atualize as minhas permissões](${attInvite})`)
                 .addField(`${e.Gear} Status`, `Acompanhe todos os Status da Saphire [clicando aqui](${config.statcordURL}${client.user.id})`)
+                .addField(`${e.topgg} Vote e ganhe e resgate (${hasVoted ? 'Você já votou 💞' : 'Voto disponível'})`, `Vote em mim no Top.gg e resgate seu prêmio usando \`/vote\`. Você pode votar [clicando aqui](${config.TopGGLink})`)
                 .setFooter({ text: 'Este painel se fechará após 1 minuto de inatividade' }),
 
             painel = new MessageActionRow()

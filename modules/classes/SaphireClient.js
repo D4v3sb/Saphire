@@ -29,6 +29,8 @@ class Saphire extends Client {
         this.blue = '#246FE0'
         this.red = '#ED4245'
         this.green = '#57f287'
+        this.moonId = '912509487984812043'
+        this.canaryId = '930985650549841940'
     }
 
     Timeout(TimeoutInMS = 0, DateNowAtDatabase = 0) {
@@ -169,10 +171,12 @@ class Saphire extends Client {
 
     }
 
-    // topGGAutoPoster() {
-    //     const { AutoPoster } = require('topgg-autoposter')
-    //     AutoPoster('topggtoken', this)
-    // }
+    topGGAutoPoster() {
+        if (this.user.id !== this.moonId) return
+        const { AutoPoster } = require('topgg-autoposter')
+        const autoPoster = AutoPoster(process.env.TOP_GG_TOKEN, this)
+        autoPoster.on('posted', () => console.log('Topp.gg AutoPoster | OK!'))
+    }
 
 }
 

@@ -11,7 +11,7 @@ client.on("ready", async () => {
 
     // EXTERNAL SERVICES
     statcord.autopost()
-    // client.topGGAutoPoster()
+    client.topGGAutoPoster()
 
     Database.registerClient(client.user.id)
     Database.openLotery(client.user.id)
