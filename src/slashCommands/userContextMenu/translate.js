@@ -6,7 +6,6 @@ module.exports = {
     type: 3,
     async execute({ interaction: interaction, emojis: e, client: client }) {
 
-        await interaction.deferReply({})
         const { targetMessage, locale } = interaction
         const text = targetMessage.content
 
@@ -23,11 +22,12 @@ module.exports = {
         }
 
         if (!text)
-            return await interaction.editReply({
-                content: `${e.Deny} | Não há nenhum texto para traduzir.`,
+            return await interaction.reply({
+                content: `${e.Deny} | Não há nenhum texto para traduzir nesta mensagem.`,
                 ephemeral: true
             })
 
+        await interaction.deferReply({})
         return translate(text, { to: locale.split('-')[0] })
             .then(async res => {
                 Embed.fields[1] = {
