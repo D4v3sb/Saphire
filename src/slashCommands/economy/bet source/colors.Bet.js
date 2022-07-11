@@ -50,7 +50,7 @@ async function betColor(interaction, value, authorMoney, moeda) {
                     },
                     {
                         name: `${e.Info} Info`,
-                        value: `O valor do prêmio é o total de **(${control.prize} ${moeda})** dividido para todos os membros de sua cor.`
+                        value: `O valor do prêmio é o total de **${control.prize} ${moeda}** dividido para todos os membros de sua cor.`
                     }
                 ]
             }
@@ -166,7 +166,7 @@ async function betColor(interaction, value, authorMoney, moeda) {
 
         const buttons = getButtons(control)
         embed.fields[0].value = formatPrizes()
-        embed.fields[1].value = `O valor do prêmio é o total de **(${control.prize} ${moeda})** dividido para todos os membros de sua cor.`
+        embed.fields[1].value = `O valor do prêmio é o total de **${control.prize} ${moeda}** dividido para todos os membros de sua cor.`
         embed.footer = { text: `${control.usersInColors.length} Apostadores` }
 
         return await interaction.editReply({
