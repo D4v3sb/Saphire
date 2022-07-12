@@ -178,7 +178,7 @@ class ButtonInteraction extends Modals {
 
         if (hasVoted && timeout)
             return await this.interaction.reply({
-                content: `${e.Info} | Você já votou nas últimas 12 horas. Espere esse tempo passar.`,
+                content: `${e.Info} | ${this.user}, você já votou nas últimas 12 horas. Espere esse tempo passar.`,
             })
 
         await Database.User.updateOne(
@@ -193,7 +193,7 @@ class ButtonInteraction extends Modals {
             { upsert: true }
         )
 
-        return await this.interaction.reply({ content: `${e.Check} | Você resgatou sua recompensa de voto e ganhou **5000 ${moeda}** + **1000 XP ${e.RedStar}**` })
+        return await this.interaction.reply({ content: `${e.Check} | ${this.user}, você resgatou sua recompensa de voto e ganhou **+5000 ${moeda}** & **+1000 XP ${e.RedStar}**` })
     }
 
 }
