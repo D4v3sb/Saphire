@@ -169,16 +169,23 @@ class ButtonInteraction extends Modals {
 
         const Topgg = require('@top-gg/sdk')
         const api = new Topgg.Api(process.env.TOP_GG_TOKEN)
-
         const hasVoted = await api.hasVoted(this.user.id)
+
         const userData = await Database.User.findOne({ id: this.user.id }, 'Timeouts.TopGGVote')
-        const guildData = await Database.User.findOne({ id: this.guild.id }, 'Moeda')
+        const guildData = await Database.Guild.findOne({ id: this.guild.id }, 'Moeda')
         const timeout = client.Timeout(43200000, userData?.Timeouts.TopGGVote)
         const moeda = guildData?.Moeda || `${e.Coin} Safiras`
+
+        if (!hasVoted)
+            return await this.interaction.reply({
+                content: `${e.Deny} | Você precisa votar primeiro. Clica no botão votar, vote, depois resgate seu prêmio.`,
+                ephemeral: true
+            })
 
         if (hasVoted && timeout)
             return await this.interaction.reply({
                 content: `${e.Info} | ${this.user}, você já votou nas últimas 12 horas. Espere esse tempo passar.`,
+                ephemeral: true
             })
 
         await Database.User.updateOne(
