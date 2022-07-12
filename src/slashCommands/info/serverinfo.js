@@ -28,6 +28,8 @@ module.exports = {
                 ephemeral: true
             })
 
+        const bans = await guild.bans.fetch()
+        const bansCount = bans.toJSON().length || 0
         const DataFormatada = `<t:${parseInt(guild.createdAt.getTime() / 1000)}:F>`
         const criadoA = `<t:${parseInt(guild.createdAt.getTime() / 1000)}:R>`
         const Notifications = guild.defaultMessageNotifications === 'ONLY_MENTIONS' ? 'Apenas @menções' : 'Todas as mensagens'
@@ -80,7 +82,7 @@ module.exports = {
                     },
                     {
                         name: `📊 Contagem`,
-                        value: `${guild.channels.cache.size} Canais\n${guild.memberCount} Membros\n${guild.roles.cache.size} Cargos\n${guild.bans.cache.size} Banidos\nSuporta até ${guild.maximumMembers} Membros`
+                        value: `${guild.channels.cache.size} Canais\n${guild.memberCount} Membros\n${guild.roles.cache.size} Cargos\n${bansCount} Banidos\nSuporta até ${guild.maximumMembers} Membros`
                     },
                     {
                         name: `📝 Descrição do Servidor`,
@@ -88,7 +90,7 @@ module.exports = {
                     },
                     {
                         name: `😀 ${guild.emojis.cache.size} Emojis`,
-                        value: guild.emojis.cache.map(emoji => emoji).slice(0, 32).join(', ').slice(0, 1024) || 'Não há nada a ser mostrado aqui...'
+                        value: guild.emojis.cache.map(emoji => emoji).slice(0, 30).join(', ').slice(0, 1024) || 'Não há nada a ser mostrado aqui...'
                     }
                 ]
             }]

@@ -1,13 +1,12 @@
-const
-    ReminderSystem = require('../update/remindersystem'),
-    GiveawaySystem = require('../update/giveawaysystem'),
-    TopGlobalRanking = require('../update/TopGlobalRanking'),
-    boostReward = require('../server/boostReward'),
-    RaffleSystem = require('../update/rifasystem'),
-    slashCommandsHandler = require('../../../src/structures/slashCommand')
+const ReminderSystem = require('../update/remindersystem')
+const GiveawaySystem = require('../update/giveawaysystem')
+const TopGlobalRanking = require('../update/TopGlobalRanking')
+const boostReward = require('../server/boostReward')
+const RaffleSystem = require('../update/rifasystem')
+const slashCommandsHandler = require('../../../src/structures/slashCommand')
 
 function init(client) {
-    
+
     TopGlobalRanking()
     slashCommandsHandler(client)
     console.log('Systems Intervals | OK!')

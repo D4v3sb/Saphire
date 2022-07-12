@@ -1,6 +1,7 @@
-const Database = require('./Database'),
-    { Emojis: e } = Database,
-    Modals = require('./Modals')
+const Database = require('./Database')
+const { Emojis: e } = Database
+const Modals = require('./Modals')
+const client = require('../../index')
 
 class ButtonInteraction extends Modals {
     constructor(interaction) {
@@ -19,6 +20,7 @@ class ButtonInteraction extends Modals {
             case 'editProfile': this.editProfile(); break;
             case 'newProof': this.newProof(); break;
             case 'closeProof': this.newProof(true); break;
+            case 'getVotePrize': this.topGGVote(); break;
             default:
                 break;
         }
@@ -161,6 +163,37 @@ class ButtonInteraction extends Modals {
             })
 
         return await this.interaction.showModal(modal)
+    }
+
+    async topGGVote() {
+
+        const Topgg = require('@top-gg/sdk')
+        const api = new Topgg.Api(process.env.TOP_GG_TOKEN)
+
+        const hasVoted = await api.hasVoted(this.user.id)
+        const userData = await Database.User.findOne({ id: this.user.id }, 'Timeouts.TopGGVote')
+        const guildData = await Database.User.findOne({ id: this.guild.id }, 'Moeda')
+        const timeout = client.Timeout(43200000, userData?.Timeouts.TopGGVote)
+        const moeda = guildData?.Moeda || `${e.Coin} Safiras`
+
+        if (hasVoted && timeout)
+            return await this.interaction.reply({
+                content: `${e.Info} | Você já votou nas últimas 12 horas. Espere esse tempo passar.`,
+            })
+
+        await Database.User.updateOne(
+            { id: this.user.id },
+            {
+                $inc: {
+                    Balance: 3000,
+                    Xp: 1000
+                },
+                'Timeouts.TopGGVote': Date.now()
+            },
+            { upsert: true }
+        )
+
+        return await this.interaction.reply({ content: `${e.Check} | Você resgatou sua recompensa de voto e ganhou **5000 ${moeda}** + **1000 XP ${e.RedStar}**` })
     }
 
 }
