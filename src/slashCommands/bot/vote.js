@@ -139,9 +139,12 @@ module.exports = {
                 for (let i = 0; i < array.length; i += 10) {
 
                     let current = array.slice(i, amount)
-
+                    allVotesData
                     let description = current
-                        .map(data => `> ${data.name} - \`${data.id}\``)
+                        .map(data => {
+                            const counter = allVotesData.filter(votes => data.id === votes.id)?.length || 0
+                            return `> (${counter}) ${data.name} - \`${data.id}\``
+                        })
                         .filter(x => x).join('\n')
 
                     let pageCount = length > 1 ? ` ${page}/${length}` : ''
