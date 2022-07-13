@@ -7,7 +7,13 @@ module.exports = {
     async execute({ interaction: interaction, emojis: e, client: client }) {
 
         const { targetMessage, locale } = interaction
-        const text = targetMessage.content
+        const text = targetMessage.content?.slice(0, 1024)
+
+        if (!text)
+            return await interaction.reply({
+                content: `${e.Deny} | Não há nenhum texto para traduzir nesta mensagem.`,
+                ephemeral: true
+            })
 
         const Embed = {
             color: '#4295fb',
@@ -21,11 +27,6 @@ module.exports = {
             footer: { text: `Traduzido para ${Languages[locale]}` }
         }
 
-        if (!text)
-            return await interaction.reply({
-                content: `${e.Deny} | Não há nenhum texto para traduzir nesta mensagem.`,
-                ephemeral: true
-            })
 
         await interaction.deferReply({})
         return translate(text, { to: locale.split('-')[0] })

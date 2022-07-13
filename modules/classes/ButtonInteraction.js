@@ -171,7 +171,8 @@ class ButtonInteraction extends Modals {
         const api = new Topgg.Api(process.env.TOP_GG_TOKEN)
         const hasVoted = await api.hasVoted(this.user.id)
 
-        const userData = await Database.User.findOne({ id: this.user.id }, 'Timeouts.TopGGVote')
+        const Reminder = require('./Reminder')
+        const userData = await Database.User.findOne({ id: this.user.id }, 'Timeouts.TopGGVote Balance')
         const guildData = await Database.Guild.findOne({ id: this.guild.id }, 'Moeda')
         const timeout = client.Timeout(43200000, userData?.Timeouts.TopGGVote)
         const moeda = guildData?.Moeda || `${e.Coin} Safiras`
@@ -195,12 +196,40 @@ class ButtonInteraction extends Modals {
                     Balance: 3000,
                     Xp: 1000
                 },
+                $push: {
+                    Transactions: {
+                        $each: [{
+                            time: `${Date.format(0, true)} - ${userData?.Balance || 0}`,
+                            data: `${e.gain} Resgatou seu *Top.gg Vote* e ganhou 5000 Safiras`
+                        }],
+                        $position: 0
+                    }
+                },
                 'Timeouts.TopGGVote': Date.now()
             },
             { upsert: true }
         )
 
-        return await this.interaction.reply({ content: `${e.Check} | ${this.user}, você resgatou sua recompensa de voto e ganhou **+5000 ${moeda}** & **+1000 XP ${e.RedStar}**` })
+        const msg = await this.interaction.reply({
+            content: `${e.Check} | ${this.user}, você resgatou sua recompensa de voto e ganhou **+5000 ${moeda}** & **+1000 XP ${e.RedStar}**`,
+            fetchReply: true
+        })
+
+        return new Reminder(msg, {
+            time: 43200000, // 12 hours
+            user: this.user,
+            client: client,
+            confirmationMessage: `⏰ | Beleza, ${this.user}! Eu vou te lembrar de votar novamente daqui \`ReplaceTIMER\``,
+            reminderData: {
+                userId: this.user.id,
+                RemindMessage: 'AUTOMATIC REMINDER | Voto Disponível',
+                Time: 43200000,
+                DateNow: Date.now(),
+                isAutomatic: true,
+                ChannelId: this.channel.id
+            }
+        }).showButton()
+
     }
 
 }

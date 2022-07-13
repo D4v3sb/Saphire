@@ -7,7 +7,15 @@ module.exports = {
         {
             name: 'list',
             description: '[bot] Lista de pessoas que votaram no Top.GG',
-            type: 1
+            type: 1,
+            options: [
+                {
+                    name: 'search_user',
+                    description: 'Veja quantos votos alguém já deu',
+                    type: 3,
+                    autocomplete: true
+                }
+            ]
         },
         {
             name: 'resgate',
@@ -53,15 +61,39 @@ module.exports = {
 
         async function voteList() {
 
+            const searchUserID = interaction.options.getString('search_user')
+            const user = client.users.cache.get(searchUserID)
+
+            if (searchUserID && !user)
+                return await interaction.reply({
+                    content: `${e.Deny} | Nenhum usuário foi encontrado.`,
+                    ephemeral: true
+                })
+
             const { Api } = require('@top-gg/sdk')
             const TopGG = new Api(process.env.TOP_GG_TOKEN)
             const allVotesData = await TopGG.getVotes() || []
 
+            if (user) {
+                const vote = allVotesData.filter(votes => votes.id === user.id) || []
+
+                if (!vote || vote.length === 0)
+                    return await interaction.reply({
+                        content: `${e.Deny} | *${user.tag} - \`${user.id}\`* não aparece na lista de votos.`,
+                        ephemeral: true
+                    })
+
+                return await interaction.reply({
+                    content: `${e.Info} | *${user.tag} - \`${user.id}\`* votou **${vote.length}** vezes.`
+                })
+            }
+
             const mappingOnlyIds = [...new Set(allVotesData.map(vote => vote.id))]
             const uniqueArray = mappingOnlyIds
-                .map(id => ({ name: client.users.cache.get(id)?.tag || null, id: id }))
+                .map(id => ({ name: client.users.cache.get(id)?.tag || null, id: id, counter: allVotesData.filter(votes => id === votes.id)?.length || 0 }))
                 .filter(x => x.name)
-                .sort((a, b) => a.name.localeCompare(b.name, 'br', { ignorePunctuation: true }))
+                // .sort((a, b) => a.name.localeCompare(b.name, 'br', { ignorePunctuation: true }))
+                .sort((a, b) => b.counter - a.counter)
 
             if (uniqueArray.length === 0)
                 return await interaction.reply({
@@ -142,8 +174,8 @@ module.exports = {
                     allVotesData
                     let description = current
                         .map(data => {
-                            const counter = allVotesData.filter(votes => data.id === votes.id)?.length || 0
-                            return `> (${counter}) ${data.name} - \`${data.id}\``
+                            // const counter = allVotesData.filter(votes => data.id === votes.id)?.length || 0
+                            return `> (${data.counter}) ${data.name} - \`${data.id}\``
                         })
                         .filter(x => x).join('\n')
 

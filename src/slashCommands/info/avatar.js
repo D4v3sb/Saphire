@@ -266,7 +266,8 @@ module.exports = {
             Database.SetTimeout(Author.id, 'Timeouts.Rep')
 
             return await int.followUp({
-                content: `${e.Check} | ${Author} deu um like para ${user.tag}.`
+                content: `${e.Check} | ${Author} deu um like para ${user.tag}.`,
+                ephemeral: ephemeral
             })
         }
 

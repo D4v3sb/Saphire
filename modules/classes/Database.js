@@ -308,8 +308,8 @@ class Database extends Models {
 
         if (!userId || !Frase) return
 
-        let userData = await Database.User.findOne({ id: userId }, 'Balance'),
-            balance = userData?.Balance || 0
+        const userData = await Database.User.findOne({ id: userId }, 'Balance')
+        const balance = userData?.Balance || 0
 
         await Database.User.updateOne(
             { id: userId },

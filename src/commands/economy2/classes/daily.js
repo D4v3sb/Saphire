@@ -26,11 +26,11 @@ class Daily {
         if (client.Timeout(86400000, dailyTimeout))
             return message.reply(`${e.Deny} | Calma calma, ainda falta **${client.GetTimeout(86400000, authorData?.Timeouts?.Daily)}** para você coletar o próximo prêmio.\n${e.Info} | Se você quiser ver os seus status, use \`${prefix}daily status\``)
 
-        let data = { fields: [] },
-            prize = dailyPrizes[count],
-            over30 = { day: count, money: parseInt(Math.floor(Math.random() * 10000)), xp: parseInt(Math.floor(Math.random() * 10000)) },
-            isVip = await Vip(message.author.id),
-            moeda = await Moeda(message)
+        let data = { fields: [] }
+        let prize = dailyPrizes[count]
+        let over30 = { day: count, money: parseInt(Math.floor(Math.random() * 10000)), xp: parseInt(Math.floor(Math.random() * 10000)) }
+        let isVip = await Vip(message.author.id)
+        let moeda = await Moeda(message)
 
         if (count > 30) {
             if (over30.money < 1000) over30.money = 1000
@@ -38,8 +38,8 @@ class Daily {
             prize = over30
         }
 
-        let money = prize.money,
-            xp = prize.xp
+        let money = prize.money
+        let xp = prize.xp
 
         if (message.guild.id === config.guildId) {
             let moneyBonus = bonusCalculate(money, 0.5)

@@ -11,7 +11,7 @@ class Reminder {
 
     async showButton() {
 
-        let msg = await this.message.edit({
+        const msg = await this.message.edit({
             components: [{
                 type: 1,
                 components: [

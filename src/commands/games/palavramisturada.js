@@ -14,10 +14,10 @@ module.exports = {
 
     execute: async (client, message, args, prefix, MessageEmbed, Database) => {
 
-        let Palavras = Database.Frases.get('f.Mix'),
-            palavra,
-            mixed,
-            mod = await IsMod(message.author.id)
+        let Palavras = Database.Frases.get('f.Mix')
+        let palavra
+        let mixed
+        let mod = await IsMod(message.author.id)
 
         if (Palavras?.length < 1)
             return message.reply(`${e.Deny} | Nenhuma palavra no registro.`)
@@ -49,35 +49,35 @@ module.exports = {
 
         async function start() {
 
-            let msg = await message.channel.send(`${e.Loading} | Qual é a palavra? **\`${mixed}\`**`),
-                moeda = await Moeda(message),
-                control = false,
-                collector = message.channel.createMessageCollector({
-                    filter: m => m.content.toLowerCase() === palavra.toLowerCase(),
-                    time: 20000
+            let msg = await message.channel.send(`${e.Loading} | Qual é a palavra? **\`${mixed}\`**`)
+            let moeda = await Moeda(message)
+            let control = false
+            let collector = message.channel.createMessageCollector({
+                filter: m => m.content.toLowerCase() === palavra.toLowerCase(),
+                time: 20000
+            })
+                .on('collect', m => {
+
+                    control = true
+
+                    Database.add(m.author.id, 15)
+                    msg.delete().catch(() => { })
+                    message.channel.send(`${e.Check} | ${m.author} acertou a palavra: **\`${mixed}\`** -> **\`${palavra}\`**\n${e.PandaProfit} | +15 ${moeda}`).catch(() => { })
+                    collector.stop()
+                    oneMoreMixCount(m.author.id)
+                    return GetAndValidateWord()
+
                 })
-                    .on('collect', m => {
 
-                        control = true
+                .on('end', () => {
 
-                        Database.add(m.author.id, 15)
-                        msg.delete().catch(() => { })
-                        message.channel.send(`${e.Check} | ${m.author} acertou a palavra: **\`${mixed}\`** -> **\`${palavra}\`**\n${e.PandaProfit} | +15 ${moeda}`).catch(() => { })
-                        collector.stop()
-                        oneMoreMixCount(m.author.id)
-                        return GetAndValidateWord()
+                    if (control) return
 
-                    })
+                    Database.registerChannelControl('pull', 'Mix', message.channel.id)
+                    msg.delete().catch(() => { })
+                    return message.channel.send(`${e.Deny} | Ninguém acertou a palavra: **\`${mixed}\`** -> **\`${palavra}\`**`).catch(() => { })
 
-                    .on('end', () => {
-
-                        if (control) return
-
-                        Database.registerChannelControl('pull', 'Mix', message.channel.id)
-                        msg.delete().catch(() => { })
-                        return message.channel.send(`${e.Deny} | Ninguém acertou a palavra: **\`${mixed}\`** -> **\`${palavra}\`**`).catch(() => { })
-
-                    })
+                })
 
         }
 
