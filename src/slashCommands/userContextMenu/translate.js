@@ -7,7 +7,7 @@ module.exports = {
     async execute({ interaction: interaction, emojis: e, client: client }) {
 
         const { targetMessage, locale } = interaction
-        const text = targetMessage.content?.slice(0, 1024)
+        const text = targetMessage.content?.slice(0, 1000)
 
         if (!text)
             return await interaction.reply({
@@ -21,19 +21,18 @@ module.exports = {
             fields: [
                 {
                     name: 'Texto',
-                    value: `\`\`\`txt\n${text}\n\`\`\``
+                    value: `\`\`\`txt\n${text.slice(0, 1000)}\n\`\`\``
                 }
             ],
             footer: { text: `Traduzido para ${Languages[locale]}` }
         }
-
 
         await interaction.deferReply({})
         return translate(text, { to: locale.split('-')[0] })
             .then(async res => {
                 Embed.fields[1] = {
                     name: 'Tradução',
-                    value: `\`\`\`txt\n${res.text}\n\`\`\``
+                    value: `\`\`\`txt\n${res.text?.slice(0, 1000)}\n\`\`\``
                 }
 
                 return await interaction.editReply({ embeds: [Embed] })
