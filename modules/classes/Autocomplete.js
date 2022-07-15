@@ -38,6 +38,7 @@ class Autocomplete {
             case 'select_logo_marca': this.select_logo_marca(value); break;
             case 'remove_sinonimo': this.remove_sinonimo(value); break;
             case 'roles_in_autorole': this.roles_in_autorole(value); break;
+            case 'delete_lembrete': this.delete_lembrete(value); break;
             case 'level_options': this.levelOptions(); break;
             case 'option': this.ideaCommandOptions(); break;
             case 'editar_imagem_com_censura': this.editImageLogoMarca(); break;
@@ -46,6 +47,22 @@ class Autocomplete {
         }
 
         return
+    }
+
+    async delete_lembrete(value) {
+
+        const allReminders = await Database.Reminder.find({}) || []
+        const userReminders = allReminders.filter(reminders => reminders.userId === this.user.id)
+
+        if (!userReminders || userReminders.length === 0) return this.respond()
+
+        const fill = userReminders.filter(reminders => reminders.RemindMessage?.toLowerCase().includes(value?.toLowerCase()) || reminders.id.toLowerCase().includes(value?.toLowerCase()))
+        const mapped = fill.map(reminder => ({ name: `${reminder.id} - ${reminder.RemindMessage}`, value: reminder.id }))
+
+        if (mapped.length > 1)
+            mapped.unshift({ name: 'Deletar todos os lembretes', value: 'all' })
+
+        return this.respond(mapped)
     }
 
     async editImageLogoMarca() {

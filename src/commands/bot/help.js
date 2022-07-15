@@ -18,199 +18,225 @@ module.exports = {
         const { Config: config } = Database
         const hasVoted = await api.hasVoted(message.author.id)
 
-        let SaphireInviteLink = `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=applications.commands%20bot`,
-            ghostServer = client.guilds.cache.get(config.saphiresHome),
-            serverInvite = ghostServer ? ` ou quem sabe entrar na [${ghostServer.name}](${config.MoonServerLink}) para se divertir?` : '',
-            attInvite = `https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot%20applications.commands&permissions=2146958847&guild_id=${message.guild.id}&disable_guild_select=true`,
-            PrincipalEmbed = new MessageEmbed()
-                .setColor('#246FE0')
-                .setTitle(`${e.BlueHeart} Centralzinha de Ajuda da ${client.user.username}`)
-                .setURL(`${SaphireInviteLink}`)
-                .setImage('https://media.discordapp.net/attachments/893361065084198954/939681589724598282/teste.png?width=720&height=223')
-                .addField(`${e.Info} Perguntas frequentes`, `Está com alguma dúvida? \`${prefix}faq\``)
-                .addField('🛰️ Global System Notification', `Ative o \`${prefix}logs\` no servidor e aproveite do meu sistema avançado de notificação. Eu vou te avisar desde os bans/kicks até Autoroles com permissões editadas.`)
-                .addField(`${e.SaphireTimida} Saphire`, `Você pode [me adicionar](${SaphireInviteLink}) no seu servidor e também pode entrar no [meu servidor de suporte](${config.SupportServerLink}) pra tirar algumas dúvidas${serverInvite}`)
-                .addField(`${e.CoroaDourada} Premium Stage`, `Tem interesse em desbloquear comandos únicos? Use \`${prefix}premium\` e descubra mais.`)
-                .addField(`⭐ Slash Commands`, `Alguns comandos foram movidos para Slash Commands. Use \`/help\` e confira as alterações. Caso o Slash Commands não esteja aparecendo para você, [atualize as minhas permissões](${attInvite})`)
-                .addField(`${e.Gear} Status`, `Acompanhe todos os Status da Saphire [clicando aqui](${config.statcordURL}${client.user.id})`)
-                .addField(`${e.topgg} Vote e ganhe e resgate (${hasVoted ? 'Você já votou 💞' : 'Voto disponível'})`, `Vote em mim no Top.gg e resgate seu prêmio usando \`/vote\`. Você pode votar [clicando aqui](${config.TopGGLink})`)
-                .setFooter({ text: 'Este painel se fechará após 1 minuto de inatividade' }),
+        let SaphireInviteLink = `https://discord.com/api/oauth2/authorize?client_id=${client.user.id}&permissions=8&scope=applications.commands%20bot`
+        let ghostServer = client.guilds.cache.get(config.saphiresHome)
+        let serverInvite = ghostServer ? ` ou quem sabe entrar na [${ghostServer.name}](${config.MoonServerLink}) para se divertir?` : ''
+        let attInvite = `https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot%20applications.commands&permissions=2146958847&guild_id=${message.guild.id}&disable_guild_select=true`
+        let PrincipalEmbed = new MessageEmbed()
+            .setColor('#246FE0')
+            .setTitle(`${e.BlueHeart} Centralzinha de Ajuda da ${client.user.username}`)
+            .setURL(`${SaphireInviteLink}`)
+            .setImage('https://media.discordapp.net/attachments/893361065084198954/939681589724598282/teste.png?width=720&height=223')
+            .addField(`${e.Info} Perguntas frequentes`, `Está com alguma dúvida? \`${prefix}faq\``)
+            .addField('🛰️ Global System Notification', `Ative o \`${prefix}logs\` no servidor e aproveite do meu sistema avançado de notificação. Eu vou te avisar desde os bans/kicks até Autoroles com permissões editadas.`)
+            .addField(`${e.SaphireTimida} Saphire`, `Você pode [me adicionar](${SaphireInviteLink}) no seu servidor e também pode entrar no [meu servidor de suporte](${config.SupportServerLink}) pra tirar algumas dúvidas${serverInvite}`)
+            .addField(`${e.CoroaDourada} Premium Stage`, `Tem interesse em desbloquear comandos únicos? Use \`${prefix}premium\` e descubra mais.`)
+            .addField(`⭐ Slash Commands`, `Alguns comandos foram movidos para Slash Commands. Use \`/help\` e confira as alterações. Caso o Slash Commands não esteja aparecendo para você, [atualize as minhas permissões](${attInvite})`)
+            .setFooter({ text: 'Este painel se fechará após 1 minuto de inatividade' })
 
-            painel = new MessageActionRow()
-                .addComponents(new MessageSelectMenu()
-                    .setCustomId('menu')
-                    .setPlaceholder('Escolher uma categoria') // Mensagem estampada
-                    .addOptions([
-                        {
-                            label: 'Painel Inicial',
-                            description: 'Painel Principal',
-                            emoji: `${e.BlueHeart}`,
-                            value: 'PainelPrincipal',
-                        },
-                        {
-                            label: 'Atualizações',
-                            description: 'Atualizações que eu recebi',
-                            emoji: '⭐',
-                            value: 'att',
-                        },
-                        {
-                            label: 'AFK',
-                            description: 'Afk Global System',
-                            emoji: `${e.Afk}`,
-                            value: 'afk',
-                        },
-                        {
-                            label: 'Admin',
-                            description: 'Saphire\'s Team Administrator',
-                            emoji: `${e.Admin}`,
-                            value: 'admin',
-                        },
-                        {
-                            label: 'Animes',
-                            description: 'Todo mundo gosta de animes, não é?',
-                            emoji: `${e.NezukoDance}`,
-                            value: 'animes',
-                        },
-                        {
-                            label: 'Bot, vulgo Eu',
-                            description: 'Todos os comandos ligados a euzinha aqui',
-                            emoji: `${e.Gear}`,
-                            value: 'bot',
-                        },
-                        {
-                            label: 'Configurações',
-                            description: 'Comandos de configurações do servidor/usuário',
-                            emoji: `${e.On}`,
-                            value: 'config',
-                        },
-                        {
-                            label: 'Economia 1',
-                            description: 'Economy Global System',
-                            emoji: `${e.PandaProfit}`,
-                            value: 'economy',
-                        },
-                        {
-                            label: 'Economia 2',
-                            description: 'Economy Global System',
-                            emoji: `${e.PandaProfit}`,
-                            value: 'economy2',
-                        },
-                        {
-                            label: 'Games/Jogos',
-                            description: 'Que tal só se divertir?',
-                            emoji: '🎮',
-                            value: 'games',
-                        },
-                        {
-                            label: 'Interação',
-                            description: 'Interagir com os outros é muito legal',
-                            emoji: '🫂',
-                            value: 'interactions',
-                        },
-                        {
-                            label: 'Pros Usuários',
-                            description: 'Comandos dos usuários',
-                            emoji: `${e.RedStar}`,
-                            value: 'users',
-                        },
-                        {
-                            label: 'Moderação/Administração 1',
-                            description: 'Comandos só pros Mod/Adm de plantão',
-                            emoji: `${e.ModShield}`,
-                            value: 'moderation',
-                        },
-                        {
-                            label: 'Moderação/Administração 2',
-                            description: 'Comandos só pros Mod/Adm de plantão',
-                            emoji: `${e.ModShield}`,
-                            value: 'moderation2',
-                        },
-                        {
-                            label: 'Desenvolvedor',
-                            description: 'Comandos exclusivos do meu criador/desenvolvedor',
-                            emoji: `${e.OwnerCrow}`,
-                            value: 'owner',
-                        },
-                        {
-                            label: 'Perfil',
-                            description: 'Comandos do perfil pessoal de cada um',
-                            emoji: '👤',
-                            value: 'perfil',
-                        },
-                        {
-                            label: 'Vip',
-                            description: 'Sistema VIP',
-                            emoji: `${e.VipStar}`,
-                            value: 'vip'
-                        },
-                        {
-                            label: 'Random',
-                            description: 'Pensa numas coisas aleatórias',
-                            emoji: `${e.CoolDoge}`,
-                            value: 'random',
-                        },
-                        {
-                            label: 'Reações/Emoções',
-                            description: 'Mostre ao mundo como se sente',
-                            emoji: '😁',
-                            value: 'reactions',
-                        },
-                        {
-                            label: 'Manipulação de Imagens',
-                            description: 'Manipule imagens com os membros',
-                            emoji: '🖼️',
-                            value: 'images',
-                        },
-                        {
-                            label: 'Servidor',
-                            description: 'Comandos fechados só para o servidor',
-                            emoji: `${e.PlanetServer}`,
-                            value: 'servidor',
-                        },
-                        {
-                            label: 'Utilidades',
-                            description: 'Comandos uteis para qualquer um, garanto',
-                            emoji: `${e.QuestionMark}`,
-                            value: 'util',
-                        },
-                        {
-                            label: 'Premium Stage',
-                            description: 'Comandos exclusivos para Servidores Premium',
-                            emoji: `${e.CoroaDourada}`,
-                            value: 'premium',
-                        },
-                        {
-                            label: 'Fechar o painel de ajuda',
-                            description: 'Desativa o painel rápido',
-                            emoji: `${e.Deny}`,
-                            value: 'Close',
-                        },
-                    ])
-                )
+        let painel = new MessageActionRow()
+            .addComponents(new MessageSelectMenu()
+                .setCustomId('menu')
+                .setPlaceholder('Escolher uma categoria') // Mensagem estampada
+                .addOptions([
+                    {
+                        label: 'Painel Inicial',
+                        description: 'Painel Principal',
+                        emoji: `${e.BlueHeart}`,
+                        value: 'PainelPrincipal',
+                    },
+                    {
+                        label: 'Atualizações',
+                        description: 'Atualizações que eu recebi',
+                        emoji: '⭐',
+                        value: 'att',
+                    },
+                    {
+                        label: 'AFK',
+                        description: 'Afk Global System',
+                        emoji: `${e.Afk}`,
+                        value: 'afk',
+                    },
+                    {
+                        label: 'Admin',
+                        description: 'Saphire\'s Team Administrator',
+                        emoji: `${e.Admin}`,
+                        value: 'admin',
+                    },
+                    {
+                        label: 'Animes',
+                        description: 'Todo mundo gosta de animes, não é?',
+                        emoji: `${e.NezukoDance}`,
+                        value: 'animes',
+                    },
+                    {
+                        label: 'Bot, vulgo Eu',
+                        description: 'Todos os comandos ligados a euzinha aqui',
+                        emoji: `${e.Gear}`,
+                        value: 'bot',
+                    },
+                    {
+                        label: 'Configurações',
+                        description: 'Comandos de configurações do servidor/usuário',
+                        emoji: `${e.On}`,
+                        value: 'config',
+                    },
+                    {
+                        label: 'Economia 1',
+                        description: 'Economy Global System',
+                        emoji: `${e.PandaProfit}`,
+                        value: 'economy',
+                    },
+                    {
+                        label: 'Economia 2',
+                        description: 'Economy Global System',
+                        emoji: `${e.PandaProfit}`,
+                        value: 'economy2',
+                    },
+                    {
+                        label: 'Games/Jogos',
+                        description: 'Que tal só se divertir?',
+                        emoji: '🎮',
+                        value: 'games',
+                    },
+                    {
+                        label: 'Interação',
+                        description: 'Interagir com os outros é muito legal',
+                        emoji: '🫂',
+                        value: 'interactions',
+                    },
+                    {
+                        label: 'Pros Usuários',
+                        description: 'Comandos dos usuários',
+                        emoji: `${e.RedStar}`,
+                        value: 'users',
+                    },
+                    {
+                        label: 'Moderação/Administração 1',
+                        description: 'Comandos só pros Mod/Adm de plantão',
+                        emoji: `${e.ModShield}`,
+                        value: 'moderation',
+                    },
+                    {
+                        label: 'Moderação/Administração 2',
+                        description: 'Comandos só pros Mod/Adm de plantão',
+                        emoji: `${e.ModShield}`,
+                        value: 'moderation2',
+                    },
+                    {
+                        label: 'Desenvolvedor',
+                        description: 'Comandos exclusivos do meu criador/desenvolvedor',
+                        emoji: `${e.OwnerCrow}`,
+                        value: 'owner',
+                    },
+                    {
+                        label: 'Perfil',
+                        description: 'Comandos do perfil pessoal de cada um',
+                        emoji: '👤',
+                        value: 'perfil',
+                    },
+                    {
+                        label: 'Vip',
+                        description: 'Sistema VIP',
+                        emoji: `${e.VipStar}`,
+                        value: 'vip'
+                    },
+                    {
+                        label: 'Random',
+                        description: 'Pensa numas coisas aleatórias',
+                        emoji: `${e.CoolDoge}`,
+                        value: 'random',
+                    },
+                    {
+                        label: 'Reações/Emoções',
+                        description: 'Mostre ao mundo como se sente',
+                        emoji: '😁',
+                        value: 'reactions',
+                    },
+                    {
+                        label: 'Manipulação de Imagens',
+                        description: 'Manipule imagens com os membros',
+                        emoji: '🖼️',
+                        value: 'images',
+                    },
+                    {
+                        label: 'Servidor',
+                        description: 'Comandos fechados só para o servidor',
+                        emoji: `${e.PlanetServer}`,
+                        value: 'servidor',
+                    },
+                    {
+                        label: 'Utilidades',
+                        description: 'Comandos uteis para qualquer um, garanto',
+                        emoji: `${e.QuestionMark}`,
+                        value: 'util',
+                    },
+                    {
+                        label: 'Premium Stage',
+                        description: 'Comandos exclusivos para Servidores Premium',
+                        emoji: `${e.CoroaDourada}`,
+                        value: 'premium',
+                    },
+                    {
+                        label: 'Fechar o painel de ajuda',
+                        description: 'Desativa o painel rápido',
+                        emoji: `${e.Deny}`,
+                        value: 'Close',
+                    },
+                ])
+            )
 
         if (args[0]) return HelpWithArgs(args[0])
 
-        const components = [painel]
-
-        if (message.member.memberPermissions('MANAGE_GUILD'))
-            components.push({
+        const components = [
+            painel,
+            {
                 type: 1,
                 components: [
                     {
                         type: 2,
-                        label: 'Atualizar Permissões',
-                        emoji: '🔄',
-                        url: `https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot%20applications.commands&permissions=2146958847&guild_id=888464632291917956&disable_guild_select=true`,
+                        label: 'Votar',
+                        emoji: e.topgg,
+                        url: config.TopGGLink,
+                        style: 'LINK'
+                    },
+                    {
+                        type: 2,
+                        label: 'Status',
+                        emoji: e.Gear,
+                        url: `${config.statcordURL}${client.user.id}`,
                         style: 'LINK'
                     }
                 ]
+            },
+            {
+                type: 1,
+                components: [
+                    {
+                        type: 2,
+                        label: 'Termos de Serviços e Privacidade',
+                        emoji: e.ReminderBook,
+                        url: 'https://github.com/SaphireBot/Saphire/wiki/Terms-of-Service-&-Privacy',
+                        style: 'LINK'
+                    }
+                ]
+            }
+        ]
+
+        if (message.member.memberPermissions('MANAGE_GUILD'))
+            components[1].components.push({
+                type: 2,
+                label: 'Atualizar Permissões',
+                emoji: '🔄',
+                url: `https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot%20applications.commands&permissions=2146958847&guild_id=888464632291917956&disable_guild_select=true`,
+                style: 'LINK'
             })
 
-        const msg = await message.reply({ embeds: [PrincipalEmbed], components: components }),
-            collector = msg.createMessageComponentCollector({
-                filtro: (interaction) => interaction.customId === 'menu' && interaction.user.id === message.author.id,
-                idle: 60000
-            })
+        const msg = await message.reply({ embeds: [PrincipalEmbed], components: components })
+        const collector = msg.createMessageComponentCollector({
+            filtro: (interaction) => interaction.customId === 'menu' && interaction.user.id === message.author.id,
+            idle: 60000
+        })
 
         collector.on('end', () => {
 

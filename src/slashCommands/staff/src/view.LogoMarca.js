@@ -3,7 +3,7 @@ const client = require('../../../../index')
 const { formatString } = require('../../../commands/games/plugins/gamePlugins')
 const { e } = require('../../../../JSON/emojis.json')
 
-async function viewLogoMarca(interaction) {
+module.exports = async (interaction) => {
 
     const { options, user } = interaction
     const logoData = Database.Logomarca.get('LogoMarca') || []
@@ -62,5 +62,3 @@ async function viewLogoMarca(interaction) {
     return
 
 }
-
-module.exports = viewLogoMarca

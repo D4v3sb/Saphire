@@ -32,12 +32,12 @@ async function ReminderSystem() {
 
 async function reminderStart(user, data) {
 
-    let RemindMessage = data.RemindMessage.slice(0, 3500),
-        Time = data.Time,
-        DateNow = data.DateNow,
-        isAutomatic = data.isAutomatic,
-        TimeOver = client.Timeout(Time, DateNow),
-        Channel = client.channels.cache.get(data.ChannelId)
+    let RemindMessage = data.RemindMessage.slice(0, 3500)
+    let Time = data.Time
+    let DateNow = data.DateNow
+    let isAutomatic = data.isAutomatic
+    let TimeOver = client.Timeout(Time, DateNow)
+    let Channel = client.channels.cache.get(data.ChannelId)
 
     if (!TimeOver && !data.Alerted) {
 
@@ -51,9 +51,9 @@ async function reminderStart(user, data) {
         let msg = await Channel.send(`${e.Notification} | ${user}, lembrete pra você.\n🗒️ | **${RemindMessage}**`).catch(() => { return NotifyUser() })
 
         if (isAutomatic) return deleteReminders(data.id)
-        
-        let emojis = ['📅', '🗑️'],
-            validate = false
+
+        let emojis = ['📅', '🗑️']
+        let validate = false
 
         for (let i of emojis) msg.react(i).catch(() => { })
 

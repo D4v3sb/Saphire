@@ -2,7 +2,7 @@ const Database = require('../../../../modules/classes/Database')
 const client = require('../../../../index')
 const { e } = require('../../../../JSON/emojis.json')
 
-async function newLogoMarca(interaction) {
+module.exports = async (interaction) => {
 
     const { options } = interaction
     const name = options.getString('marca')
@@ -78,5 +78,3 @@ async function newLogoMarca(interaction) {
         ephemeral: true
     })
 }
-
-module.exports = newLogoMarca

@@ -3,7 +3,7 @@ const { formatString } = require('../../../../src/commands/games/plugins/gamePlu
 const { e } = require('../../../../JSON/emojis.json')
 const client = require('../../../../index')
 
-async function deleteLogoMarca(interaction) {
+module.exports = async (interaction) => {
 
     const { options, user } = interaction
     const logoData = Database.Logomarca.get('LogoMarca') || []
@@ -87,5 +87,3 @@ async function deleteLogoMarca(interaction) {
         })
 
 }
-
-module.exports = deleteLogoMarca

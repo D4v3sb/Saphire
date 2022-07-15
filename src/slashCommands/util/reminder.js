@@ -5,40 +5,79 @@ module.exports = {
     type: 1,
     options: [
         {
-            name: 'mensagem',
-            description: 'Me lembre de...',
-            type: 3,
-            required: true
+            name: 'novo_lembrete',
+            description: '[util] Defina um novo lembrete',
+            type: 1,
+            options: [
+                {
+                    name: 'mensagem',
+                    description: 'Me lembre de...',
+                    type: 3,
+                    required: true
+                },
+                {
+                    name: 'quando',
+                    description: 'Para quando é o lembrete?',
+                    type: 3,
+                    required: true
+                }
+            ]
         },
         {
-            name: 'quando',
-            description: 'Para quando é o lembrete?',
-            type: 3,
-            required: true
+            name: 'mais_opções',
+            description: '[util] Mais opções do comando lembrete',
+            type: 1,
+            options: [
+                {
+                    name: 'delete_lembrete',
+                    description: 'Deletar um lembrete',
+                    type: 3,
+                    autocomplete: true
+                },
+                {
+                    name: 'lista',
+                    description: 'Lista de lembretes',
+                    type: 3,
+                    choices: [
+                        {
+                            name: 'Lista com lembretes automáticos',
+                            value: 'automatic'
+                        },
+                        {
+                            name: 'Sem lembretes automáticos',
+                            value: 'normal'
+                        }
+                    ]
+                }
+            ]
         }
     ],
     async execute({ interaction: interaction, client: client, database: Database, emojis: e, guildData: guildData, member: member }) {
 
         const moment = require('moment')
-        let dataInfo = interaction.options.getString('mensagem')
-        let when = interaction.options.getString('quando')
-        let { user, channel } = interaction
+        let { user, channel, options } = interaction
+        let dataInfo = options.getString('mensagem')
+        let when = options.getString('quando')
+        const lembreteToDeleteId = options.getString('delete_lembrete')
+        const list = options.getString('lista')
 
-        if (guildData?.AntLink && !member?.permissions?.toArray()?.includes('ADMINISTRATOR') && dataInfo.replace(/ /g, '').includes('discord.gg')) {
+        if (lembreteToDeleteId) return require('./src/delete.reminder.js')(interaction, lembreteToDeleteId)
+        if (list) return require('./src/list.reminder.js')(interaction, list)
+
+        if (guildData?.AntLink && !member?.permissions?.toArray()?.includes('ADMINISTRATOR') && dataInfo.replace(/ /g, '').includes('discord.gg'))
             return interaction.reply({
                 content: `${e.antlink} | O sistema de antilink está ativado neste servidor.`,
                 ephemeral: true
             })
-        }
 
-        let Args = when.trim().split(/ +/g),
-            DefinedTime = 0,
-            { day } = require('../../../modules/functions/plugins/eventPlugins')
+        let Args = when.trim().split(/ +/g)
+        let DefinedTime = 0
+        let { day } = require('../../../modules/functions/plugins/eventPlugins')
 
         if (Args[0].includes('/') || Args[0].includes(':') || ['hoje', 'today', 'tomorrow', 'amanhã'].includes(Args[0]?.toLowerCase())) {
 
-            let data = Args[0],
-                hour = Args[1]
+            let data = Args[0]
+            let hour = Args[1]
 
             if (['tomorrow', 'amanhã'].includes(data.toLowerCase()))
                 data = day(true)
@@ -159,9 +198,9 @@ module.exports = {
                     ephemeral: true
                 })
 
-            const PassCode = require('../../../modules/functions/plugins/PassCode'),
-                ReminderCode = PassCode(7).toUpperCase(),
-                Data = require('../../../modules/functions/plugins/data')
+            const PassCode = require('../../../modules/functions/plugins/PassCode')
+            const ReminderCode = PassCode(7).toUpperCase()
+            const Data = require('../../../modules/functions/plugins/data')
 
             new Database.Reminder({
                 id: ReminderCode,

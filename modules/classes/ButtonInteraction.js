@@ -157,7 +157,7 @@ class ButtonInteraction extends Modals {
                         min_length: 3,
                         max_length: 20,
                         placeholder: "Escrever novo título",
-                        value: title?.length >= 5 ? title : null
+                        value: title?.length >= 3 && title?.length <= 20 ? title : null
                     }
                 ]
             })

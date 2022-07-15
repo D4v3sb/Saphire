@@ -93,16 +93,16 @@ class Saphire extends Client {
 
         const moment = require('moment')
 
-        let now = Date.now(),
-            ms = moment(now).diff(moment(timeStamp)),
-            date = moment.duration(ms),
-            Years = format(date.years()) > 0 ? `${format(date.years())} anos` : '',
-            Months = format(date.months()) > 0 ? `${format(date.months())} meses` : '',
-            Day = format(date.days()) > 0 ? `${format(date.days())} dias` : '',
-            Hours = format(date.hours()) > 0 ? `${format(date.hours())} horas` : '',
-            Minutes = format(date.minutes()) > 0 ? `${format(date.minutes())} minutos` : '',
-            Seconds = format(date.seconds()) > 0 ? `${format(date.seconds())} segundos` : '',
-            Dh = '', Hm = '', Ms = '', Ym = '', Md = ''
+        let now = Date.now()
+        let ms = moment(now).diff(moment(timeStamp))
+        let date = moment.duration(ms)
+        let Years = format(date.years()) > 0 ? `${format(date.years())} anos` : ''
+        let Months = format(date.months()) > 0 ? `${format(date.months())} meses` : ''
+        let Day = format(date.days()) > 0 ? `${format(date.days())} dias` : ''
+        let Hours = format(date.hours()) > 0 ? `${format(date.hours())} horas` : ''
+        let Minutes = format(date.minutes()) > 0 ? `${format(date.minutes())} minutos` : ''
+        let Seconds = format(date.seconds()) > 0 ? `${format(date.seconds())} segundos` : ''
+        let Dh = '', Hm = '', Ms = '', Ym = '', Md = ''
 
         if (Years && Months || Years && Day || Years && Hours || Years && Minutes || Years && Seconds) Ym = 'SPACE'
         if (Months && Day || Months && Hours || Months && Minutes || Months && Seconds) Md = 'SPACE'
@@ -174,8 +174,7 @@ class Saphire extends Client {
     topGGAutoPoster() {
         if (this.user.id !== this.moonId) return
         const { AutoPoster } = require('topgg-autoposter')
-        const autoPoster = AutoPoster(process.env.TOP_GG_TOKEN, this)
-        autoPoster.on('posted', () => console.log('Topp.gg AutoPoster | OK!'))
+        return AutoPoster(process.env.TOP_GG_TOKEN, this)
     }
 
 }

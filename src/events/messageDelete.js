@@ -1,10 +1,10 @@
-const client = require('../../index'),
-    Notify = require('../../modules/functions/plugins/notify'),
-    Database = require('../../modules/classes/Database')
+const client = require('../../index')
+const Notify = require('../../modules/functions/plugins/notify')
+const Database = require('../../modules/classes/Database')
 
 client.on('messageDelete', async message => {
 
-    let giveaway = await Database.Giveaway.findOne({ MessageID: message.id })
+    const giveaway = await Database.Giveaway.findOne({ MessageID: message.id })
 
     if (!giveaway) return
 

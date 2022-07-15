@@ -2,7 +2,7 @@ const Database = require('../../../../modules/classes/Database')
 const { e } = require('../../../../JSON/emojis.json')
 const { formatString } = require('../../../../src/commands/games/plugins/gamePlugins')
 
-async function editLogoMarca(interaction) {
+module.exports = async (interaction) => {
 
     const { options } = interaction
     const logoData = Database.Logomarca.get('LogoMarca') || []
@@ -136,5 +136,3 @@ async function editLogoMarca(interaction) {
     }
 
 }
-
-module.exports = editLogoMarca
