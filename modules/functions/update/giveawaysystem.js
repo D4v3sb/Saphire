@@ -6,7 +6,7 @@ const { Emojis: e } = Database
 
 async function GiveawaySystem() {
 
-    let GiveawaysAllData = await Database.Giveaway.find({}, 'MessageID GuildId ChannelId Actived TimeToDelete') || []
+    let GiveawaysAllData = await Database.Giveaway.find({}) || []
 
     if (!GiveawaysAllData || GiveawaysAllData.length === 0) return
 
