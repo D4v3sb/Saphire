@@ -9,7 +9,7 @@ module.exports = {
     dm_permission: false,
     type: 1,
     options: [],
-    async execute({ interaction: interaction, client: client, database: Database, emojis: e, guildData: guildData, clientData: clientData }) {
+    async execute({ interaction: interaction, client: client, database: Database, emojis: e }) {
 
         const { Config: config } = Database
         const { user } = interaction
@@ -122,9 +122,53 @@ module.exports = {
             }]
         }
 
+        const components = [
+            painel,
+            {
+                type: 1,
+                components: [
+                    {
+                        type: 2,
+                        label: 'Votar',
+                        emoji: e.topgg,
+                        url: config.TopGGLink,
+                        style: 'LINK'
+                    },
+                    {
+                        type: 2,
+                        label: 'Status',
+                        emoji: e.Gear,
+                        url: `${config.statcordURL}${client.user.id}`,
+                        style: 'LINK'
+                    }
+                ]
+            },
+            {
+                type: 1,
+                components: [
+                    {
+                        type: 2,
+                        label: 'Termos de Serviços',
+                        emoji: e.ReminderBook,
+                        url: config.Terms,
+                        style: 'LINK'
+                    }
+                ]
+            }
+        ]
+
+        if (interaction.member.memberPermissions('MANAGE_GUILD'))
+            components[1].components.push({
+                type: 2,
+                label: 'Atualizar Permissões',
+                emoji: '🔄',
+                url: `https://discord.com/oauth2/authorize?client_id=${client.user.id}&scope=bot%20applications.commands&permissions=2146958847&guild_id=888464632291917956&disable_guild_select=true`,
+                style: 'LINK'
+            })
+
         const msg = await interaction.reply({
             embeds: [PrincipalEmbed],
-            components: [painel],
+            components: components,
             fetchReply: true
         }),
             collector = msg.createMessageComponentCollector({

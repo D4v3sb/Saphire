@@ -55,7 +55,7 @@ async function reminderStart(user, data) {
         let emojis = ['📅', '🗑️']
         let validate = false
 
-        for (let i of emojis) msg.react(i).catch(() => { })
+        for (let i of emojis) msg?.react(i).catch(() => { })
 
         const collector = msg.createReactionCollector({
             filter: (reaction, u) => emojis.includes(reaction.emoji.name) && u.id === user.id,

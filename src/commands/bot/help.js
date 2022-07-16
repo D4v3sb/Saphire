@@ -214,9 +214,9 @@ module.exports = {
                 components: [
                     {
                         type: 2,
-                        label: 'Termos de Serviços e Privacidade',
+                        label: 'Termos de Serviços',
                         emoji: e.ReminderBook,
-                        url: 'https://github.com/SaphireBot/Saphire/wiki/Terms-of-Service-&-Privacy',
+                        url: config.Terms,
                         style: 'LINK'
                     }
                 ]
