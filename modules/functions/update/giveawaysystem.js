@@ -1,8 +1,8 @@
-const client = require('../../../index'),
-    { MessageEmbed } = require('discord.js'),
-    data = require('../plugins/data'),
-    Database = require('../../classes/Database'),
-    { Emojis: e } = Database
+const client = require('../../../index')
+const { MessageEmbed } = require('discord.js')
+const data = require('../plugins/data')
+const Database = require('../../classes/Database')
+const { Emojis: e } = Database
 
 async function GiveawaySystem() {
 
@@ -12,7 +12,7 @@ async function GiveawaySystem() {
 
     for (const gwData of GiveawaysAllData) {
 
-        if (!gwData?.GuildId)
+        if (!gwData?.GuildId || !gwData?.MessageID || !gwData?.ChannelId)
             return await Database.Giveaway.deleteOne({ _id: gwData._id })
 
         let Guild = client.guilds.cache.get(gwData?.GuildId)
