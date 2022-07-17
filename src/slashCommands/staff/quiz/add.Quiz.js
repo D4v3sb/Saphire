@@ -10,15 +10,9 @@ module.exports = async (interaction) => {
     const answer2 = options.getString('answer2')
     const answer3 = options.getString('answer3')
 
-    if (question.length > 1500)
+    if (question.length > 1500 || answer.length > 1500 || answer2?.length > 1500 || answer3?.length > 1500)
         return await interaction.reply({
-            content: `${e.Deny} | O limite máximo da pergunta é de 1500 caracteres.`,
-            ephemeral: true
-        })
-
-    if (answer.length > 1500 || answer2?.length > 1500 || answer3?.length > 1500)
-        return await interaction.reply({
-            content: `${e.Deny} | O limite máximo da resposta é de 1500 caracteres.`,
+            content: `${e.Deny} | O limite máximo de caracteres em perguntas e respostas são de 1500.`,
             ephemeral: true
         })
 

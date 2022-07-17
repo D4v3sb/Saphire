@@ -162,6 +162,62 @@ module.exports = {
                             autocomplete: true
                         }
                     ]
+                },
+                {
+                    name: 'add_answers',
+                    description: 'Adicione uma nova resposta a uma pergunta',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'quiz_question',
+                            description: 'Selecione a pergunta que deseja',
+                            type: 4,
+                            required: true,
+                            autocomplete: true
+                        },
+                        {
+                            name: 'new_answer',
+                            description: 'Resposta a ser adicionada',
+                            type: 3,
+                            required: true
+                        },
+                        {
+                            name: 'new_answer2',
+                            description: 'Resposta a ser adicionada',
+                            type: 3
+                        },
+                        {
+                            name: 'new_answer3',
+                            description: 'Resposta a ser adicionada',
+                            type: 3
+                        },
+                        {
+                            name: 'new_answer4',
+                            description: 'Resposta a ser adicionada',
+                            type: 3
+                        }
+                    ]
+                },
+                {
+                    name: 'del_answers',
+                    description: 'Delete uma resposta de uma pergunta',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'quiz_question',
+                            description: 'Selecione a pergunta que deseja',
+                            type: 4,
+                            required: true,
+                            autocomplete: true
+                        },
+                        {
+                            name: 'answers',
+                            description: 'Resposta a ser deleteada',
+                            type: 3,
+                            required: true,
+                            autocomplete: true
+                        }
+                    ]
                 }
             ]
         }

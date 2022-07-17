@@ -15,7 +15,11 @@ module.exports = async (interaction) => {
             ephemeral: true
         })
 
-    quizData.splice(questionIndex, 1)
+    const answer = options.getString('answers')
+    const answerIndex = question.answers.findIndex(a => a === answer)
+
+    question.answers.splice(answerIndex, 1)
+    quizData[questionIndex] = question
     Quiz.set('quiz', [...quizData])
-    return await interaction.reply({ content: `${e.Check} | Pergunta deletada com sucesso!` })
+    return await interaction.reply({ content: `${e.Check} | Resposta deletada com sucesso!` })
 }

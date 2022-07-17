@@ -32,6 +32,8 @@ module.exports = (interaction) => {
         switch (subCommand) {
             case 'new': require('./quiz/add.Quiz')(interaction); break;
             case 'delete': require('./quiz/delete.Quiz')(interaction); break;
+            case 'add_answers': require('./quiz/newAnswers.Quiz')(interaction); break;
+            case 'del_answers': require('./quiz/delAnswers.Quiz')(interaction); break;
             default: await interaction.reply({
                 content: `${e.Deny} | Nenhuma função foi encontrada`,
                 ephemeral: true

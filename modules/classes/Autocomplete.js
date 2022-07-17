@@ -40,6 +40,7 @@ class Autocomplete {
             case 'roles_in_autorole': this.roles_in_autorole(value); break;
             case 'delete_lembrete': this.delete_lembrete(value); break;
             case 'quiz_question': this.quiz_question(value); break;
+            case 'answers': this.answers(); break;
             case 'level_options': this.levelOptions(); break;
             case 'option': this.ideaCommandOptions(); break;
             case 'editar_imagem_com_censura': this.editImageLogoMarca(); break;
@@ -50,6 +51,19 @@ class Autocomplete {
         return
     }
 
+    async answers() {
+
+        const { options } = this.interaction
+        const questionIndex = options.getInteger('quiz_question')
+        const quizData = Database.Quiz.get('quiz')
+        const question = quizData[questionIndex]
+
+        if (!question || question.answers.length === 1) return await this.respond()
+
+        const mapped = question.answers.map(answer => ({ name: answer, value: answer }))
+        return await this.respond(mapped)
+    }
+
     async quiz_question(value) {
 
         const quizData = Database.Quiz.get('quiz')
@@ -58,7 +72,7 @@ class Autocomplete {
             || data.answers.find(resp => resp.toLowerCase().includes(value?.toLowerCase()))
         )
 
-        const mapped = fill.map(data => ({ name: data.question, value: `${quizData.findIndex(question => question.question === data.question)}` }))
+        const mapped = fill.map(data => ({ name: data.question, value: quizData.findIndex(question => question.question === data.question) }))
         return await this.respond(mapped)
     }
 
