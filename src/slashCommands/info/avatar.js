@@ -224,7 +224,7 @@ module.exports = {
 
             if (user.id === client.user.id)
                 return await int.followUp({
-                    content: `${Author}, olha... Eu agradeço... Mas você já viu meu \`${prefix}perfil @${client.user.username}\`?`,
+                    content: `${Author}, olha... Eu agradeço... Mas você já viu meu \`/perfil @${client.user.username}\`?`,
                     ephemeral: true
                 })
 

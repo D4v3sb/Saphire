@@ -14,6 +14,7 @@ class Database extends Models {
         this.Emojis = Database.Emojis
         this.Config = Database.Config
         this.ConfigJSON = Database.ConfigJSON
+        this.Quiz = Database.Quiz
         this.Names = {
             Rody: "451619591320371213",
             Gowther: "315297741406339083",
@@ -35,6 +36,7 @@ class Database extends Models {
     static User = require('../database/models/User')
     static EmojisJSON = new JSON('../../JSON/emojis.json')
     static ConfigJSON = new JSON('../../JSON/config.json')
+    static Quiz = new JSON('../../JSON/quiz.json')
     static Cache = new JSON('../../cache.json')
     static Emojis = Database.EmojisJSON.get('e')
     static Config = Database.ConfigJSON.get('config')

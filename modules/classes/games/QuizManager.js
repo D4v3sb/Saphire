@@ -1,7 +1,7 @@
-const quizData = require('../../../JSON/quiz.json')
 const { formatString, emoji, formatNumberCaracters, getUser } = require('../../../src/commands/games/plugins/gamePlugins')
 const Database = require('../Database')
 const { e } = require('../../../JSON/emojis.json')
+const quizData = Database.Quiz.get('quiz')
 
 class QuizManager {
     constructor(data, options) {
@@ -21,18 +21,18 @@ class QuizManager {
 
         const { interaction, author, pushChannel, pullChannel, control, client, guild, channel } = this
 
-        let rankingControl = [],
-            timesSkiped = 0,
-            characters = Database.Characters,
-            fastMode = 25000
+        let rankingControl = []
+        let timesSkiped = 0
+        let characters = Database.Characters
+        let fastMode = 25000
 
         return chooseMode()
 
         async function init(isJumped) {
 
-            let query = quizData.random(),
-                question = query.question,
-                answer = query.answers
+            let query = quizData.random()
+            let question = query.question
+            let answer = query.answers
 
             control.accept = false
 

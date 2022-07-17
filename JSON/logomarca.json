@@ -1671,11 +1671,103 @@
         {
             "name": [
                 "disney plus",
-                "disney+"
+                "disney +"
             ],
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/997332142277263360/143_Sem_Titulo_20220714234135.png",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997332141975289886/images-removebg-preview.png"
+            }
+        },
+        {
+            "name": [
+                "hbo max",
+                "hbo"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/997335468150620211/144_Sem_Titulo_20220714235342.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997335467877998683/HBO-Max-Logo.png"
+            }
+        },
+        {
+            "name": [
+                "walmart"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997336544744570940/walmart_logo_icon_170230.png"
+            }
+        },
+        {
+            "name": [
+                "banco santander",
+                "santander"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997708656797814846/banco-santander-logo-42.png"
+            }
+        },
+        {
+            "name": [
+                "duracell"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/997710394380537937/Point_Blur_Jul162022_004419.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997710394095304744/images-removebg-preview.png"
+            }
+        },
+        {
+            "name": [
+                "uol"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997711094003023963/logo-uol-icon-1024.png"
+            }
+        },
+        {
+            "name": [
+                "tripadvisor"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997711611626279063/images.png"
+            }
+        },
+        {
+            "name": [
+                "r7"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/997712526932463636/147_Sem_Titulo_20220716005303.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997712526575943742/images.jpeg"
+            }
+        },
+        {
+            "name": [
+                "xbox"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997713085278195802/Xbox_one_logo.svg.png"
+            }
+        },
+        {
+            "name": [
+                "xbox one"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/997713634887225375/148_Sem_Titulo_20220716005719.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997713634601996298/images_1.jpeg"
+            }
+        },
+        {
+            "name": [
+                "casas bahia"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997715051886678166/images_1.png"
             }
         }
     ]

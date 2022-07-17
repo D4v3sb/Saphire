@@ -37,7 +37,7 @@ module.exports = async (interaction) => {
                 ephemeral: true
             })
 
-        if (!imageURLNoCensor.isURL() || !imageURLNoCensor.includes('https://media.discordapp.net/attachments/'))
+        if (!imageURLNoCensor.isURL() || !['https://cdn.discordapp.com/attachments/', 'https://media.discordapp.net/attachments/'].includes(imageURLNoCensor))
             return await interaction.reply({
                 content: `${e.Deny} | Este não é um link válido.`,
                 ephemeral: true

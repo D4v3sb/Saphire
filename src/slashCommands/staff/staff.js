@@ -114,12 +114,62 @@ module.exports = {
                     ]
                 }
             ]
+        },
+        {
+            name: 'quiz',
+            description: '[staff] Comando para gerenciar o conteúdo do comando quiz',
+            type: 2,
+            options: [
+                {
+                    name: 'new',
+                    description: '[staff] Adicionar uma nova pergunta',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'question',
+                            description: 'Nova pergunta do quiz',
+                            type: 3,
+                            required: true
+                        },
+                        {
+                            name: 'answer',
+                            description: 'Resposta número 1',
+                            type: 3,
+                            required: true
+                        },
+                        {
+                            name: 'answer2',
+                            description: 'Resposta número 2',
+                            type: 3
+                        },
+                        {
+                            name: 'answer3',
+                            description: 'Resposta número 2',
+                            type: 3
+                        }
+                    ]
+                },
+                {
+                    name: 'delete',
+                    description: '[staff] Delete uma pergunta do quiz',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'quiz_question',
+                            description: 'Selecione a pergunta para deletar',
+                            type: 3,
+                            required: true,
+                            autocomplete: true
+                        }
+                    ]
+                }
+            ]
         }
     ],
     async execute({ interaction: interaction, database: Database, emojis: e, clientData: clientData }) {
 
         const { Config: config } = Database
-        const { options, user } = interaction
+        const { user } = interaction
         const adms = [...clientData.Administradores, ...clientData.Moderadores, config.ownerId, '327496267007787008']
 
         if (!adms.includes(user.id))
@@ -128,36 +178,6 @@ module.exports = {
                 ephemeral: true
             })
 
-        const subCommandGroup = options.getSubcommandGroup()
-
-        switch (subCommandGroup) {
-            case 'logomarca': logoMarca(); break;
-            default: await interaction.reply({
-                content: `${e.Deny} | Nenhuma função foi encontrada`,
-                ephemeral: true
-            });
-                break;
-        }
-
-        return
-
-        async function logoMarca() {
-
-            const subCommand = options.getSubcommand()
-
-            switch (subCommand) {
-                case 'new': require('./src/new.LogoMarca')(interaction); break;
-                case 'view': require('./src/view.LogoMarca')(interaction); break;
-                case 'edit': require('./src/edit.LogoMarca')(interaction); break;
-                case 'delete': require('./src/delete.LogoMarca')(interaction); break;
-                default: await interaction.reply({
-                    content: `${e.Deny} | Nenhuma função foi encontrada`,
-                    ephemeral: true
-                });
-                    break;
-            }
-
-            return
-        }
+        return require('./index')(interaction)
     }
 }

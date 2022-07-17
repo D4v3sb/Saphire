@@ -39,6 +39,7 @@ class Autocomplete {
             case 'remove_sinonimo': this.remove_sinonimo(value); break;
             case 'roles_in_autorole': this.roles_in_autorole(value); break;
             case 'delete_lembrete': this.delete_lembrete(value); break;
+            case 'quiz_question': this.quiz_question(value); break;
             case 'level_options': this.levelOptions(); break;
             case 'option': this.ideaCommandOptions(); break;
             case 'editar_imagem_com_censura': this.editImageLogoMarca(); break;
@@ -47,6 +48,18 @@ class Autocomplete {
         }
 
         return
+    }
+
+    async quiz_question(value) {
+
+        const quizData = Database.Quiz.get('quiz')
+        const fill = quizData.filter(data =>
+            data.question?.toLowerCase().includes(value?.toLowerCase())
+            || data.answers.find(resp => resp.toLowerCase().includes(value?.toLowerCase()))
+        )
+
+        const mapped = fill.map(data => ({ name: data.question, value: `${quizData.findIndex(question => question.question === data.question)}` }))
+        return await this.respond(mapped)
     }
 
     async delete_lembrete(value) {
