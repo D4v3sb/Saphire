@@ -150,6 +150,40 @@ module.exports = {
                     ]
                 },
                 {
+                    name: 'edit',
+                    description: '[staff] Edite perguntas do quiz',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'quiz_question',
+                            description: 'Selecione a pergunta para editar',
+                            type: 4,
+                            required: true,
+                            autocomplete: true
+                        },
+                        {
+                            name: 'new_question',
+                            description: 'Nova pergunta para ser editada',
+                            type: 3,
+                            required: true
+                        }
+                    ]
+                },
+                {
+                    name: 'view',
+                    description: '[staff] Visualize uma pergunta do quiz',
+                    type: 1,
+                    options: [
+                        {
+                            name: 'quiz_question',
+                            description: 'Selecione a pergunta para editar',
+                            type: 4,
+                            required: true,
+                            autocomplete: true
+                        }
+                    ]
+                },
+                {
                     name: 'delete',
                     description: '[staff] Delete uma pergunta do quiz',
                     type: 1,
@@ -165,7 +199,7 @@ module.exports = {
                 },
                 {
                     name: 'add_answers',
-                    description: 'Adicione uma nova resposta a uma pergunta',
+                    description: '[staff] Adicione uma nova resposta a uma pergunta',
                     type: 1,
                     options: [
                         {
@@ -200,7 +234,7 @@ module.exports = {
                 },
                 {
                     name: 'del_answers',
-                    description: 'Delete uma resposta de uma pergunta',
+                    description: '[staff] Delete uma resposta de uma pergunta',
                     type: 1,
                     options: [
                         {
@@ -218,6 +252,11 @@ module.exports = {
                             autocomplete: true
                         }
                     ]
+                },
+                {
+                    name: 'list',
+                    description: '[staff] Lista de todas as perguntas do quiz',
+                    type: 1
                 }
             ]
         }

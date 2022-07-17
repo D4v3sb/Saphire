@@ -1,6 +1,6 @@
-const Moeda = require('../../../modules/functions/public/moeda'),
-    { DatabaseObj: { e, config } } = require('../../../modules/functions/plugins/database'),
-    NewLoteryGiveaway = require('../../../modules/functions/update/newlotery')
+const Moeda = require('../../../modules/functions/public/moeda')
+const { DatabaseObj: { e, config } } = require('../../../modules/functions/plugins/database')
+const NewLoteryGiveaway = require('../../../modules/functions/update/newlotery')
 
 module.exports = {
     name: 'loteria',

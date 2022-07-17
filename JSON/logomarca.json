@@ -1769,6 +1769,60 @@
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997715051886678166/images_1.png"
             }
+        },
+        {
+            "name": [
+                "bottero"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/997986966320709643/bottero2.png",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/997986966022930514/bottero.png"
+            }
+        },
+        {
+            "name": [
+                "nissan"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998017813799239680/nissan2.png?width=474&height=408",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998017813404979302/nissan.png?width=474&height=408"
+            }
+        },
+        {
+            "name": [
+                "anatel"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998020082573770813/anatel2.png?width=405&height=408",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998020082129190912/anatel.png?width=405&height=408"
+            }
+        },
+        {
+            "name": [
+                "nesquik"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998020283476738068/nesquik2.png",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998020283157979166/nesquik.png"
+            }
+        },
+        {
+            "name": [
+                "nescau"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998027607746543666/nescau2.png",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998027607473926295/nescau.png"
+            }
+        },
+        {
+            "name": [
+                "toddy"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998275584415236107/toddy21.png",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998275584058736812/toddy2.png"
+            }
         }
     ]
 }

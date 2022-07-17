@@ -1,10 +1,10 @@
-const client = require('../../index'),
-    ModalInteraction = require('../../modules/classes/ModalInteraction'),
-    ButtonInteraction = require('../../modules/classes/ButtonInteraction'),
-    SelectMenuInteraction = require('../../modules/classes/SelectMenuInteraction'),
-    SlashCommand = require('../../modules/classes/SlashCommand'),
-    Autocomplete = require('../../modules/classes/Autocomplete'),
-    Database = require('../../modules/classes/Database')
+const client = require('../../index')
+const ModalInteraction = require('../../modules/classes/ModalInteraction')
+const ButtonInteraction = require('../../modules/classes/ButtonInteraction')
+const SelectMenuInteraction = require('../../modules/classes/SelectMenuInteraction')
+const SlashCommand = require('../../modules/classes/SlashCommand')
+const Autocomplete = require('../../modules/classes/Autocomplete')
+const Database = require('../../modules/classes/Database')
 
 client.on('interactionCreate', async interaction => {
 

@@ -1,7 +1,6 @@
 const { formatString, emoji, formatNumberCaracters, getUser } = require('../../../src/commands/games/plugins/gamePlugins')
 const Database = require('../Database')
 const { e } = require('../../../JSON/emojis.json')
-const quizData = Database.Quiz.get('quiz')
 
 class QuizManager {
     constructor(data, options) {
@@ -30,6 +29,7 @@ class QuizManager {
 
         async function init(isJumped) {
 
+            const quizData = Database.Quiz.get('quiz')
             let query = quizData.random()
             let question = query.question
             let answer = query.answers
@@ -885,7 +885,7 @@ class QuizManager {
                     value: `O tempo normal das perguntas são de 30 segundos, já o speed mode são apenas 5.\n⚙️ Quiz Administration Commands`
                 }
             ],
-            footer: { text: `${quizData?.length || 0} perguntas disponíveis` }
+            footer: { text: `${Database.Quiz.get('quiz')?.length || 0} perguntas disponíveis` }
         },
         {
             color: this.client.blue,

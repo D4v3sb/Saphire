@@ -67,10 +67,12 @@ class Autocomplete {
     async quiz_question(value) {
 
         const quizData = Database.Quiz.get('quiz')
-        const fill = quizData.filter(data =>
-            data.question?.toLowerCase().includes(value?.toLowerCase())
-            || data.answers.find(resp => resp.toLowerCase().includes(value?.toLowerCase()))
-        )
+        const fill = value ?
+            quizData.filter(data =>
+                data.question?.toLowerCase().includes(value?.toLowerCase())
+                || data.answers.find(resp => resp.toLowerCase().includes(value?.toLowerCase()))
+            )
+            : quizData
 
         const mapped = fill.map(data => ({ name: data.question, value: quizData.findIndex(question => question.question === data.question) }))
         return await this.respond(mapped)

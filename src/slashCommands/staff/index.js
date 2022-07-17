@@ -3,7 +3,6 @@ const { e } = require('../../../JSON/emojis.json')
 module.exports = (interaction) => {
 
     const { options } = interaction
-
     const subCommandGroup = options.getSubcommandGroup()
     const subCommand = options.getSubcommand()
 
@@ -34,6 +33,9 @@ module.exports = (interaction) => {
             case 'delete': require('./quiz/delete.Quiz')(interaction); break;
             case 'add_answers': require('./quiz/newAnswers.Quiz')(interaction); break;
             case 'del_answers': require('./quiz/delAnswers.Quiz')(interaction); break;
+            case 'edit': require('./quiz/edit.Quiz')(interaction); break;
+            case 'list': require('./quiz/list.Quiz')(interaction); break;
+            case 'view': require('./quiz/view.Quiz')(interaction); break;
             default: await interaction.reply({
                 content: `${e.Deny} | Nenhuma função foi encontrada`,
                 ephemeral: true
