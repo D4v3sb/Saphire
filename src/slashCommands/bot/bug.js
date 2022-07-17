@@ -6,8 +6,8 @@ module.exports = {
     options: [],
     async execute({ interaction: interaction, client: client, database: Database, emojis: e, modals: modals }) {
 
-        let userData = await Database.User.findOne({ id: interaction.user.id }, 'Timeouts.Bug'),
-            timeout = userData?.Timeouts?.Bug || 0
+        const userData = await Database.User.findOne({ id: interaction.user.id }, 'Timeouts.Bug')
+        const timeout = userData?.Timeouts?.Bug || 0
 
         if (client.Timeout(120000, timeout))
             return await interaction.reply({

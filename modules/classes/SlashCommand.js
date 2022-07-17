@@ -20,6 +20,7 @@ class SlashCommand extends Modals {
         const command = client.slashCommands.get(this.interaction.commandName);
         if (!command) return
 
+        const { Config: config } = this.Database
         const admins = [...clientData.Administradores, this.Database.Config.ownerId]
         const staff = [...clientData.Administradores, ...clientData.Moderadores, config.ownerId, '327496267007787008']
 
