@@ -157,7 +157,7 @@ module.exports = {
                         {
                             name: 'quiz_question',
                             description: 'Selecione a pergunta para deletar',
-                            type: 3,
+                            type: 4,
                             required: true,
                             autocomplete: true
                         }

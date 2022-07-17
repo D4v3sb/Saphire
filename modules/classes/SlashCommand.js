@@ -21,7 +21,7 @@ class SlashCommand extends Modals {
         if (!command) return
 
         const admins = [...clientData.Administradores, this.Database.Config.ownerId]
-        const staff = [...clientData.Administradores, ...client.staff]
+        const staff = [...clientData.Administradores, ...clientData.Moderadores, config.ownerId, '327496267007787008']
 
         if (command.admin && !admins.includes(this.interaction.user.id))
             return await this.interaction.reply({
