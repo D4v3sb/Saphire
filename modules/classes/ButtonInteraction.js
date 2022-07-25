@@ -189,11 +189,12 @@ class ButtonInteraction extends Modals {
                 ephemeral: true
             })
 
+
         await Database.User.updateOne(
             { id: this.user.id },
             {
                 $inc: {
-                    Balance: 3000,
+                    Balance: 5000,
                     Xp: 1000
                 },
                 $push: {

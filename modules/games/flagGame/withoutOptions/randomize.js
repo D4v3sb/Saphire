@@ -1,4 +1,4 @@
-module.exports = (wrongAnswer = 0, flags, control) => {
+function randomizeFlags(wrongAnswer = 0, flags, control) {
 
     if (wrongAnswer > 0) {
         let flag = flags?.random()
@@ -13,3 +13,5 @@ module.exports = (wrongAnswer = 0, flags, control) => {
     control.atualFlag = flag
     return
 }
+
+module.exports = randomizeFlags
