@@ -1,7 +1,7 @@
 const Database = require('../../../../modules/classes/Database')
 const { e } = require('../../../../JSON/emojis.json')
 
-module.exports = (interaction, reminderId) => {
+module.exports = async (interaction, reminderId) => {
 
     if (!reminderId)
         return await interaction.reply({

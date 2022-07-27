@@ -29,7 +29,7 @@ module.exports = {
         const { Config: config } = Database
 
         let hide = options.getBoolean('hide') || false
-        let user = client.users.cache.get(options.getString('search_user')) || interaction.user
+        let user = options.getUser('user') || client.users.cache.get(options.getString('search_user')) || interaction.user
 
         if (user.id === client.user.id)
             return await interaction.reply({

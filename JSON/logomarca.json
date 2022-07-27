@@ -57,6 +57,24 @@
         },
         {
             "name": [
+                "americanas"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000564105486274660/images_2.png"
+            }
+        },
+        {
+            "name": [
+                "anatel"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998020082573770813/anatel2.png?width=405&height=408",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998020082129190912/anatel.png?width=405&height=408"
+            }
+        },
+        {
+            "name": [
                 "android"
             ],
             "images": {
@@ -89,6 +107,15 @@
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/995375451059015760/Polish_20220709_113811294.png",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995375450698289252/audi-512.png"
+            }
+        },
+        {
+            "name": [
+                "avon"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/998433475621294160/151_Sem_Titulo_20220718003752.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/998433475398991932/1658115436814.png"
             }
         },
         {
@@ -127,6 +154,34 @@
             "images": {
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994961641454186566/Novo-Logo-002.jpg"
+            }
+        },
+        {
+            "name": [
+                "banco santander",
+                "santander"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997708656797814846/banco-santander-logo-42.png"
+            }
+        },
+        {
+            "name": [
+                "bauducco"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/998443766815916142/154_Sem_Titulo_20220718011831.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/998443766576844851/bauducco-logo.png"
+            }
+        },
+        {
+            "name": [
+                "bbc"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/997320527205122108/138_Sem_Titulo_20220714224651.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997320526949265418/images.jpeg"
             }
         },
         {
@@ -179,6 +234,15 @@
         },
         {
             "name": [
+                "bottero"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/997986966320709643/bottero2.png",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/997986966022930514/bottero.png"
+            }
+        },
+        {
+            "name": [
                 "bradesco",
                 "banco bradesco"
             ],
@@ -203,6 +267,15 @@
             "images": {
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995708699186315364/images.png"
+            }
+        },
+        {
+            "name": [
+                "brawlhalla"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/1000830078172795033/brawlhalla2.jpeg",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/1000830077967269988/brawlhalla.jpeg"
             }
         },
         {
@@ -263,6 +336,15 @@
         },
         {
             "name": [
+                "casas bahia"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997715051886678166/images_1.png"
+            }
+        },
+        {
+            "name": [
                 "chanel"
             ],
             "images": {
@@ -272,11 +354,29 @@
         },
         {
             "name": [
+                "cheetos"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/1000597892966387732/161_Sem_Titulo_20220723235802.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000597892748288080/1280px-Cheetos_logo.svg.png"
+            }
+        },
+        {
+            "name": [
                 "chevrolet"
             ],
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/993857322441003128/98_Sem_Titulo_20220705093332.png?width=727&height=408",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993857322222891078/images.jpeg?width=727&height=408"
+            }
+        },
+        {
+            "name": [
+                "cifra club"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000593486405456053/images_4.png"
             }
         },
         {
@@ -318,6 +418,15 @@
         },
         {
             "name": [
+                "danone"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/1000601657949831168/163_Sem_Titulo_20220724000550.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000601657723334696/11c6d9ef43beb8926d621186ea4538bc.png"
+            }
+        },
+        {
+            "name": [
                 "dc comics",
                 "dc"
             ],
@@ -337,7 +446,7 @@
         },
         {
             "name": [
-                "devianart"
+                "deviantart"
             ],
             "images": {
                 "censored": null,
@@ -364,6 +473,25 @@
         },
         {
             "name": [
+                "disney channel"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/997326450220871782/140_Sem_Titulo_20220714231855.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997326449872732231/Disney-Channel-Logo.png"
+            }
+        },
+        {
+            "name": [
+                "disney plus",
+                "disney +"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/997332142277263360/143_Sem_Titulo_20220714234135.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997332141975289886/images-removebg-preview.png"
+            }
+        },
+        {
+            "name": [
                 "domino's pizza",
                 "dominos pizza"
             ],
@@ -383,11 +511,29 @@
         },
         {
             "name": [
+                "dulux"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/1000594432296488990/159_Sem_Titulo_20220723234446.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000594432065814538/dulux-logo.png"
+            }
+        },
+        {
+            "name": [
                 "duolingo"
             ],
             "images": {
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/996233597105229915/emojisky.com-10914593.png"
+            }
+        },
+        {
+            "name": [
+                "duracell"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/997710394380537937/Point_Blur_Jul162022_004419.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997710394095304744/images-removebg-preview.png"
             }
         },
         {
@@ -406,6 +552,15 @@
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/996086420814966904/unknown.png?width=408&height=408",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/996086420554907729/unknown.png?width=408&height=408"
+            }
+        },
+        {
+            "name": [
+                "embratel"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/1000818859474956379/165_Sem_Titulo_20220724143608.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000818859248459897/Embratel_logo.png"
             }
         },
         {
@@ -464,6 +619,15 @@
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/994642107379744849/fantaII.png",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994642107086147634/fanta.png"
+            }
+        },
+        {
+            "name": [
+                "fbi"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000819961800957952/1658684437165.png"
             }
         },
         {
@@ -588,6 +752,16 @@
         },
         {
             "name": [
+                "hbo max",
+                "hbo"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/997335468150620211/144_Sem_Titulo_20220714235342.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997335467877998683/HBO-Max-Logo.png"
+            }
+        },
+        {
+            "name": [
                 "hyundai"
             ],
             "images": {
@@ -629,6 +803,34 @@
             "images": {
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/994077977673474118/1657076907488.png"
+            }
+        },
+        {
+            "name": [
+                "italac"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/1000642258892234782/164_Sem_Titulo_20220724024914.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000642258707693699/images_5.png"
+            }
+        },
+        {
+            "name": [
+                "jequiti"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/998438985888182392/152_Sem_Titulo_20220718005706.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/998438985686851635/images.png"
+            }
+        },
+        {
+            "name": [
+                "kfc",
+                "kentucky fried chicken"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/997324241735254076/139_Sem_Titulo_20220714230853.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997324241412309073/images_1.jpeg"
             }
         },
         {
@@ -693,6 +895,15 @@
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/995328255240437900/Picsart_22-07-09_09-50-28-510.png",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995328246549860372/logo-lego-512.png"
+            }
+        },
+        {
+            "name": [
+                "lenovo"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/997316927468863519/137_Sem_Titulo_20220714224030.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997316927246569592/logo-lenovo-vermelha-1024.png"
             }
         },
         {
@@ -820,6 +1031,15 @@
         },
         {
             "name": [
+                "microsoft"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000561892214980718/microsoft-80660_640.png"
+            }
+        },
+        {
+            "name": [
                 "minecraft",
                 "mine"
             ],
@@ -835,6 +1055,15 @@
             "images": {
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995561731143241728/mojang_logo_icon_170945.png"
+            }
+        },
+        {
+            "name": [
+                "monange"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/998441317820530728/153_Sem_Titulo_20220718010750.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/998441317594046504/153_Sem_Titulo_20220718010555.png"
             }
         },
         {
@@ -858,11 +1087,47 @@
         },
         {
             "name": [
+                "mucilon"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/998431265571213372/149_Sem_Titulo_20220718002420.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/998431265386659920/1658114519479.png"
+            }
+        },
+        {
+            "name": [
+                "nescau"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998027607746543666/nescau2.png",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998027607473926295/nescau.png"
+            }
+        },
+        {
+            "name": [
+                "nesquik"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998020283476738068/nesquik2.png",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998020283157979166/nesquik.png"
+            }
+        },
+        {
+            "name": [
                 "nestlé"
             ],
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/996130618259812362/nestle2.png?width=409&height=408",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/996130618020741250/nestle.png?width=409&height=408"
+            }
+        },
+        {
+            "name": [
+                "nestlé ninho"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/1000598567502741524/162_Sem_Titulo_20220724000111.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000598567183994920/images.jpeg"
             }
         },
         {
@@ -917,6 +1182,15 @@
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/995436115404259388/Picsart_22-07-09_18-07-22-662.png",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995436115173593110/imagem_2022-07-09_175935302_copy_512x512.png"
+            }
+        },
+        {
+            "name": [
+                "nissan"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998017813799239680/nissan2.png?width=474&height=408",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998017813404979302/nissan.png?width=474&height=408"
             }
         },
         {
@@ -1021,6 +1295,15 @@
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/995434630570320003/Picsart_22-07-09_17-21-44-915.png",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995434630348013628/outback-steakhouse-512.png"
+            }
+        },
+        {
+            "name": [
+                "paladins"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/1000822067865854093/166_Sem_Titulo_20220724144916.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000822067547099176/kindpng_1270562.png"
             }
         },
         {
@@ -1155,6 +1438,15 @@
         },
         {
             "name": [
+                "r7"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/997712526932463636/147_Sem_Titulo_20220716005303.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997712526575943742/images.jpeg"
+            }
+        },
+        {
+            "name": [
                 "rappi"
             ],
             "images": {
@@ -1234,6 +1526,15 @@
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/996235855180091402/127_Sem_Titulo_20220711230515.png",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/996235854945202276/images__1_-removebg-preview.png"
+            }
+        },
+        {
+            "name": [
+                "shell"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000560937721401464/images-removebg-preview.png"
             }
         },
         {
@@ -1339,6 +1640,15 @@
         },
         {
             "name": [
+                "sucrilhos"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000595042022457474/1605805288072.png"
+            }
+        },
+        {
+            "name": [
                 "supreme"
             ],
             "images": {
@@ -1348,11 +1658,29 @@
         },
         {
             "name": [
+                "telecine"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/1000563331897249832/157_Sem_Titulo_20220723214033.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000563331645575239/images_1.png"
+            }
+        },
+        {
+            "name": [
                 "telegram"
             ],
             "images": {
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993630173125693580/imagem_2022-07-04_183058766.png?width=408&height=408"
+            }
+        },
+        {
+            "name": [
+                "terra"
+            ],
+            "images": {
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/1000591803726184469/158_Sem_Titulo_20220723233420.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000591803466121246/images_3.png"
             }
         },
         {
@@ -1394,6 +1722,15 @@
         },
         {
             "name": [
+                "toddy"
+            ],
+            "images": {
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998275584415236107/toddy21.png",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998275584058736812/toddy2.png"
+            }
+        },
+        {
+            "name": [
                 "toei animation",
                 "toei"
             ],
@@ -1419,6 +1756,15 @@
             "images": {
                 "censored": null,
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995564840842178690/transformice-logo.png"
+            }
+        },
+        {
+            "name": [
+                "tripadvisor"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997711611626279063/images.png"
             }
         },
         {
@@ -1450,7 +1796,8 @@
         },
         {
             "name": [
-                "tv cultura"
+                "tv cultura",
+                "cultura"
             ],
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/996121695544942682/tv_cultura.png",
@@ -1486,11 +1833,29 @@
         },
         {
             "name": [
+                "uol"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997711094003023963/logo-uol-icon-1024.png"
+            }
+        },
+        {
+            "name": [
                 "uptime"
             ],
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/996084170105290883/uptime2.png",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/996084169681682432/uptime.png"
+            }
+        },
+        {
+            "name": [
+                "vagalume"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/1000592629345562775/1_BWkPidfUKtndVrJZxm4mxQ.png"
             }
         },
         {
@@ -1509,6 +1874,15 @@
             "images": {
                 "censored": "https://media.discordapp.net/attachments/991029755367292948/993856178855608320/97_Sem_Titulo_20220705092911.png?width=401&height=408",
                 "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993856178528468993/1657023995493.png?width=401&height=408"
+            }
+        },
+        {
+            "name": [
+                "walmart"
+            ],
+            "images": {
+                "censored": null,
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997336544744570940/walmart_logo_icon_170230.png"
             }
         },
         {
@@ -1606,145 +1980,6 @@
         },
         {
             "name": [
-                "xiaomi"
-            ],
-            "images": {
-                "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993574816500166726/xiaomi-removebg-preview_1.png?width=408&height=408"
-            }
-        },
-        {
-            "name": [
-                "yahoo"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/996125888875855912/yahoo.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/996125888607436930/imagem_2022-07-11_154034082.png"
-            }
-        },
-        {
-            "name": [
-                "yoki"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/995327832349749288/Picsart_22-07-09_09-46-21-986.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995327825773080627/yoki-512.png"
-            }
-        },
-        {
-            "name": [
-                "lenovo"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/997316927468863519/137_Sem_Titulo_20220714224030.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997316927246569592/logo-lenovo-vermelha-1024.png"
-            }
-        },
-        {
-            "name": [
-                "bbc"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/997320527205122108/138_Sem_Titulo_20220714224651.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997320526949265418/images.jpeg"
-            }
-        },
-        {
-            "name": [
-                "kfc",
-                "kentucky fried chicken"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/997324241735254076/139_Sem_Titulo_20220714230853.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997324241412309073/images_1.jpeg"
-            }
-        },
-        {
-            "name": [
-                "disney channel"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/997326450220871782/140_Sem_Titulo_20220714231855.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997326449872732231/Disney-Channel-Logo.png"
-            }
-        },
-        {
-            "name": [
-                "disney plus",
-                "disney +"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/997332142277263360/143_Sem_Titulo_20220714234135.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997332141975289886/images-removebg-preview.png"
-            }
-        },
-        {
-            "name": [
-                "hbo max",
-                "hbo"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/997335468150620211/144_Sem_Titulo_20220714235342.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997335467877998683/HBO-Max-Logo.png"
-            }
-        },
-        {
-            "name": [
-                "walmart"
-            ],
-            "images": {
-                "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997336544744570940/walmart_logo_icon_170230.png"
-            }
-        },
-        {
-            "name": [
-                "banco santander",
-                "santander"
-            ],
-            "images": {
-                "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997708656797814846/banco-santander-logo-42.png"
-            }
-        },
-        {
-            "name": [
-                "duracell"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/997710394380537937/Point_Blur_Jul162022_004419.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997710394095304744/images-removebg-preview.png"
-            }
-        },
-        {
-            "name": [
-                "uol"
-            ],
-            "images": {
-                "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997711094003023963/logo-uol-icon-1024.png"
-            }
-        },
-        {
-            "name": [
-                "tripadvisor"
-            ],
-            "images": {
-                "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997711611626279063/images.png"
-            }
-        },
-        {
-            "name": [
-                "r7"
-            ],
-            "images": {
-                "censored": "https://media.discordapp.net/attachments/991029755367292948/997712526932463636/147_Sem_Titulo_20220716005303.png",
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997712526575943742/images.jpeg"
-            }
-        },
-        {
-            "name": [
                 "xbox"
             ],
             "images": {
@@ -1763,65 +1998,38 @@
         },
         {
             "name": [
-                "casas bahia"
+                "xiaomi"
             ],
             "images": {
                 "censored": null,
-                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/997715051886678166/images_1.png"
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/993574816500166726/xiaomi-removebg-preview_1.png?width=408&height=408"
             }
         },
         {
             "name": [
-                "bottero"
+                "yahoo"
             ],
             "images": {
-                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/997986966320709643/bottero2.png",
-                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/997986966022930514/bottero.png"
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/996125888875855912/yahoo.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/996125888607436930/imagem_2022-07-11_154034082.png"
             }
         },
         {
             "name": [
-                "nissan"
+                "yakult"
             ],
             "images": {
-                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998017813799239680/nissan2.png?width=474&height=408",
-                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998017813404979302/nissan.png?width=474&height=408"
+                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/1000831165109915658/yakult2.png",
+                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/1000831164703047810/yakult.png"
             }
         },
         {
             "name": [
-                "anatel"
+                "yoki"
             ],
             "images": {
-                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998020082573770813/anatel2.png?width=405&height=408",
-                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998020082129190912/anatel.png?width=405&height=408"
-            }
-        },
-        {
-            "name": [
-                "nesquik"
-            ],
-            "images": {
-                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998020283476738068/nesquik2.png",
-                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998020283157979166/nesquik.png"
-            }
-        },
-        {
-            "name": [
-                "nescau"
-            ],
-            "images": {
-                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998027607746543666/nescau2.png",
-                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998027607473926295/nescau.png"
-            }
-        },
-        {
-            "name": [
-                "toddy"
-            ],
-            "images": {
-                "censored": "https://cdn.discordapp.com/attachments/991029755367292948/998275584415236107/toddy21.png",
-                "uncensored": "https://cdn.discordapp.com/attachments/991029755367292948/998275584058736812/toddy2.png"
+                "censored": "https://media.discordapp.net/attachments/991029755367292948/995327832349749288/Picsart_22-07-09_09-46-21-986.png",
+                "uncensored": "https://media.discordapp.net/attachments/991029755367292948/995327825773080627/yoki-512.png"
             }
         }
     ]
