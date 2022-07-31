@@ -19,6 +19,11 @@ module.exports = {
                     autocomplete: true
                 },
                 {
+                    name: "content",
+                    description: "Conteúdo da mensagem",
+                    type: 3,
+                },
+                {
                     name: 'title',
                     description: 'Título da embed',
                     type: 3
@@ -88,14 +93,9 @@ module.exports = {
     ],
     async execute({ interaction: interaction, client: client, emojis: e }) {
 
-        return await interaction.reply({
-            content: `${e.Loading} | Este comando está sob construção.`,
-            ephemeral: true
-        })
-
         const { options, channel } = interaction
 
-        let subCommand = options.subCommand()
+        let subCommand = options.getSubcommand()
 
         if (subCommand === 'add_field') return addNewField()
         if (subCommand === 'create') return createNewEmbed()
@@ -111,6 +111,7 @@ module.exports = {
             let timestamp = options.getBoolean('timestamp')
             let footer = options.getString('footer')
             let footer_icon_url = options.getString('footer_icon_url')
+            let content = options.getString('content')
 
             if (title?.length > 256)
                 title = `${title?.slice(0, 253)}...`
@@ -125,7 +126,7 @@ module.exports = {
                 color: color,
                 title: title,
                 url: url,
-                description: description,
+                description: description.replace("\\n", "\n"),
                 thumbnail: { url: thumbnail },
                 image: { url: image },
                 timestamp: timestamp ? new Date() : null,
@@ -135,7 +136,9 @@ module.exports = {
                 },
             }
 
-            return channel.send({
+
+            channel.send({
+                content,
                 embeds: [embed]
             }).catch(async err => {
                 return await interaction.reply({
@@ -143,6 +146,10 @@ module.exports = {
                     ephemeral: true
                 })
             })
+
+            return await interaction
+            .reply({ content: "Embed enviado", ephemeral: true })
+            .catch((o_O) => {});
         }
 
         async function addNewField() {
@@ -159,13 +166,13 @@ module.exports = {
                     ephemeral: true
                 })
 
-            let embed = message?.embeds[0]
-
             if (message.author.id !== client.user.id)
                 return await interaction.reply({
                     content: `${e.Deny} | A mensagem foi encontrada, porém, não foi eu que enviou esta mensagem. Por favor, forneça o ID de uma mensagem que contenha uma embed e que foi eu a enviar.`,
                     ephemeral: true
                 })
+            
+            let embed = message?.embeds[0];
 
             if (!embed)
                 return await interaction.reply({
@@ -173,7 +180,20 @@ module.exports = {
                     ephemeral: true
                 })
 
+            message
+            .edit({
+                embeds: [message.embeds[0].addField(fieldName, fieldValue)],
+            })
+            .catch(async (err) => {
+                return await interaction.reply({
+                    content: `${e.Warn} | Houve um erro ao editar a embed.\n> \`${err}\``,
+                    ephemeral: true,
+                });
+            });
 
+            return await interaction
+            .reply({ content: "Embed editado", ephemeral: true })
+            .catch((o_O) => {});
         }
     }
 }
